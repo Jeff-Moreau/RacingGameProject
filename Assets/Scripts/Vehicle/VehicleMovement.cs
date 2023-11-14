@@ -29,6 +29,7 @@ public class VehicleMovement : MonoBehaviour
             Vehicle.SetIsMoving(false);
             Exhaust.gameObject.SetActive(true);
             Thruster.gameObject.SetActive(false);
+
             for(int i = 0; i < TailLights.Length; i++)
             {
                 TailLights[i].gameObject.SetActive(true);
@@ -40,6 +41,7 @@ public class VehicleMovement : MonoBehaviour
             Vehicle.SetIsMoving(true);
             Exhaust.gameObject.SetActive(false);
             Thruster.gameObject.SetActive(true);
+
             for (int i = 0; i < TailLights.Length; i++)
             {
                 TailLights[i].gameObject.SetActive(false);
