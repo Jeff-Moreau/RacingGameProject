@@ -21,8 +21,21 @@ public class VehicleMovement : MonoBehaviour
         var verMovement = Input.GetAxis("Vertical");
         var movement = new Vector3(horMovement, 0, verMovement);
 
-        _vehicleBody.AddForce(movement * Vehicle.GetRollSpeed);
-        VehicleArmor.transform.LookAt(movement + VehicleArmor.transform.position);
+        if (Input.GetKey(KeyCode.W))
+        {
+            _vehicleBody.AddForce(VehicleArmor.transform.forward * Vehicle.GetRollSpeed, ForceMode.Force);
+            _vehicleBody.AddForce(Physics.gravity*_vehicleBody.mass);
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            VehicleArmor.transform.Rotate(new Vector3(0, 70, 0) * Time.deltaTime);
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            VehicleArmor.transform.Rotate(new Vector3(0, -70, 0) * Time.deltaTime);
+        }
 
         if (horMovement == 0 && verMovement == 0)
         {
@@ -30,11 +43,11 @@ public class VehicleMovement : MonoBehaviour
             Exhaust.gameObject.SetActive(true);
             Thruster.gameObject.SetActive(false);
 
-            for(int i = 0; i < TailLights.Length; i++)
+            for (int i = 0; i < TailLights.Length; i++)
             {
                 TailLights[i].gameObject.SetActive(true);
             }
-            
+
         }
         else
         {
