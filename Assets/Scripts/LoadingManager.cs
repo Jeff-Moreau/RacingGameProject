@@ -18,7 +18,7 @@ public class LoadingManager : MonoBehaviour
 
         for (int i = 0; i < _polePositions.Length; i++)
         {
-            if (_polePositions[i].gameObject.GetComponent<StartingPositionsManager>().GetSpotTaken == false && totalCount < _aiCount)
+            if (_polePositions[i].gameObject.GetComponent<StartingPositionsManager>().GetSpotTaken == false && totalCount <= _aiCount)
             {
                 _aiVehicles[i].transform.position = _polePositions[i].transform.position;
                 _aiVehicles[i].transform.rotation = _polePositions[i].transform.rotation;
