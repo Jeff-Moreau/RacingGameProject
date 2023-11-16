@@ -11,18 +11,14 @@ public class LoadingManager : MonoBehaviour
         var totalCount = 0;
         var randomSpot = Random.Range(0, _aiCount);
 
-
-        while (totalCount < _aiCount)
+        for (int i = 0; i < _polePositions.Length; i++)
         {
-            for (int i = 0; i < _polePositions.Length; i++)
+            if (_polePositions[i].gameObject.GetComponent<StartingPositionsManager>().GetSpotTaken == false && totalCount < _aiCount)
             {
-                if (_polePositions[randomSpot].gameObject.GetComponent<StartingPositionsManager>().GetSpotTaken == false && totalCount < _aiCount)
-                {
-                    _aiVehicles[i].transform.position = _polePositions[randomSpot].transform.position;
-                    _aiVehicles[i].transform.rotation = _polePositions[randomSpot].transform.rotation;
-                    _polePositions[randomSpot].gameObject.GetComponent<StartingPositionsManager>().SetSpotTaken(true);
-                    totalCount++;
-                }
+                _aiVehicles[i].transform.position = _polePositions[randomSpot].transform.position;
+                _aiVehicles[i].transform.rotation = _polePositions[i].transform.rotation;
+                _polePositions[i].gameObject.GetComponent<StartingPositionsManager>().SetSpotTaken(true);
+                totalCount++;
             }
         }
     }
