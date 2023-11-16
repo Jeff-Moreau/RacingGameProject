@@ -26,6 +26,10 @@ public class VehicleMovement : MonoBehaviour
             _vehicleBody.AddForce(VehicleArmor.transform.forward * Vehicle.GetRollSpeed, ForceMode.Force);
             _vehicleBody.AddForce(Physics.gravity*_vehicleBody.mass);
         }
+        else if (Input.GetKeyUp(KeyCode.W))
+        {
+            _vehicleBody.AddForce(Physics.gravity * (_vehicleBody.mass * 10));
+        }
 
         if (Input.GetKey(KeyCode.D))
         {
