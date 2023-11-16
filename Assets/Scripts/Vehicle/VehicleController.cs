@@ -35,6 +35,9 @@ public class VehicleController : MonoBehaviour
 
         _vehicleBody.AddForce(VehicleArmor.transform.forward * Vehicle.GetRollSpeed, ForceMode.Force);
         _vehicleBody.AddForce(Physics.gravity * _vehicleBody.mass);
+
+        VehicleArmor.transform.rotation = _waypoints[_currentWaypoint].rotation;
+        //VehicleArmor.transform.Rotate(new Vector3(0, 70, 0) * Time.deltaTime);
     }
 
     private void GetWaypoints()
