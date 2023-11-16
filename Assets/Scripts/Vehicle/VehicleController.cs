@@ -24,26 +24,26 @@ public class VehicleController : MonoBehaviour
     private void Start()
     {
         GetWaypoints();
-        _currentWaypoint = 1;
-        _proxSqr = 10 * 10; // change after
+        _currentWaypoint = 14;
+        _proxSqr = 8 * 8; // change after
     }
 
     private void Update()
     {
         var waypointPosition = _waypoints[_currentWaypoint].position;
         var relativeWaypointPos = transform.InverseTransformPoint(new Vector3(waypointPosition.x, transform.position.y, waypointPosition.z));
-        var localVelocity = transform.InverseTransformDirection(_vehicleBody.velocity);
 
         _vehicleBody.AddForce(VehicleArmor.transform.forward * 50, ForceMode.Force); // change after
         _vehicleBody.AddForce(Physics.gravity * _vehicleBody.mass);
 
         VehicleArmor.transform.rotation = _waypoints[_currentWaypoint].rotation;
-        //VehicleArmor.transform.Rotate(new Vector3(0, 70, 0) * Time.deltaTime);
         CheckWaypointPosition(relativeWaypointPos);
     }
 
     private void CheckWaypointPosition(Vector3 relativeWaypointPos)
     {
+        Debug.Log(_currentWaypoint + " " + relativeWaypointPos.sqrMagnitude);
+        Debug.Log(_proxSqr);
         if (relativeWaypointPos.sqrMagnitude < _proxSqr)
         {
             _currentWaypoint += 1;

@@ -10725,6 +10725,7 @@ GameObject:
   - component: {fileID: 6323648850615545603}
   - component: {fileID: 5458810945715145492}
   - component: {fileID: 5410282482315495453}
+  - component: {fileID: 7584919417716459228}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -10845,6 +10846,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7584919417716459228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6889888617679485394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b84ad015f0cc85249af5602d25075dd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WaypointContainer: {fileID: 0}
+  Vehicle: {fileID: 11400000, guid: 6d61787211c2fa747ab58dde8b3fba67, type: 2}
+  VehicleArmor: {fileID: 7925766267834119143}
+  Exhaust: {fileID: 1682183365871664060}
+  Thruster: {fileID: 2471891424572293884}
+  TailLights:
+  - {fileID: 3107903475711936130}
+  - {fileID: 5014522531667267744}
 --- !u!1 &7736142056143914926
 GameObject:
   m_ObjectHideFlags: 0
@@ -10994,7 +11015,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2451126087491491175}
-  - component: {fileID: 4907835275648973359}
   - component: {fileID: 5706395171247740418}
   - component: {fileID: 3079891781894312042}
   m_Layer: 0
@@ -11003,7 +11023,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2451126087491491175
 Transform:
   m_ObjectHideFlags: 0
@@ -11021,21 +11041,6 @@ Transform:
   - {fileID: 8470111364112228388}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4907835275648973359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8030500827607855529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 823d2120e9681ae4da5f24dd58dff7fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Vehicle: {fileID: 11400000, guid: 6d61787211c2fa747ab58dde8b3fba67, type: 2}
-  SoundIdle: {fileID: 5706395171247740418}
-  SoundThruster: {fileID: 3079891781894312042}
 --- !u!82 &5706395171247740418
 AudioSource:
   m_ObjectHideFlags: 0
