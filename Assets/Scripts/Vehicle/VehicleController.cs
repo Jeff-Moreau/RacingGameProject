@@ -12,7 +12,8 @@ public class VehicleController : MonoBehaviour
     private Transform[] _waypoints;
     private int _currentWaypoint;
     private Rigidbody _vehicleBody;
-    
+    private float _proxSqr;
+
     public Transform GetCurrentWaypoint => _waypoints[_currentWaypoint];
 
     private void Awake()
@@ -24,7 +25,7 @@ public class VehicleController : MonoBehaviour
     {
         GetWaypoints();
         _currentWaypoint = 1;
-        //_proxSqr = _aiCarConfig.WaypointProx * _aiCarConfig.WaypointProx;
+        _proxSqr = 10 * 10; // change after
     }
 
     private void Update()
@@ -33,11 +34,25 @@ public class VehicleController : MonoBehaviour
         var relativeWaypointPos = transform.InverseTransformPoint(new Vector3(waypointPosition.x, transform.position.y, waypointPosition.z));
         var localVelocity = transform.InverseTransformDirection(_vehicleBody.velocity);
 
-        _vehicleBody.AddForce(VehicleArmor.transform.forward * Vehicle.GetRollSpeed, ForceMode.Force);
+        _vehicleBody.AddForce(VehicleArmor.transform.forward * 50, ForceMode.Force); // change after
         _vehicleBody.AddForce(Physics.gravity * _vehicleBody.mass);
 
         VehicleArmor.transform.rotation = _waypoints[_currentWaypoint].rotation;
         //VehicleArmor.transform.Rotate(new Vector3(0, 70, 0) * Time.deltaTime);
+        CheckWaypointPosition(relativeWaypointPos);
+    }
+
+    private void CheckWaypointPosition(Vector3 relativeWaypointPos)
+    {
+        if (relativeWaypointPos.sqrMagnitude < _proxSqr)
+        {
+            _currentWaypoint += 1;
+
+            if (_currentWaypoint == _waypoints.Length)
+            {
+                _currentWaypoint = 0;
+            }
+        }
     }
 
     private void GetWaypoints()

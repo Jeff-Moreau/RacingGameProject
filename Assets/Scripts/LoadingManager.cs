@@ -23,6 +23,7 @@ public class LoadingManager : MonoBehaviour
                 _aiVehicles[i].transform.position = _polePositions[i].transform.position;
                 _aiVehicles[i].transform.rotation = _polePositions[i].transform.rotation;
                 _polePositions[i].gameObject.GetComponent<StartingPositionsManager>().SetSpotTaken(true);
+                _aiVehicles[i].SetActive(true);
                 totalCount++;
             }
         }
