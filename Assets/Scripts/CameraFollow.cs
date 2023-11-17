@@ -7,7 +7,7 @@ public class CameraFollow : MonoBehaviour
 
     private void Update()
     {
-        transform.position = new Vector3(VehicleArmor.transform.position.x, VehicleArmor.transform.position.y, VehicleArmor.transform.position.z - 20);
+        transform.position = new Vector3(VehicleArmor.transform.position.x, VehicleArmor.transform.position.y - 0.01f, VehicleArmor.transform.position.z - 1.8f);
         transform.rotation = VehicleArmor.transform.rotation;
     }
 }

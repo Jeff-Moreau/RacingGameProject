@@ -10776,7 +10776,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9660042f787edab4b96f690045ec8379, type: 2}
+  - {fileID: 2100000, guid: b8f870f9ccba1ab4f8fb2ec2e662212e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10866,6 +10866,8 @@ MonoBehaviour:
   TailLights:
   - {fileID: 3107903475711936130}
   - {fileID: 5014522531667267744}
+  ManageRace: {fileID: 0}
+  LoadManager: {fileID: 0}
 --- !u!1 &7736142056143914926
 GameObject:
   m_ObjectHideFlags: 0
@@ -11247,7 +11249,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Vehicle: {fileID: 11400000, guid: 6d61787211c2fa747ab58dde8b3fba67, type: 2}
-  SoundThruster: {fileID: 5706395171247740418}
 --- !u!1 &8405391749400779039
 GameObject:
   m_ObjectHideFlags: 0
