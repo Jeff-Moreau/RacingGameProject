@@ -31,6 +31,7 @@ public class VehicleMovement : MonoBehaviour
         GetWaypoints();
         _currentWaypoint = 14;
         _proxSqr = 8 * 8; // change after
+        Vehicle.SetIsMoving(false);
     }
 
     private void Update()
@@ -77,7 +78,7 @@ public class VehicleMovement : MonoBehaviour
         {
             var waypointPosition = _waypoints[_currentWaypoint].position;
             var relativeWaypointPos = transform.InverseTransformPoint(new Vector3(waypointPosition.x, transform.position.y, waypointPosition.z));
-
+            Vehicle.SetIsMoving(false);
             if (ManageRace.GameStarted)
             {
                 _vehicleBody.AddForce(VehicleArmor.transform.forward * 25, ForceMode.Force); // change after
@@ -140,5 +141,11 @@ public class VehicleMovement : MonoBehaviour
             _currentPosition = ManageRace.GetRacers;
             ManageRace.SetCurrentLap(1);
         }
+    }
+
+    public void ResetPosition()
+    {
+        transform.localPosition = new Vector3(0, 0, 0);
+        transform.localRotation = Quaternion.identity;
     }
 }

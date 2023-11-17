@@ -6,7 +6,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject _aiVehicles;
     [SerializeField] private GameObject _playerVehicle;
     [SerializeField] private GameObject _managers;
-    [SerializeField] private GameObject _finish;
+    [SerializeField] private RaceManager _raceManager;
+    [SerializeField] private GameObject _finish;  
 
     public void NewGame()
     {
@@ -14,6 +15,7 @@ public class MainMenu : MonoBehaviour
         _managers.SetActive(true);
         _aiVehicles.SetActive(true);
         _playerVehicle.SetActive(true);
+        _raceManager.ResetLevel();
     }
 
     public void ExitGame()

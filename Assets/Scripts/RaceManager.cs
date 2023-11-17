@@ -16,6 +16,7 @@ public class RaceManager : MonoBehaviour
     [SerializeField] private AudioSource _audio;
     [SerializeField] private List<GameObject> _racers;
     [SerializeField] private GameObject _finish;
+    [SerializeField] private LoadingManager _loadManager;
 
     private bool _gameStart = false;
     private bool _raceOver = false;
@@ -31,6 +32,17 @@ public class RaceManager : MonoBehaviour
     public void AddRacers(GameObject me) => _racers.Add(me);
     public void ResetRacers() => _racers.Clear();
     public int GetRacers => _racers.Count;
+
+    private void Awake()
+    {
+        _gameStart = false;
+        _raceOver = false;
+        _resetText = false;
+        _secondsPassed = 4;
+        _trackLaps = 1;
+        _currentLap = 0;
+        _count = 0;
+    }
 
     private void Update()
     {
@@ -109,6 +121,22 @@ public class RaceManager : MonoBehaviour
     private void ResetLapText()
     {
         _resetText = true;
+        _updateText.text = "";
+    }
+
+    public void ResetLevel()
+    {
+        _gameStart = false;
+        _raceOver = false;
+        _resetText = false;
+        _secondsPassed = 4;
+        _trackLaps = 1;
+        _currentLap = 0;
+        _count = 0;
+        //_loadManager.ResetLoading();
+        _racers.Clear();
+        _positionText.text = "";
+        _lapText.text = "";
         _updateText.text = "";
     }
 }

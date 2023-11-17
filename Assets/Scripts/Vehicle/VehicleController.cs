@@ -95,4 +95,10 @@ public class VehicleController : MonoBehaviour
             }
         }
     }
+
+    public void ResetPosition()
+    {
+        transform.localPosition = new Vector3(0, 0, 0);
+        transform.localRotation = Quaternion.identity;
+    }
 }
