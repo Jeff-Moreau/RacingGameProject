@@ -45,8 +45,8 @@ public class VehicleController : MonoBehaviour
 
     private void CheckWaypointPosition(Vector3 relativeWaypointPos)
     {
-        Debug.Log(_currentWaypoint + " " + relativeWaypointPos.sqrMagnitude);
-        Debug.Log(_proxSqr);
+        /*Debug.Log(_currentWaypoint + " " + relativeWaypointPos.sqrMagnitude);
+        Debug.Log(_proxSqr);*/
         if (relativeWaypointPos.sqrMagnitude < _proxSqr)
         {
             _currentWaypoint += 1;
@@ -78,6 +78,14 @@ public class VehicleController : MonoBehaviour
         else
         {
             return _waypoints[_currentWaypoint - 1];
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "FinishLine")
+        {
+            ManageRace.AddRacers(gameObject);
         }
     }
 }

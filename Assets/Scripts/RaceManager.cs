@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -19,6 +20,7 @@ public class RaceManager : MonoBehaviour
     [SerializeField] private LoadingManager _loadingManager;
     [SerializeField] private AudioClip[] _countdown;
     [SerializeField] private AudioSource _audio;
+    [SerializeField] private List<GameObject> _racers;
 
     private bool _gameStart = false;
     private bool _raceOver = true;
@@ -27,15 +29,20 @@ public class RaceManager : MonoBehaviour
     private int _trackLaps = 2;
     private int _currentLap = 0;
     private int _count = 0;
+    private int _currentPosition = 0;
+    
 
     public bool GameStarted => _gameStart;
     public int CurrentLap => _currentLap;
     public int SetCurrentLap(int amount) => _currentLap += amount;
+    public int CurrentPosition => _currentPosition;
+    public int SetCurrentPosition(int amount) => _currentPosition = amount;
+    public void AddRacers(GameObject me) => _racers.Add(me);
 
     private void Update()
     {
         _secondsPassed -= Time.deltaTime;
-        
+        Debug.Log(_racers.Count);
         if (!_gameStart && _secondsPassed > 1)
         {
 
@@ -98,7 +105,7 @@ public class RaceManager : MonoBehaviour
         if (_currentLap > _trackLaps)
         {
             _lapText.text = "Lap: " + _trackLaps + " of " + _trackLaps;
-            _updateText.text = " YOU FINISHED " + _player.CurrentPosition;
+            _updateText.text = "  YOU FINISHED  " + _player.CurrentPosition;
             _raceOver = true;
         }
     }
