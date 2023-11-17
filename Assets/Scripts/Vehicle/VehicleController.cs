@@ -9,6 +9,7 @@ public class VehicleController : MonoBehaviour
     [SerializeField] private ParticleSystem Thruster;
     [SerializeField] private Light[] TailLights;
     [SerializeField] private RaceManager ManageRace;
+    [SerializeField] private LoadingManager LoadManager;
 
     private Transform[] _waypoints;
     private int _currentWaypoint;
@@ -85,7 +86,15 @@ public class VehicleController : MonoBehaviour
     {
         if (other.name == "FinishLine")
         {
-            ManageRace.AddRacers(gameObject);
+            if (ManageRace.GetRacers < LoadManager.RaceCount)
+            {
+                ManageRace.AddRacers(gameObject);
+            }
+            else if (ManageRace.GetRacers >= LoadManager.RaceCount)
+            {
+                ManageRace.ResetRacers();
+                ManageRace.AddRacers(gameObject);
+            }
         }
     }
 }

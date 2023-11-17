@@ -38,11 +38,14 @@ public class RaceManager : MonoBehaviour
     public int CurrentPosition => _currentPosition;
     public int SetCurrentPosition(int amount) => _currentPosition = amount;
     public void AddRacers(GameObject me) => _racers.Add(me);
+    public void ResetRacers() => _racers.Clear();
+    public int GetRacers => _racers.Count;
 
     private void Update()
     {
         _secondsPassed -= Time.deltaTime;
         Debug.Log(_racers.Count);
+
         if (!_gameStart && _secondsPassed > 1)
         {
 
@@ -90,7 +93,7 @@ public class RaceManager : MonoBehaviour
         if (_gameStart && _currentLap <= _trackLaps)
         {
             _lapText.text = "Lap: " + _currentLap + " of " + _trackLaps;
-            _positionText.text = "Position: " + _player.CurrentPosition + " of " + (_loadingManager.RACERCOUNT + 1);
+            _positionText.text = "Position: " + _player.CurrentPosition + " of " + (_loadingManager.RaceCount);
         }
         if (_currentLap == _trackLaps && !_resetText)
         {

@@ -73,8 +73,16 @@ public class VehicleMovement : MonoBehaviour
     {
         if (other.name == "FinishLine")
         {
-            ManageRace.AddRacers(gameObject);
-            _currentPosition = ManageRace.CurrentPosition;
+            if (ManageRace.GetRacers < LoadManager.RaceCount)
+            {
+                ManageRace.AddRacers(gameObject);
+            }
+            else if (ManageRace.GetRacers >= LoadManager.RaceCount)
+            {
+                ManageRace.ResetRacers();
+                ManageRace.AddRacers(gameObject);
+            }
+            _currentPosition = ManageRace.GetRacers;
             ManageRace.SetCurrentLap(1);
         }
     }
