@@ -10,9 +10,13 @@ public class VehicleMovement : MonoBehaviour
     [SerializeField] private RaceManager ManageRace;
     [SerializeField] private Collider FinishLine;
     [SerializeField] private LoadingManager LoadManager;
+    [SerializeField] private GameObject WaypointContainer;
 
     private Rigidbody _vehicleBody;
     private int _currentPosition;
+    private Transform[] _waypoints;
+    private int _currentWaypoint;
+    private float _proxSqr;
 
     public int CurrentPosition => _currentPosition;
 
@@ -23,12 +27,15 @@ public class VehicleMovement : MonoBehaviour
 
     private void Start()
     {
-        _currentPosition = 1;
+        _currentPosition = 0;
+        GetWaypoints();
+        _currentWaypoint = 14;
+        _proxSqr = 8 * 8; // change after
     }
 
     private void Update()
     {
-        if (ManageRace.GameStarted)
+        if (ManageRace.GameStarted && !ManageRace.RaceOver)
         {
             if (Input.GetKey(KeyCode.W))
             {
@@ -66,11 +73,60 @@ public class VehicleMovement : MonoBehaviour
                 VehicleArmor.transform.Rotate(new Vector3(0, -70, 0) * Time.deltaTime);
             }
         }
+        else
+        {
+            var waypointPosition = _waypoints[_currentWaypoint].position;
+            var relativeWaypointPos = transform.InverseTransformPoint(new Vector3(waypointPosition.x, transform.position.y, waypointPosition.z));
+
+            if (ManageRace.GameStarted)
+            {
+                _vehicleBody.AddForce(VehicleArmor.transform.forward * 25, ForceMode.Force); // change after
+                _vehicleBody.AddForce(Physics.gravity * _vehicleBody.mass);
+                VehicleArmor.transform.rotation = _waypoints[_currentWaypoint].rotation;
+            }
+            CheckWaypointPosition(relativeWaypointPos);
+        }
+    }
+
+    private void CheckWaypointPosition(Vector3 relativeWaypointPos)
+    {
+        if (relativeWaypointPos.sqrMagnitude < _proxSqr)
+        {
+            _currentWaypoint += 1;
+
+            if (_currentWaypoint == _waypoints.Length)
+            {
+                _currentWaypoint = 0;
+            }
+        }
+    }
+
+    private void GetWaypoints()
+    {
+        var potentialWaypoints = WaypointContainer.GetComponentsInChildren<Transform>();
+        _waypoints = new Transform[potentialWaypoints.Length - 1];
+
+        for (int i = 1; i < potentialWaypoints.Length; i++)
+        {
+            _waypoints[i - 1] = potentialWaypoints[i];
+        }
+    }
+
+    public Transform GetLastWaypoint()
+    {
+        if (_currentWaypoint - 1 < 0)
+        {
+            return _waypoints[_waypoints.Length - 1];
+        }
+        else
+        {
+            return _waypoints[_currentWaypoint - 1];
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "FinishLine")
+        if (other.name == "FinishLine" && !ManageRace.RaceOver)
         {
             if (ManageRace.GetRacers < LoadManager.RaceCount)
             {

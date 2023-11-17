@@ -6,6 +6,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject _aiVehicles;
     [SerializeField] private GameObject _playerVehicle;
     [SerializeField] private GameObject _managers;
+    [SerializeField] private GameObject _finish;
 
     public void NewGame()
     {
@@ -30,6 +31,20 @@ public class MainMenu : MonoBehaviour
     }
 
     public void HostGame()
+    {
+
+    }
+
+    public void BackToMain()
+    {
+        _managers.SetActive(false);
+        _aiVehicles.SetActive(false);
+        _playerVehicle.SetActive(false);
+        _finish.SetActive(false);
+        _mainMenu.SetActive(true);
+    }
+
+    public void NextRace()
     {
 
     }

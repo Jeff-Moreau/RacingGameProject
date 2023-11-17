@@ -15,15 +15,17 @@ public class RaceManager : MonoBehaviour
     [SerializeField] private AudioClip[] _countdown;
     [SerializeField] private AudioSource _audio;
     [SerializeField] private List<GameObject> _racers;
+    [SerializeField] private GameObject _finish;
 
     private bool _gameStart = false;
-    private bool _raceOver = true;
+    private bool _raceOver = false;
     private bool _resetText = false;
     private float _secondsPassed = 4;
-    private int _trackLaps = 3;
+    private int _trackLaps = 2;
     private int _currentLap = 0;
     private int _count = 0;
-    
+
+    public bool RaceOver => _raceOver;
     public bool GameStarted => _gameStart;
     public int SetCurrentLap(int amount) => _currentLap += amount;
     public void AddRacers(GameObject me) => _racers.Add(me);
@@ -100,6 +102,7 @@ public class RaceManager : MonoBehaviour
             _lapText.text = "Lap: " + _trackLaps + " of " + _trackLaps;
             _updateText.text = "  YOU FINISHED  " + _player.CurrentPosition;
             _raceOver = true;
+            _finish.SetActive(true);
         }
     }
 

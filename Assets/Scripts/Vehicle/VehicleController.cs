@@ -82,7 +82,7 @@ public class VehicleController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "FinishLine")
+        if (other.name == "FinishLine" && !ManageRace.RaceOver)
         {
             if (ManageRace.GetRacers < LoadManager.RaceCount)
             {
