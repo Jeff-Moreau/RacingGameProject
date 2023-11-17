@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class RaceManager : MonoBehaviour
 {
-    // spawn everyone
-    // wait for count down
-    // start race
-    // check laps
-    // update lap text
-    // if position changes flash on screen for 1 - 3
     [SerializeField] private GameObject _countDownWindow;
     [SerializeField] private TextMeshProUGUI _centerText;
     [SerializeField] private TextMeshProUGUI _updateText;
@@ -26,17 +20,12 @@ public class RaceManager : MonoBehaviour
     private bool _raceOver = true;
     private bool _resetText = false;
     private float _secondsPassed = 4;
-    private int _trackLaps = 2;
+    private int _trackLaps = 3;
     private int _currentLap = 0;
     private int _count = 0;
-    private int _currentPosition = 0;
     
-
     public bool GameStarted => _gameStart;
-    public int CurrentLap => _currentLap;
     public int SetCurrentLap(int amount) => _currentLap += amount;
-    public int CurrentPosition => _currentPosition;
-    public int SetCurrentPosition(int amount) => _currentPosition = amount;
     public void AddRacers(GameObject me) => _racers.Add(me);
     public void ResetRacers() => _racers.Clear();
     public int GetRacers => _racers.Count;
@@ -107,6 +96,7 @@ public class RaceManager : MonoBehaviour
         }
         if (_currentLap > _trackLaps)
         {
+            _positionText.text = "Position: " + _player.CurrentPosition + " of " + (_loadingManager.RaceCount);
             _lapText.text = "Lap: " + _trackLaps + " of " + _trackLaps;
             _updateText.text = "  YOU FINISHED  " + _player.CurrentPosition;
             _raceOver = true;

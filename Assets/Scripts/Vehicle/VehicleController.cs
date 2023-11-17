@@ -46,8 +46,6 @@ public class VehicleController : MonoBehaviour
 
     private void CheckWaypointPosition(Vector3 relativeWaypointPos)
     {
-        /*Debug.Log(_currentWaypoint + " " + relativeWaypointPos.sqrMagnitude);
-        Debug.Log(_proxSqr);*/
         if (relativeWaypointPos.sqrMagnitude < _proxSqr)
         {
             _currentWaypoint += 1;
@@ -61,7 +59,7 @@ public class VehicleController : MonoBehaviour
 
     private void GetWaypoints()
     {
-        Transform[] potentialWaypoints = WaypointContainer.GetComponentsInChildren<Transform>();
+        var potentialWaypoints = WaypointContainer.GetComponentsInChildren<Transform>();
         _waypoints = new Transform[potentialWaypoints.Length - 1];
 
         for (int i = 1; i < potentialWaypoints.Length; i++)
