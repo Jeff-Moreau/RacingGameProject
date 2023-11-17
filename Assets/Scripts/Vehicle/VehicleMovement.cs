@@ -17,17 +17,29 @@ public class VehicleMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var horMovement = Input.GetAxis("Horizontal");
-        var verMovement = Input.GetAxis("Vertical");
-        var movement = new Vector3(horMovement, 0, verMovement);
-
         if (Input.GetKey(KeyCode.W))
         {
+            Vehicle.SetIsMoving(true);
+            Exhaust.gameObject.SetActive(false);
+            Thruster.gameObject.SetActive(true);
+
+            for (int i = 0; i < TailLights.Length; i++)
+            {
+                TailLights[i].gameObject.SetActive(false);
+            }
             _vehicleBody.AddForce(VehicleArmor.transform.forward * Vehicle.GetRollSpeed, ForceMode.Force);
             _vehicleBody.AddForce(Physics.gravity*_vehicleBody.mass);
         }
         else if (Input.GetKeyUp(KeyCode.W))
         {
+            Vehicle.SetIsMoving(false);
+            Exhaust.gameObject.SetActive(true);
+            Thruster.gameObject.SetActive(false);
+
+            for (int i = 0; i < TailLights.Length; i++)
+            {
+                TailLights[i].gameObject.SetActive(true);
+            }
             _vehicleBody.AddForce(Physics.gravity * (_vehicleBody.mass * 10));
         }
 
@@ -39,30 +51,6 @@ public class VehicleMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             VehicleArmor.transform.Rotate(new Vector3(0, -70, 0) * Time.deltaTime);
-        }
-
-        if (horMovement == 0 && verMovement == 0)
-        {
-            Vehicle.SetIsMoving(false);
-            Exhaust.gameObject.SetActive(true);
-            Thruster.gameObject.SetActive(false);
-
-            for (int i = 0; i < TailLights.Length; i++)
-            {
-                TailLights[i].gameObject.SetActive(true);
-            }
-
-        }
-        else
-        {
-            Vehicle.SetIsMoving(true);
-            Exhaust.gameObject.SetActive(false);
-            Thruster.gameObject.SetActive(true);
-
-            for (int i = 0; i < TailLights.Length; i++)
-            {
-                TailLights[i].gameObject.SetActive(false);
-            }
         }
     }
 }
