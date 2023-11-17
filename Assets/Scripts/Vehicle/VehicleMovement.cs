@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class VehicleMovement : MonoBehaviour
@@ -11,10 +12,18 @@ public class VehicleMovement : MonoBehaviour
     [SerializeField] private Collider _finishLine;
 
     private Rigidbody _vehicleBody;
+    private int _currentPosition;
+
+    public int CurrentPosition => _currentPosition;
 
     private void Awake()
     {
         _vehicleBody = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        _currentPosition = 1;
     }
 
     private void Update()

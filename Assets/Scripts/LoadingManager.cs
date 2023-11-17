@@ -7,6 +7,8 @@ public class LoadingManager : MonoBehaviour
     [SerializeField] private GameObject[] _polePositions;
     [SerializeField, Range(1, 19)] private int _aiCount;
 
+    public int RACERCOUNT => _aiCount;
+
     private void Start()
     {
         var totalCount = 0;
