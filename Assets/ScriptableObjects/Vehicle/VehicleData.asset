@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69145997ad5533542b5fd507d71584ab, type: 3}
   m_Name: VehicleData
   m_EditorClassIdentifier: 
-  _rollSpeed: 75
+  _rollSpeed: 50
   _armorHeight: 7.4
   _thrusterSound: {fileID: 8300000, guid: 8c0b2ad2efb831c458025c1ab7951902, type: 3}
   _idleSound: {fileID: 8300000, guid: 1ca6a3d1d522dfe43b044954d63f8040, type: 3}

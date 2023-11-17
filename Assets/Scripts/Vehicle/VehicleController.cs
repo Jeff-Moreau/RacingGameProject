@@ -8,6 +8,8 @@ public class VehicleController : MonoBehaviour
     [SerializeField] private ParticleSystem Exhaust;
     [SerializeField] private ParticleSystem Thruster;
     [SerializeField] private Light[] TailLights;
+    [SerializeField] private RaceManager ManageRace;
+    [SerializeField] private LoadingManager LoadManager;
 
     private Transform[] _waypoints;
     private int _currentWaypoint;
@@ -33,19 +35,17 @@ public class VehicleController : MonoBehaviour
         var waypointPosition = _waypoints[_currentWaypoint].position;
         var relativeWaypointPos = transform.InverseTransformPoint(new Vector3(waypointPosition.x, transform.position.y, waypointPosition.z));
 
-        
-
-        _vehicleBody.AddForce(VehicleArmor.transform.forward * 50, ForceMode.Force); // change after
-        _vehicleBody.AddForce(Physics.gravity * _vehicleBody.mass);
-
-        VehicleArmor.transform.rotation = _waypoints[_currentWaypoint].rotation;
+        if (ManageRace.GameStarted)
+        {
+            _vehicleBody.AddForce(VehicleArmor.transform.forward * 50, ForceMode.Force); // change after
+            _vehicleBody.AddForce(Physics.gravity * _vehicleBody.mass);
+            VehicleArmor.transform.rotation = _waypoints[_currentWaypoint].rotation;
+        }
         CheckWaypointPosition(relativeWaypointPos);
     }
 
     private void CheckWaypointPosition(Vector3 relativeWaypointPos)
     {
-        Debug.Log(_currentWaypoint + " " + relativeWaypointPos.sqrMagnitude);
-        Debug.Log(_proxSqr);
         if (relativeWaypointPos.sqrMagnitude < _proxSqr)
         {
             _currentWaypoint += 1;
@@ -59,7 +59,7 @@ public class VehicleController : MonoBehaviour
 
     private void GetWaypoints()
     {
-        Transform[] potentialWaypoints = WaypointContainer.GetComponentsInChildren<Transform>();
+        var potentialWaypoints = WaypointContainer.GetComponentsInChildren<Transform>();
         _waypoints = new Transform[potentialWaypoints.Length - 1];
 
         for (int i = 1; i < potentialWaypoints.Length; i++)
@@ -78,5 +78,27 @@ public class VehicleController : MonoBehaviour
         {
             return _waypoints[_currentWaypoint - 1];
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "FinishLine" && !ManageRace.RaceOver)
+        {
+            if (ManageRace.GetRacers < LoadManager.RaceCount)
+            {
+                ManageRace.AddRacers(gameObject);
+            }
+            else if (ManageRace.GetRacers >= LoadManager.RaceCount)
+            {
+                ManageRace.ResetRacers();
+                ManageRace.AddRacers(gameObject);
+            }
+        }
+    }
+
+    public void ResetPosition()
+    {
+        transform.localPosition = new Vector3(0, 0, 0);
+        transform.localRotation = Quaternion.identity;
     }
 }
