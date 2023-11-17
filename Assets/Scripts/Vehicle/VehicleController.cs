@@ -33,6 +33,8 @@ public class VehicleController : MonoBehaviour
         var waypointPosition = _waypoints[_currentWaypoint].position;
         var relativeWaypointPos = transform.InverseTransformPoint(new Vector3(waypointPosition.x, transform.position.y, waypointPosition.z));
 
+        
+
         _vehicleBody.AddForce(VehicleArmor.transform.forward * 50, ForceMode.Force); // change after
         _vehicleBody.AddForce(Physics.gravity * _vehicleBody.mass);
 
