@@ -22,7 +22,7 @@ public class RaceManager : MonoBehaviour
     private bool _raceOver = false;
     private bool _resetText = false;
     private float _secondsPassed = 4;
-    private int _trackLaps = 2;
+    private int _trackLaps = 3;
     private int _currentLap = 0;
     private int _count = 0;
 
@@ -39,7 +39,7 @@ public class RaceManager : MonoBehaviour
         _raceOver = false;
         _resetText = false;
         _secondsPassed = 4;
-        _trackLaps = 1;
+        _trackLaps = 3;
         _currentLap = 0;
         _count = 0;
     }
@@ -130,7 +130,7 @@ public class RaceManager : MonoBehaviour
         _raceOver = false;
         _resetText = false;
         _secondsPassed = 4;
-        _trackLaps = 1;
+        _trackLaps = 3;
         _currentLap = 0;
         _count = 0;
         //_loadManager.ResetLoading();
