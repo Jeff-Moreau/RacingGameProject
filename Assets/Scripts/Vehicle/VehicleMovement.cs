@@ -7,6 +7,8 @@ public class VehicleMovement : MonoBehaviour
     [SerializeField] private ParticleSystem Exhaust;
     [SerializeField] private ParticleSystem Thruster;
     [SerializeField] private Light[] TailLights;
+    [SerializeField] private RaceManager ManageRace;
+    [SerializeField] private Collider _finishLine;
 
     private Rigidbody _vehicleBody;
 
@@ -15,7 +17,7 @@ public class VehicleMovement : MonoBehaviour
         _vehicleBody = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (Input.GetKey(KeyCode.W))
         {
@@ -28,7 +30,7 @@ public class VehicleMovement : MonoBehaviour
                 TailLights[i].gameObject.SetActive(false);
             }
             _vehicleBody.AddForce(VehicleArmor.transform.forward * Vehicle.GetRollSpeed, ForceMode.Force);
-            _vehicleBody.AddForce(Physics.gravity*_vehicleBody.mass);
+            _vehicleBody.AddForce(Physics.gravity * _vehicleBody.mass);
         }
         else if (Input.GetKeyUp(KeyCode.W))
         {
@@ -51,6 +53,14 @@ public class VehicleMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             VehicleArmor.transform.Rotate(new Vector3(0, -70, 0) * Time.deltaTime);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "FinishLine")
+        {
+            ManageRace.SetCurrentLap(1);
         }
     }
 }
