@@ -2,17 +2,18 @@ using UnityEngine;
 
 public class PlayerController : VehicleController
 {
-    private float myRotationSpeed;
-    private float myMassMultiplier;
+    [Header("Vehicle Data")]
+    [SerializeField] protected VehicleData myData;
+
+    private float myWaypointProximity;
 
     private void Start()
     {
-        myMassMultiplier = 15;
-        myRotationSpeed = 70;
+        GetWaypoints();
         myCurrentPosition = 0;
         myCurrentWaypoint = 14;
+        myWaypointProximity = myData.GetWaypointProximity * myData.GetWaypointProximity;
         myData.SetIsMoving(false);
-        GetWaypoints();
     }
 
     private void Update()
@@ -60,17 +61,17 @@ public class PlayerController : VehicleController
                     myTailLightBulbs[i].gameObject.SetActive(true);
                 }
 
-                mySphere.AddForce(Physics.gravity * (mySphere.mass * myMassMultiplier));
+                mySphere.AddForce(Physics.gravity * (mySphere.mass * myData.GetMassMultiplier));
             }
 
             if (Input.GetKey(KeyCode.D))
             {
-                myArmor.transform.Rotate(new Vector3(0, myRotationSpeed, 0) * Time.deltaTime);
+                myArmor.transform.Rotate(new Vector3(0, myData.GetRotationSpeed, 0) * Time.deltaTime);
             }
 
             if (Input.GetKey(KeyCode.A))
             {
-                myArmor.transform.Rotate(new Vector3(0, -myRotationSpeed, 0) * Time.deltaTime);
+                myArmor.transform.Rotate(new Vector3(0, -myData.GetRotationSpeed, 0) * Time.deltaTime);
             }
         }
         else
@@ -87,6 +88,19 @@ public class PlayerController : VehicleController
                 myArmor.transform.rotation = myWaypoints[myCurrentWaypoint].rotation;
             }
             CheckWaypointPosition(relativeWaypointPos);
+        }
+    }
+
+    private void CheckWaypointPosition(Vector3 relativeWaypointPos)
+    {
+        if (relativeWaypointPos.sqrMagnitude < myWaypointProximity)
+        {
+            myCurrentWaypoint += 1;
+
+            if (myCurrentWaypoint == myWaypoints.Length)
+            {
+                myCurrentWaypoint = 0;
+            }
         }
     }
 }

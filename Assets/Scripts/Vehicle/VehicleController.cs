@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class VehicleController : MonoBehaviour
 {
-    [Header("Vehicle Data")]
-    [SerializeField] protected VehicleData myData;
-
     [Header("Vehicle Pieces")]
     [SerializeField] protected Rigidbody mySphere = null;
     [SerializeField] protected GameObject myArmor = null;
@@ -17,26 +14,12 @@ public class VehicleController : MonoBehaviour
     protected Transform[] myWaypoints;
     protected int myCurrentPosition;
     protected int myCurrentWaypoint;
-    protected float myProxSqr;
 
     public int CurrentPosition => myCurrentPosition;
 
     protected void Awake()
     {
         theWaypointsContainer = GameObject.FindWithTag("Waypoints");
-    }
-
-    protected void CheckWaypointPosition(Vector3 relativeWaypointPos)
-    {
-        if (relativeWaypointPos.sqrMagnitude < myProxSqr)
-        {
-            myCurrentWaypoint += 1;
-
-            if (myCurrentWaypoint == myWaypoints.Length)
-            {
-                myCurrentWaypoint = 0;
-            }
-        }
     }
 
     protected void GetWaypoints()

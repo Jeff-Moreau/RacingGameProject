@@ -1681,6 +1681,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 959209462}
   m_CullTransparentMesh: 1
+--- !u!1 &1008414929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1008414930}
+  - component: {fileID: 1008414931}
+  m_Layer: 0
+  m_Name: MenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1008414930
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008414929}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1407814701}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1008414931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008414929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e57e2b39be3868241b5ae7fad9194c3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theMainMenu: {fileID: 1678639359}
 --- !u!1 &1074957610
 GameObject:
   m_ObjectHideFlags: 0
@@ -2281,6 +2326,7 @@ Transform:
   - {fileID: 1770991524}
   - {fileID: 690837326}
   - {fileID: 1859775826}
+  - {fileID: 1008414930}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1445148834
@@ -2849,12 +2895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e57e2b39be3868241b5ae7fad9194c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainMenu: {fileID: 1678639359}
-  _aiVehicles: {fileID: 0}
-  _playerVehicle: {fileID: 0}
-  _managers: {fileID: 1407814699}
-  _raceManager: {fileID: 0}
-  _finish: {fileID: 0}
+  theMainMenu: {fileID: 0}
 --- !u!82 &1678639365
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2960,7 +3001,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1770991524}
-  - component: {fileID: 1770991525}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2983,24 +3023,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1407814701}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1770991525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1770991523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e57e2b39be3868241b5ae7fad9194c3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mainMenu: {fileID: 0}
-  _aiVehicles: {fileID: 0}
-  _playerVehicle: {fileID: 0}
-  _managers: {fileID: 0}
-  _raceManager: {fileID: 0}
-  _finish: {fileID: 0}
 --- !u!1 &1787686297
 GameObject:
   m_ObjectHideFlags: 0
@@ -3416,19 +3438,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31df8b87b60d9674ea523f2910e2e7a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _countDownWindow: {fileID: 0}
-  _centerText: {fileID: 0}
-  _updateText: {fileID: 0}
-  _lapText: {fileID: 0}
-  _positionText: {fileID: 0}
-  _finishLine: {fileID: 0}
-  _player: {fileID: 0}
-  _loadingManager: {fileID: 0}
-  _countdown: []
-  _audio: {fileID: 0}
-  _racers: []
-  _finish: {fileID: 0}
-  _loadManager: {fileID: 0}
+  myCountDownAudioClips: []
+  myAudioSource: {fileID: 0}
+  myRacers: []
+  theTracks: []
+  theCountDownText: {fileID: 0}
+  theUpdateText: {fileID: 0}
+  theLapText: {fileID: 0}
+  thePositionText: {fileID: 0}
+  thePlayer: {fileID: 0}
+  theFinishUI: {fileID: 0}
 --- !u!1 &1942702007
 GameObject:
   m_ObjectHideFlags: 0
