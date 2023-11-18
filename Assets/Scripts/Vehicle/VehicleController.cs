@@ -2,97 +2,63 @@ using UnityEngine;
 
 public class VehicleController : MonoBehaviour
 {
-    [SerializeField] private GameObject WaypointContainer;
-    [SerializeField] private VehicleData Vehicle;
-    [SerializeField] private GameObject VehicleArmor;
-    [SerializeField] private ParticleSystem Exhaust;
-    [SerializeField] private ParticleSystem Thruster;
-    [SerializeField] private Light[] TailLights;
-    [SerializeField] private RaceManager ManageRace;
-    [SerializeField] private LoadingManager LoadManager;
+    [Header("Vehicle Data")]
+    [SerializeField] protected VehicleData myData;
 
-    private Transform[] _waypoints;
-    private int _currentWaypoint;
-    private Rigidbody _vehicleBody;
-    private float _proxSqr;
+    [Header("Vehicle Pieces")]
+    [SerializeField] protected Rigidbody mySphere = null;
+    [SerializeField] protected GameObject myArmor = null;
+    [SerializeField] protected ParticleSystem[] myExhaustParticles = null;
+    [SerializeField] protected ParticleSystem[] myThrusterParticles = null;
+    [SerializeField] protected Light[] myTailLightBulbs = null;
+    [SerializeField] protected Light[] myHeadLightBulbs = null;
 
-    public Transform GetCurrentWaypoint => _waypoints[_currentWaypoint];
+    protected GameObject theWaypointsContainer;
+    protected Transform[] myWaypoints;
+    protected int myCurrentPosition;
+    protected int myCurrentWaypoint;
+    protected float myProxSqr;
 
-    private void Awake()
+    public int CurrentPosition => myCurrentPosition;
+
+    protected void Awake()
     {
-        _vehicleBody = GetComponent<Rigidbody>();
+        theWaypointsContainer = GameObject.FindWithTag("Waypoints");
     }
 
-    private void Start()
+    protected void CheckWaypointPosition(Vector3 relativeWaypointPos)
     {
-        GetWaypoints();
-        _currentWaypoint = 14;
-        _proxSqr = 8 * 8; // change after
-    }
-
-    private void Update()
-    {
-        var waypointPosition = _waypoints[_currentWaypoint].position;
-        var relativeWaypointPos = transform.InverseTransformPoint(new Vector3(waypointPosition.x, transform.position.y, waypointPosition.z));
-
-        if (ManageRace.GameStarted)
+        if (relativeWaypointPos.sqrMagnitude < myProxSqr)
         {
-            _vehicleBody.AddForce(VehicleArmor.transform.forward * 50, ForceMode.Force); // change after
-            _vehicleBody.AddForce(Physics.gravity * _vehicleBody.mass);
-            VehicleArmor.transform.rotation = _waypoints[_currentWaypoint].rotation;
-        }
-        CheckWaypointPosition(relativeWaypointPos);
-    }
+            myCurrentWaypoint += 1;
 
-    private void CheckWaypointPosition(Vector3 relativeWaypointPos)
-    {
-        if (relativeWaypointPos.sqrMagnitude < _proxSqr)
-        {
-            _currentWaypoint += 1;
-
-            if (_currentWaypoint == _waypoints.Length)
+            if (myCurrentWaypoint == myWaypoints.Length)
             {
-                _currentWaypoint = 0;
+                myCurrentWaypoint = 0;
             }
         }
     }
 
-    private void GetWaypoints()
+    protected void GetWaypoints()
     {
-        var potentialWaypoints = WaypointContainer.GetComponentsInChildren<Transform>();
-        _waypoints = new Transform[potentialWaypoints.Length - 1];
+        var potentialWaypoints = theWaypointsContainer.GetComponentsInChildren<Transform>();
+        myWaypoints = new Transform[potentialWaypoints.Length - 1];
 
         for (int i = 1; i < potentialWaypoints.Length; i++)
         {
-            _waypoints[i - 1] = potentialWaypoints[i];
+            myWaypoints[i - 1] = potentialWaypoints[i];
         }
     }
 
     public Transform GetLastWaypoint()
     {
-        if (_currentWaypoint - 1 < 0)
+        if (myCurrentWaypoint - 1 < 0)
         {
-            return _waypoints[_waypoints.Length - 1];
+            return myWaypoints[myWaypoints.Length - 1];
         }
         else
         {
-            return _waypoints[_currentWaypoint - 1];
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.name == "FinishLine" && !ManageRace.RaceOver)
-        {
-            if (ManageRace.GetRacers < LoadManager.RaceCount)
-            {
-                ManageRace.AddRacers(gameObject);
-            }
-            else if (ManageRace.GetRacers >= LoadManager.RaceCount)
-            {
-                ManageRace.ResetRacers();
-                ManageRace.AddRacers(gameObject);
-            }
+            return myWaypoints[myCurrentWaypoint - 1];
         }
     }
 

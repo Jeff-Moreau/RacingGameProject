@@ -2,52 +2,64 @@ using UnityEngine;
 
 public class LoadingManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _playerVehicle;
-    [SerializeField] private GameObject[] _aiVehicles;
-    [SerializeField] private GameObject[] _polePositions;
-    [SerializeField, Range(1, 19)] private int _aiCount;
+    // SINGLETON STARTS
+    private static LoadingManager myInstance;
+    private void Singleton()
+    {
+        if (myInstance != null && myInstance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            myInstance = this;
+        }
 
-    public int RaceCount => _aiCount + 1;
+        DontDestroyOnLoad(this.gameObject);
+    }
+    public static LoadingManager Load => myInstance;
+    // SINGLETON ENDS
+
+    [Header("Loading Data")]
+    [SerializeField, Range(1, 19)] private int myVehicleCount;
+
+    [Header("Other Data Needed")]
+    [SerializeField] private GameObject thePlayerVehicle;
+    [SerializeField] private GameObject[] theAIVehicles;
+    [SerializeField] private GameObject[] thePolePositions;
+
+    private PolePositionMarker[] thePolePositionsTaken;
+
+    public int RaceCount => myVehicleCount + 1;
+
+    private void Awake()
+    {
+        Singleton();
+
+        for (int i = 0; i < thePolePositions.Length; i++)
+        {
+            thePolePositionsTaken[i] = thePolePositions[i].gameObject.GetComponent<PolePositionMarker>();
+        }
+    }
 
     private void Start()
     {
         var totalCount = 0;
-        var randomPosition = Random.Range(0, _aiCount);
+        var randomPolePosition = Random.Range(0, myVehicleCount);
 
-        _playerVehicle.transform.position = _polePositions[randomPosition].transform.position;
-        _playerVehicle.transform.rotation = _polePositions[randomPosition].transform.rotation;
-        _polePositions[randomPosition].gameObject.GetComponent<StartingPositionsManager>().SetSpotTaken(true);
+        thePlayerVehicle.transform.position = thePolePositions[randomPolePosition].transform.position;
+        thePlayerVehicle.transform.rotation = thePolePositions[randomPolePosition].transform.rotation;
+        thePolePositionsTaken[randomPolePosition].SetSpotTaken(true);
 
-        for (int i = 0; i < _polePositions.Length; i++)
+        for (int i = 0; i < thePolePositions.Length; i++)
         {
-            if (_polePositions[i].gameObject.GetComponent<StartingPositionsManager>().GetSpotTaken == false && totalCount < _aiCount)
+            if (thePolePositionsTaken[i].GetSpotTaken == false && totalCount < myVehicleCount)
             {
-                _aiVehicles[i].transform.position = _polePositions[i].transform.position;
-                _aiVehicles[i].transform.rotation = _polePositions[i].transform.rotation;
-                _polePositions[i].gameObject.GetComponent<StartingPositionsManager>().SetSpotTaken(true);
-                _aiVehicles[i].SetActive(true);
-                totalCount++;
-            }
-        }
-    }
-
-    public void ResetLoading()
-    {
-        var totalCount = 0;
-        var randomPosition = Random.Range(0, _aiCount);
-
-        _playerVehicle.transform.position = _polePositions[randomPosition].transform.position;
-        _playerVehicle.transform.rotation = _polePositions[randomPosition].transform.rotation;
-        _polePositions[randomPosition].gameObject.GetComponent<StartingPositionsManager>().SetSpotTaken(true);
-
-        for (int i = 0; i < _polePositions.Length; i++)
-        {
-            if (_polePositions[i].gameObject.GetComponent<StartingPositionsManager>().GetSpotTaken == false && totalCount < _aiCount)
-            {
-                _aiVehicles[i].transform.position = _polePositions[i].transform.position;
-                _aiVehicles[i].transform.rotation = _polePositions[i].transform.rotation;
-                _polePositions[i].gameObject.GetComponent<StartingPositionsManager>().SetSpotTaken(true);
-                _aiVehicles[i].SetActive(true);
+                theAIVehicles[i].transform.position = thePolePositions[i].transform.position;
+                theAIVehicles[i].transform.rotation = thePolePositions[i].transform.rotation;
+                thePolePositionsTaken[i].SetSpotTaken(true);
+                theAIVehicles[i].SetActive(true);
                 totalCount++;
             }
         }

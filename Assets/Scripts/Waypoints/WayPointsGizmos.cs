@@ -4,24 +4,24 @@ public class WayPointsGizmos : MonoBehaviour
 {
     private const string WAYPOINT = "Waypoint ";
 
-    [SerializeField] private float _waypointSize = 1.0f;
-    [SerializeField] private Color _waypointColor = Color.red;
+    [SerializeField] private float myWaypointSphereSize = 1.0f;
+    [SerializeField] private Color myWaypointColor = Color.red;
 
-    private Transform[] _wayPoints = null;
+    private Transform[] theWayPoints = null;
 
     private void OnDrawGizmos()
     {
-        _wayPoints = GetComponentsInChildren<Transform>();
-        var lastWaypoint = _wayPoints[_wayPoints.Length - 1].position;
+        theWayPoints = GetComponentsInChildren<Transform>();
+        var lastWaypoint = theWayPoints[theWayPoints.Length - 1].position;
 
-        for (int i = 1; i < _wayPoints.Length; i++)
+        for (int i = 1; i < theWayPoints.Length; i++)
         {
-            Gizmos.color = _waypointColor;
-            Gizmos.DrawSphere(_wayPoints[i].position, _waypointSize);
-            Gizmos.DrawLine(lastWaypoint, _wayPoints[i].position);
-            lastWaypoint = _wayPoints[i].position;
+            Gizmos.color = myWaypointColor;
+            Gizmos.DrawSphere(theWayPoints[i].position, myWaypointSphereSize);
+            Gizmos.DrawLine(lastWaypoint, theWayPoints[i].position);
+            lastWaypoint = theWayPoints[i].position;
 
-            _wayPoints[i].name = WAYPOINT + i.ToString();
+            theWayPoints[i].name = WAYPOINT + i.ToString();
         }
     }
 }

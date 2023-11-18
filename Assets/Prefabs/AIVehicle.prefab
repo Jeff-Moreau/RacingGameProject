@@ -10858,16 +10858,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b84ad015f0cc85249af5602d25075dd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaypointContainer: {fileID: 0}
-  Vehicle: {fileID: 11400000, guid: 6d61787211c2fa747ab58dde8b3fba67, type: 2}
-  VehicleArmor: {fileID: 7925766267834119143}
-  Exhaust: {fileID: 1682183365871664060}
-  Thruster: {fileID: 2471891424572293884}
-  TailLights:
-  - {fileID: 3107903475711936130}
-  - {fileID: 5014522531667267744}
-  ManageRace: {fileID: 0}
-  LoadManager: {fileID: 0}
+  myData: {fileID: 0}
+  mySphere: {fileID: 0}
+  myArmor: {fileID: 0}
+  myExhaustParticles: []
+  myThrusterParticles: []
+  myTailLightBulbs: []
+  myHeadLightBulbs: []
 --- !u!1 &7736142056143914926
 GameObject:
   m_ObjectHideFlags: 0
@@ -11026,7 +11023,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2451126087491491175
 Transform:
   m_ObjectHideFlags: 0

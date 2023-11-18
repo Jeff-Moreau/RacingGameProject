@@ -3,17 +3,24 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "VehicleData", menuName = "ScriptableObject/VehicleData")]
 public class VehicleData : ScriptableObject
 {
-    [SerializeField] private float _rollSpeed = 0;
-    [SerializeField] private float _armorHeight = 0;
-    [SerializeField] private AudioClip _thrusterSound = null;
-    [SerializeField] private AudioClip _idleSound = null;
+    [Header("Movement")]
+    [SerializeField] private bool isMoving = false;
+    [SerializeField] private float theRollSpeed = 0;
 
-    private bool _isMoving = false;
+    [Header("Armor Height Offset above Ball")]
+    [SerializeField] private float theArmorHeight = 0;
 
-    public float GetRollSpeed => _rollSpeed;
-    public float GetArmorHeight => _armorHeight;
-    public AudioClip GetThrusterSound => _thrusterSound;
-    public AudioClip GetIdleSound => _idleSound;
-    public bool GetIsMoving => _isMoving;
-    public bool SetIsMoving(bool yesno) => _isMoving = yesno;
+    [Header("Sound FX")]
+    [SerializeField] private AudioClip theIdleSound = null;
+    [SerializeField] private AudioClip theThrusterSound = null;
+
+    public bool GetIsMoving => isMoving;
+    public float GetRollSpeed => theRollSpeed;
+
+    public float GetArmorHeight => theArmorHeight;
+
+    public AudioClip GetIdleSound => theIdleSound;
+    public AudioClip GetThrusterSound => theThrusterSound;
+
+    public void SetIsMoving(bool yesno) => isMoving = yesno;
 }

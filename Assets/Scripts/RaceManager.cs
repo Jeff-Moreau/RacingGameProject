@@ -4,13 +4,32 @@ using UnityEngine;
 
 public class RaceManager : MonoBehaviour
 {
+    // SINGLETON STARTS
+    private static RaceManager myInstance;
+    private void Singleton()
+    {
+        if (myInstance != null && myInstance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            myInstance = this;
+        }
+
+        DontDestroyOnLoad(this.gameObject);
+    }
+    public static RaceManager Load => myInstance;
+    // SINGLETON ENDS
+
     [SerializeField] private GameObject _countDownWindow;
     [SerializeField] private TextMeshProUGUI _centerText;
     [SerializeField] private TextMeshProUGUI _updateText;
     [SerializeField] private TextMeshProUGUI _lapText;
     [SerializeField] private TextMeshProUGUI _positionText;
     [SerializeField] private Collider _finishLine;
-    [SerializeField] private VehicleMovement _player;
+    [SerializeField] private PlayerController _player;
     [SerializeField] private LoadingManager _loadingManager;
     [SerializeField] private AudioClip[] _countdown;
     [SerializeField] private AudioSource _audio;
@@ -35,6 +54,7 @@ public class RaceManager : MonoBehaviour
 
     private void Awake()
     {
+        Singleton();
         _gameStart = false;
         _raceOver = false;
         _resetText = false;
