@@ -632,7 +632,7 @@ GameObject:
   - component: {fileID: 257078228}
   - component: {fileID: 257078227}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: JoinGameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -806,7 +806,7 @@ GameObject:
   - component: {fileID: 542220355}
   - component: {fileID: 542220354}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ExitText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1559,7 +1559,7 @@ GameObject:
   - component: {fileID: 959209465}
   - component: {fileID: 959209464}
   m_Layer: 5
-  m_Name: Title
+  m_Name: TitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1693,7 +1693,7 @@ GameObject:
   - component: {fileID: 1074957613}
   - component: {fileID: 1074957612}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: NewGameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3013,7 +3013,7 @@ GameObject:
   - component: {fileID: 1787686300}
   - component: {fileID: 1787686299}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: HostGameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3147,7 +3147,7 @@ GameObject:
   - component: {fileID: 1837360308}
   - component: {fileID: 1837360307}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: MadeByText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3441,7 +3441,7 @@ GameObject:
   - component: {fileID: 1942702010}
   - component: {fileID: 1942702009}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: SettingsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
