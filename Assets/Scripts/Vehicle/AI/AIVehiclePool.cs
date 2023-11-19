@@ -15,8 +15,6 @@ public class AIVehiclePool : MonoBehaviour
     {
         myAIVehicleList = new List<GameObject>();
 
-        Debug.Log("Pool " + myTotalAIVehicles);
-
         for (int i = 0; i < myTotalAIVehicles; i++)
         {
             myAIVehicleList.Add(Instantiate(myAIVehicle, transform));
@@ -28,6 +26,7 @@ public class AIVehiclePool : MonoBehaviour
     {
         for (int i = 0; i < myTotalAIVehicles; i++)
         {
+            Debug.Log("Pool " + myTotalAIVehicles);
             if (!myAIVehicleList[i].activeInHierarchy)
             {
                 return myAIVehicleList[i];
