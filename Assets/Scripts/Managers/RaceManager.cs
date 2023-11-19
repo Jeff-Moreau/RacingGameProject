@@ -41,6 +41,7 @@ public class RaceManager : MonoBehaviour
     private int myTrackLaps = 3; // to the track itself
     private int myCurrentLap = 0;
     private int myAudioCount = 0;
+    private GameObject thePlayer;
 
     public bool RaceOver => myRaceOver;
     public bool GameStarted => myGameStart;
@@ -58,6 +59,11 @@ public class RaceManager : MonoBehaviour
         myTrackLaps = 3;
         myCurrentLap = 0;
         myAudioCount = 0;
+    }
+
+    private void Start()
+    {
+        thePlayer = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update()
@@ -112,7 +118,7 @@ public class RaceManager : MonoBehaviour
         if (myGameStart && myCurrentLap <= myTrackLaps)
         {
             theLapText.text = "Lap: " + myCurrentLap + " of " + myTrackLaps;
-            thePositionText.text = "Position: " + /*LoadingManager.Load.GetPlayers[0].GetComponent<VehicleController>().CurrentPosition +*/ " of " + (LoadingManager.Load.RaceCount);
+            thePositionText.text = "Position: " + thePlayer.transform.position.x + " of " + (LoadingManager.Load.RaceCount);
         }
         if (myCurrentLap == myTrackLaps && !myResetText)
         {

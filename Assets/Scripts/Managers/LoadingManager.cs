@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class LoadingManager : MonoBehaviour
 {
@@ -29,10 +28,10 @@ public class LoadingManager : MonoBehaviour
     [SerializeField] private GameObject[] theTrack; // fix later with list of tracks
     
     private GameObject[] thePolePositions;
-
+    private int theTotalVehicles;
+    private int theTotalPlayers;
     public int RaceCount => myVehicleCount;// check this later might be wrong should check players as well
     public GameObject GetCurrentTrack => theTrack[0];
-    public GameObject[] GetPlayers => thePlayerVehicles;
 
     private void Awake()
     {
@@ -41,39 +40,29 @@ public class LoadingManager : MonoBehaviour
         thePolePositions = theTrack[0].GetComponent<TrackInformation>().GetPolePositions;
         theAIVehiclePool.SetTotalAIVehciles(thePolePositions.Length - thePlayerVehicles.Length);
 
+    }
+
+    private void Start()
+    {
+        Instantiate(theTrack[0]);
+        ResetPolePositions();
+        LoadPlayersInTrack();
+        LoadAIVehiclesInTrack();
+    }
+
+    private void ResetPolePositions()
+    {
         for (int i = 0; i < thePolePositions.Length; i++)
         {
             thePolePositions[i].GetComponent<PolePositionMarker>().SetSpotTaken(false);
         }
     }
 
-    private void Start()
+    private void LoadAIVehiclesInTrack()
     {
-        Instantiate(theTrack[0]);
-        var totalCount = 0;
-        var playerCount = 0;
-
         for (int i = 0; i < thePolePositions.Length; i++)
         {
-            for (int j = 0; j < thePlayerVehicles.Length; j++)
-            {
-                var randomPolePosition = Random.Range(0, thePlayerVehicles.Length);
-
-                if (thePolePositions[randomPolePosition].GetComponent<PolePositionMarker>().GetSpotTaken == false && playerCount < thePlayerVehicles.Length)
-                {
-                    thePlayerVehicles[j].transform.SetPositionAndRotation(thePolePositions[randomPolePosition].transform.position, thePolePositions[randomPolePosition].transform.rotation);
-                    thePolePositions[randomPolePosition].GetComponent<PolePositionMarker>().SetSpotTaken(true);
-                    Instantiate(thePlayerVehicles[j]);
-                    thePlayerVehicles[j].SetActive(true);
-                    playerCount++;
-                    totalCount++;
-                }
-            }
-        }
-
-        for (int i = 0; i < thePolePositions.Length; i++)
-        {
-            if (thePolePositions[i].GetComponent<PolePositionMarker>().GetSpotTaken == false && totalCount < myVehicleCount)
+            if (thePolePositions[i].GetComponent<PolePositionMarker>().GetSpotTaken == false && theTotalVehicles < myVehicleCount)
             {
                 var newAIVehicle = theAIVehiclePool.GetAIVehicle();
 
@@ -81,12 +70,33 @@ public class LoadingManager : MonoBehaviour
                 {
                     newAIVehicle.transform.SetPositionAndRotation(thePolePositions[i].transform.position, thePolePositions[i].transform.rotation);
                     thePolePositions[i].GetComponent<PolePositionMarker>().SetSpotTaken(true);
-                    totalCount++;
+                    theTotalVehicles++;
                 }
 
                 for (int j = 0; j < theAIVehiclePool.GetAIVehicleList.Count; j++)
                 {
                     newAIVehicle.SetActive(true);
+                }
+            }
+        }
+    }
+
+    private void LoadPlayersInTrack()
+    {
+        for (int i = 0; i < thePolePositions.Length; i++)
+        {
+            for (int j = 0; j < thePlayerVehicles.Length; j++)
+            {
+                var randomPolePosition = Random.Range(0, thePlayerVehicles.Length);
+
+                if (thePolePositions[randomPolePosition].GetComponent<PolePositionMarker>().GetSpotTaken == false && theTotalPlayers < thePlayerVehicles.Length)
+                {
+                    thePlayerVehicles[j].transform.SetPositionAndRotation(thePolePositions[randomPolePosition].transform.position, thePolePositions[randomPolePosition].transform.rotation);
+                    thePolePositions[randomPolePosition].GetComponent<PolePositionMarker>().SetSpotTaken(true);
+                    Instantiate(thePlayerVehicles[j]);
+                    thePlayerVehicles[j].SetActive(true);
+                    theTotalPlayers++;
+                    theTotalVehicles++;
                 }
             }
         }
