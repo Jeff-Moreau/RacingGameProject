@@ -4,6 +4,7 @@ public class LoadingManager : MonoBehaviour
 {
     // SINGLETON STARTS
     private static LoadingManager myInstance;
+    public static LoadingManager Load => myInstance;
     private void Singleton()
     {
         if (myInstance != null && myInstance != this)
@@ -16,7 +17,6 @@ public class LoadingManager : MonoBehaviour
             myInstance = this;
         }
     }
-    public static LoadingManager Load => myInstance;
     // SINGLETON ENDS
 
     [Header("Loading Data")]

@@ -11,6 +11,11 @@ public class AIVehiclePool : MonoBehaviour
     public List<GameObject> GetAIVehicleList => myAIVehicleList;
     public int SetTotalAIVehciles(int amount) => myTotalAIVehicles = amount;
 
+    private void Awake()
+    {
+        myTotalAIVehicles = 0;
+    }
+
     private void Start()
     {
         myAIVehicleList = new List<GameObject>();
