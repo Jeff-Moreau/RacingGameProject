@@ -10725,6 +10725,7 @@ GameObject:
   - component: {fileID: 6323648850615545603}
   - component: {fileID: 5458810945715145492}
   - component: {fileID: 5410282482315495453}
+  - component: {fileID: 8385641965187165899}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -10845,6 +10846,31 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8385641965187165899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6889888617679485394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 608fd93c6ad138b4ba7b839f1104dda3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mySphere: {fileID: 5410282482315495453}
+  myArmor: {fileID: 7925766267834119143}
+  myExhaustParticles:
+  - {fileID: 1682183365871664060}
+  myThrusterParticles:
+  - {fileID: 2471891424572293884}
+  myTailLightBulbs:
+  - {fileID: 3107903475711936130}
+  - {fileID: 5014522531667267744}
+  myHeadLightBulbs:
+  - {fileID: 3938720496734198529}
+  - {fileID: 7239500624726001572}
+  myData: {fileID: 11400000, guid: 6d61787211c2fa747ab58dde8b3fba67, type: 2}
 --- !u!1 &7736142056143914926
 GameObject:
   m_ObjectHideFlags: 0
@@ -10997,7 +11023,6 @@ GameObject:
   - component: {fileID: 4907835275648973359}
   - component: {fileID: 5706395171247740418}
   - component: {fileID: 3079891781894312042}
-  - component: {fileID: 2168585155991016226}
   m_Layer: 0
   m_Name: Vehicle
   m_TagString: Untagged
@@ -11014,7 +11039,7 @@ Transform:
   m_GameObject: {fileID: 8030500827607855529}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.5395058, z: -0, w: 0.84198195}
-  m_LocalPosition: {x: 527.6, y: 25.449997, z: 727.1}
+  m_LocalPosition: {x: 446.46002, y: 25.449997, z: 689.5}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11229,31 +11254,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2168585155991016226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8030500827607855529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 608fd93c6ad138b4ba7b839f1104dda3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mySphere: {fileID: 5410282482315495453}
-  myArmor: {fileID: 7925766267834119143}
-  myExhaustParticles:
-  - {fileID: 1682183365871664060}
-  myThrusterParticles:
-  - {fileID: 2471891424572293884}
-  myTailLightBulbs:
-  - {fileID: 3107903475711936130}
-  - {fileID: 5014522531667267744}
-  myHeadLightBulbs:
-  - {fileID: 3938720496734198529}
-  - {fileID: 7239500624726001572}
-  myData: {fileID: 11400000, guid: 6d61787211c2fa747ab58dde8b3fba67, type: 2}
 --- !u!1 &8405391749400779039
 GameObject:
   m_ObjectHideFlags: 0

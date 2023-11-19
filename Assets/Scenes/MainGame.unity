@@ -1306,8 +1306,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29506cae30396a941be802f7105fe93e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myVehicleCount: 0
+  myVehicleCount: 20
   thePlayerVehicles:
+  - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
+  - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
+  - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
+  - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
+  - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
+  - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
+  - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
+  - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
+  - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
   - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
   theAIVehiclePool: {fileID: 1770991525}
   theTrack:
@@ -2325,8 +2334,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1770991524}
   - {fileID: 690837326}
+  - {fileID: 1770991524}
   - {fileID: 1859775826}
   - {fileID: 1008414930}
   m_Father: {fileID: 0}
@@ -3467,7 +3476,7 @@ MonoBehaviour:
   theUpdateText: {fileID: 1963274062}
   theLapText: {fileID: 795035650}
   thePositionText: {fileID: 1445148836}
-  thePlayer: {fileID: 2168585155991016226, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
+  thePlayer: {fileID: 0}
   theFinishUI: {fileID: 1845157785}
 --- !u!82 &1859775828
 AudioSource:
@@ -4266,7 +4275,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1978637292}
-  - {fileID: 1407814701}
   - {fileID: 561473207}
+  - {fileID: 1407814701}
   - {fileID: 2112834600}
   - {fileID: 49309019}
