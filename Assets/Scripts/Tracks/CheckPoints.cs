@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CheckPoints : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if (!RaceManager.Load.RaceOver)
         {
@@ -16,5 +16,5 @@ public class CheckPoints : MonoBehaviour
                 RaceManager.Load.AddRacers(other.gameObject);
             }
         }
-    }
+    }*/
 }

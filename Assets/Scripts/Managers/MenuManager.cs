@@ -15,8 +15,6 @@ public class MenuManager : MonoBehaviour
         {
             myInstance = this;
         }
-
-        DontDestroyOnLoad(this.gameObject);
     }
     public static MenuManager Load => myInstance;
     // SINGLETON ENDS

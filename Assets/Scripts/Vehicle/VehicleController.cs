@@ -14,12 +14,13 @@ public class VehicleController : MonoBehaviour
     protected Transform[] myWaypoints;
     protected int myCurrentPosition;
     protected int myCurrentWaypoint;
+    protected float myWaypointProximity;
 
     public int CurrentPosition => myCurrentPosition;
 
     protected void Awake()
     {
-        theWaypointsContainer = GameObject.FindWithTag("Waypoints");
+        theWaypointsContainer = LoadingManager.Load.GetCurrentTrack.GetComponent<TrackInformation>().GetWaypointsContainer;
     }
 
     protected void GetWaypoints()
@@ -45,9 +46,16 @@ public class VehicleController : MonoBehaviour
         }
     }
 
-    public void ResetPosition()
+    protected void CheckWaypointPosition(Vector3 relativeWaypointPos)
     {
-        transform.localPosition = new Vector3(0, 0, 0);
-        transform.localRotation = Quaternion.identity;
+        if (relativeWaypointPos.sqrMagnitude < myWaypointProximity)
+        {
+            myCurrentWaypoint += 1;
+
+            if (myCurrentWaypoint == myWaypoints.Length)
+            {
+                myCurrentWaypoint = 0;
+            }
+        }
     }
 }

@@ -10725,7 +10725,7 @@ GameObject:
   - component: {fileID: 6323648850615545603}
   - component: {fileID: 5458810945715145492}
   - component: {fileID: 5410282482315495453}
-  - component: {fileID: 7584919417716459228}
+  - component: {fileID: 6813454746402346262}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -10846,7 +10846,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7584919417716459228
+--- !u!114 &6813454746402346262
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10855,16 +10855,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 6889888617679485394}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b84ad015f0cc85249af5602d25075dd0, type: 3}
+  m_Script: {fileID: 11500000, guid: 28f265b241bd6564d9f722034e1174da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myData: {fileID: 0}
-  mySphere: {fileID: 0}
-  myArmor: {fileID: 0}
-  myExhaustParticles: []
-  myThrusterParticles: []
-  myTailLightBulbs: []
-  myHeadLightBulbs: []
+  mySphere: {fileID: 5410282482315495453}
+  myArmor: {fileID: 7925766267834119143}
+  myExhaustParticles:
+  - {fileID: 1682183365871664060}
+  myThrusterParticles:
+  - {fileID: 2471891424572293884}
+  myTailLightBulbs:
+  - {fileID: 3107903475711936130}
+  - {fileID: 5014522531667267744}
+  myHeadLightBulbs:
+  - {fileID: 3938720496734198529}
+  - {fileID: 7239500624726001572}
+  myData: {fileID: 11400000, guid: 154c61855ff75f347ac481eb7f214bac, type: 2}
 --- !u!1 &7736142056143914926
 GameObject:
   m_ObjectHideFlags: 0
@@ -11004,7 +11010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ball: {fileID: 971787535205590008}
-  ArmorOffset: {fileID: 11400000, guid: 6d61787211c2fa747ab58dde8b3fba67, type: 2}
+  ArmorOffset: {fileID: 11400000, guid: 154c61855ff75f347ac481eb7f214bac, type: 2}
 --- !u!1 &8030500827607855529
 GameObject:
   m_ObjectHideFlags: 0
@@ -11016,14 +11022,13 @@ GameObject:
   - component: {fileID: 2451126087491491175}
   - component: {fileID: 5706395171247740418}
   - component: {fileID: 3079891781894312042}
-  - component: {fileID: 4470246492680658188}
   m_Layer: 0
   m_Name: AIVehicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2451126087491491175
 Transform:
   m_ObjectHideFlags: 0
@@ -11233,19 +11238,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4470246492680658188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8030500827607855529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca8b26f0e955251498b5ca17c5586c99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Vehicle: {fileID: 11400000, guid: 6d61787211c2fa747ab58dde8b3fba67, type: 2}
 --- !u!1 &8405391749400779039
 GameObject:
   m_ObjectHideFlags: 0

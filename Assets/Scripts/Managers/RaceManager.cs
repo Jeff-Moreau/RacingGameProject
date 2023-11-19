@@ -17,8 +17,6 @@ public class RaceManager : MonoBehaviour
         {
             myInstance = this;
         }
-
-        DontDestroyOnLoad(this.gameObject);
     }
     public static RaceManager Load => myInstance;
     // SINGLETON ENDS
@@ -26,7 +24,6 @@ public class RaceManager : MonoBehaviour
     [Header("Race Data")]
     [SerializeField] private AudioClip[] myCountDownAudioClips;
     [SerializeField] private AudioSource myAudioSource;
-    [SerializeField] private List<GameObject> myRacers;
 
     [Header("Other Data Needed")]
     [SerializeField] private GameObject[] theTracks;
@@ -37,6 +34,7 @@ public class RaceManager : MonoBehaviour
     [SerializeField] private PlayerController thePlayer;
     [SerializeField] private GameObject theFinishUI;
 
+    //private List<GameObject> myRacers = null;
     private bool myGameStart = false;
     private bool myRaceOver = false;
     private bool myResetText = false;
@@ -47,9 +45,9 @@ public class RaceManager : MonoBehaviour
 
     public bool RaceOver => myRaceOver;
     public bool GameStarted => myGameStart;
-    public void AddRacers(GameObject me) => myRacers.Add(me);
-    public void ResetRacers() => myRacers.Clear();
-    public int GetRacers => myRacers.Count;
+    //public void AddRacers(GameObject me) => myRacers.Add(me);
+    //public void ResetRacers() => myRacers.Clear();
+    //public int GetRacers => myRacers.Count;
 
     private void Awake()
     {
@@ -66,7 +64,7 @@ public class RaceManager : MonoBehaviour
     private void Update()
     {
         myStartRaceCountdownSeconds -= Time.deltaTime;
-        Debug.Log(myRacers.Count);
+        //Debug.Log(myRacers.Count);
 
         if (!myGameStart && myStartRaceCountdownSeconds > 1)
         {
@@ -152,7 +150,7 @@ public class RaceManager : MonoBehaviour
         myTrackLaps = 3;
         myCurrentLap = 0;
         myAudioCount = 0;
-        myRacers.Clear();
+        //myRacers.Clear();
         thePositionText.text = "";
         theLapText.text = "";
         theUpdateText.text = "";
