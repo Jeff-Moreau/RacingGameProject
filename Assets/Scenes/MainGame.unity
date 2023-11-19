@@ -1306,16 +1306,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29506cae30396a941be802f7105fe93e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myVehicleCount: 20
+  myVehicleCount: 12
   thePlayerVehicles:
-  - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
-  - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
-  - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
-  - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
-  - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
-  - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
-  - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
-  - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
   - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
   - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
   theAIVehiclePool: {fileID: 1770991525}
@@ -2906,7 +2898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e57e2b39be3868241b5ae7fad9194c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theMainMenu: {fileID: 0}
+  theMainMenu: {fileID: 1678639359}
 --- !u!82 &1678639365
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3476,7 +3468,6 @@ MonoBehaviour:
   theUpdateText: {fileID: 1963274062}
   theLapText: {fileID: 795035650}
   thePositionText: {fileID: 1445148836}
-  thePlayer: {fileID: 0}
   theFinishUI: {fileID: 1845157785}
 --- !u!82 &1859775828
 AudioSource:

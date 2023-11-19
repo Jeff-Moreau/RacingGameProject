@@ -38,7 +38,7 @@ public class VehicleController : MonoBehaviour
     {
         if (myCurrentWaypoint - 1 < 0)
         {
-            return myWaypoints[myWaypoints.Length - 1];
+            return myWaypoints[^ - 1];
         }
         else
         {

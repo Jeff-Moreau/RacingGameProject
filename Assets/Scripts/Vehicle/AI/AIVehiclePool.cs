@@ -35,7 +35,7 @@ public class AIVehiclePool : MonoBehaviour
         }
 
         var newAIVehicle = Instantiate(myAIVehicle, transform);
-        myAIVehicle.gameObject.SetActive(false);
+        myAIVehicle.SetActive(false);
         myAIVehicleList.Add(newAIVehicle);
 
         return newAIVehicle;

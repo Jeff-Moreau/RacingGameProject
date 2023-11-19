@@ -31,7 +31,6 @@ public class RaceManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI theUpdateText;
     [SerializeField] private TextMeshProUGUI theLapText;
     [SerializeField] private TextMeshProUGUI thePositionText;
-    [SerializeField] private PlayerController thePlayer;
     [SerializeField] private GameObject theFinishUI;
 
     //private List<GameObject> myRacers = null;
@@ -113,7 +112,7 @@ public class RaceManager : MonoBehaviour
         if (myGameStart && myCurrentLap <= myTrackLaps)
         {
             theLapText.text = "Lap: " + myCurrentLap + " of " + myTrackLaps;
-            thePositionText.text = "Position: " + thePlayer.CurrentPosition + " of " + (LoadingManager.Load.RaceCount);
+            thePositionText.text = "Position: " + /*LoadingManager.Load.GetPlayers[0].GetComponent<VehicleController>().CurrentPosition +*/ " of " + (LoadingManager.Load.RaceCount);
         }
         if (myCurrentLap == myTrackLaps && !myResetText)
         {
@@ -123,13 +122,13 @@ public class RaceManager : MonoBehaviour
                 myAudioCount++;
             }
             theUpdateText.text = "LAST LAP!";
-            Invoke("ResetLapText", 2);
+            Invoke(nameof(ResetLapText), 2);
         }
         if (myCurrentLap > myTrackLaps)
         {
-            thePositionText.text = "Position: " + thePlayer.CurrentPosition + " of " + (LoadingManager.Load.RaceCount);
+            thePositionText.text = "Position: "/* + LoadingManager.Load.GetPlayers[0].GetComponent<VehicleController>().CurrentPosition*/ + " of " + (LoadingManager.Load.RaceCount);
             theLapText.text = "Lap: " + myTrackLaps + " of " + myTrackLaps;
-            theUpdateText.text = "  YOU FINISHED  " + thePlayer.CurrentPosition;
+            theUpdateText.text = "  YOU FINISHED  "/* + LoadingManager.Load.GetPlayers[0].GetComponent<VehicleController>().CurrentPosition*/;
             myRaceOver = true;
             theFinishUI.SetActive(true);
         }

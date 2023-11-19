@@ -32,6 +32,7 @@ public class LoadingManager : MonoBehaviour
 
     public int RaceCount => myVehicleCount;// check this later might be wrong should check players as well
     public GameObject GetCurrentTrack => theTrack[0];
+    public GameObject[] GetPlayers => thePlayerVehicles;
 
     private void Awake()
     {
@@ -56,13 +57,11 @@ public class LoadingManager : MonoBehaviour
         {
             for (int j = 0; j < thePlayerVehicles.Length; j++)
             {
-                var randomPolePosition = Random.Range(0, myVehicleCount);
+                var randomPolePosition = Random.Range(0, thePlayerVehicles.Length);
+
                 if (thePolePositions[randomPolePosition].GetComponent<PolePositionMarker>().GetSpotTaken == false && playerCount < thePlayerVehicles.Length)
                 {
-                    Debug.LogError(randomPolePosition);
-
-                    thePlayerVehicles[j].transform.position = thePolePositions[randomPolePosition].transform.position;
-                    thePlayerVehicles[j].transform.rotation = thePolePositions[randomPolePosition].transform.rotation;
+                    thePlayerVehicles[j].transform.SetPositionAndRotation(thePolePositions[randomPolePosition].transform.position, thePolePositions[randomPolePosition].transform.rotation);
                     thePolePositions[randomPolePosition].GetComponent<PolePositionMarker>().SetSpotTaken(true);
                     Instantiate(thePlayerVehicles[j]);
                     thePlayerVehicles[j].SetActive(true);
@@ -80,8 +79,7 @@ public class LoadingManager : MonoBehaviour
 
                 if (newAIVehicle != null)
                 {
-                    newAIVehicle.transform.position = thePolePositions[i].transform.position;
-                    newAIVehicle.transform.rotation = thePolePositions[i].transform.rotation;
+                    newAIVehicle.transform.SetPositionAndRotation(thePolePositions[i].transform.position, thePolePositions[i].transform.rotation);
                     thePolePositions[i].GetComponent<PolePositionMarker>().SetSpotTaken(true);
                     totalCount++;
                 }
