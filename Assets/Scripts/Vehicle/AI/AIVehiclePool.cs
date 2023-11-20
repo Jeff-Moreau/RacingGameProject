@@ -9,16 +9,12 @@ public class AIVehiclePool : MonoBehaviour
     private int myTotalAIVehicles;
 
     public List<GameObject> GetAIVehicleList => myAIVehicleList;
-    public int SetTotalAIVehciles(int amount) => myTotalAIVehicles = amount;
-
-    private void Awake()
-    {
-        myTotalAIVehicles = 0;
-    }
 
     private void Start()
     {
         myAIVehicleList = new List<GameObject>();
+
+        myTotalAIVehicles = 25;
 
         for (int i = 0; i < myTotalAIVehicles; i++)
         {
@@ -31,7 +27,6 @@ public class AIVehiclePool : MonoBehaviour
     {
         for (int i = 0; i < myTotalAIVehicles; i++)
         {
-            Debug.Log("Pool " + myTotalAIVehicles);
             if (!myAIVehicleList[i].activeInHierarchy)
             {
                 return myAIVehicleList[i];

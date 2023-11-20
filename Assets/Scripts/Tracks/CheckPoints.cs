@@ -2,13 +2,18 @@ using UnityEngine;
 
 public class CheckPoints : MonoBehaviour
 {
-    /*private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!RaceManager.Load.RaceOver)
         {
             if (RaceManager.Load.GetRacers < LoadingManager.Load.RaceCount)
             {
                 RaceManager.Load.AddRacers(other.gameObject);
+
+                if (other.gameObject.CompareTag("Player"))
+                {
+                    RaceManager.Load.SetPlayerPosition(RaceManager.Load.GetRacers);
+                }
             }
             else if (RaceManager.Load.GetRacers >= LoadingManager.Load.RaceCount)
             {
@@ -16,5 +21,5 @@ public class CheckPoints : MonoBehaviour
                 RaceManager.Load.AddRacers(other.gameObject);
             }
         }
-    }*/
+    }
 }

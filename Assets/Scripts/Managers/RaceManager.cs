@@ -33,7 +33,7 @@ public class RaceManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI thePositionText;
     [SerializeField] private GameObject theFinishUI;
 
-    //private List<GameObject> myRacers = null;
+    private List<GameObject> myRacers = null;
     private bool myGameStart = false;
     private bool myRaceOver = false;
     private bool myResetText = false;
@@ -41,17 +41,23 @@ public class RaceManager : MonoBehaviour
     private int myTrackLaps = 3; // to the track itself
     private int myCurrentLap = 0;
     private int myAudioCount = 0;
+    private int thePlayerPosition = 0;
     private GameObject thePlayer;
 
     public bool RaceOver => myRaceOver;
     public bool GameStarted => myGameStart;
-    //public void AddRacers(GameObject me) => myRacers.Add(me);
-    //public void ResetRacers() => myRacers.Clear();
-    //public int GetRacers => myRacers.Count;
+    public void AddRacers(GameObject me) => myRacers.Add(me);
+    public void ResetRacers() => myRacers.Clear();
+    public int GetRacers => myRacers.Count;
+    public int SetPlayerPosition(int position) => thePlayerPosition = position;
 
     private void Awake()
     {
         Singleton();
+    }
+
+    private void Start()
+    {
         myGameStart = false;
         myRaceOver = false;
         myResetText = false;
@@ -59,21 +65,18 @@ public class RaceManager : MonoBehaviour
         myTrackLaps = 3;
         myCurrentLap = 0;
         myAudioCount = 0;
-    }
-
-    private void Start()
-    {
-        thePlayer = GameObject.FindGameObjectWithTag("Player");
+        myRacers = LoadingManager.Load.GetTotalVehicles;
+        thePlayer = LoadingManager.Load.GetPlayer;
     }
 
     private void Update()
     {
+        Debug.Log(thePlayer.tag);
+        Debug.Log("Race Manager " + thePlayerPosition);
         myStartRaceCountdownSeconds -= Time.deltaTime;
-        //Debug.Log(myRacers.Count);
 
         if (!myGameStart && myStartRaceCountdownSeconds > 1)
         {
-
             if (Mathf.Floor(myStartRaceCountdownSeconds) == 3)
             {
                 if (!myAudioSource.isPlaying && myAudioCount == 0)
@@ -118,7 +121,7 @@ public class RaceManager : MonoBehaviour
         if (myGameStart && myCurrentLap <= myTrackLaps)
         {
             theLapText.text = "Lap: " + myCurrentLap + " of " + myTrackLaps;
-            thePositionText.text = "Position: " + thePlayer.transform.position.x + " of " + (LoadingManager.Load.RaceCount);
+            thePositionText.text = "Position: " + thePlayerPosition + " of " + (LoadingManager.Load.RaceCount);
         }
         if (myCurrentLap == myTrackLaps && !myResetText)
         {
@@ -132,9 +135,9 @@ public class RaceManager : MonoBehaviour
         }
         if (myCurrentLap > myTrackLaps)
         {
-            thePositionText.text = "Position: "/* + LoadingManager.Load.GetPlayers[0].GetComponent<VehicleController>().CurrentPosition*/ + " of " + (LoadingManager.Load.RaceCount);
+            thePositionText.text = "Position: " + thePlayerPosition + " of " + (LoadingManager.Load.RaceCount);
             theLapText.text = "Lap: " + myTrackLaps + " of " + myTrackLaps;
-            theUpdateText.text = "  YOU FINISHED  "/* + LoadingManager.Load.GetPlayers[0].GetComponent<VehicleController>().CurrentPosition*/;
+            theUpdateText.text = "  YOU FINISHED  " + thePlayerPosition;
             myRaceOver = true;
             theFinishUI.SetActive(true);
         }

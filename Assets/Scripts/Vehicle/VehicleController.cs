@@ -17,6 +17,7 @@ public class VehicleController : MonoBehaviour
     protected float myWaypointProximity;
 
     public int CurrentPosition => myCurrentPosition;
+    public int SetSurrentPosition(int position) => myCurrentPosition = position;
 
     protected void Awake()
     {

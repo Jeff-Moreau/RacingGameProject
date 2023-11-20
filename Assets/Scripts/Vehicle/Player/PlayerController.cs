@@ -16,6 +16,7 @@ public class PlayerController : VehicleController
 
     private void Update()
     {
+        Debug.Log(myCurrentPosition);
         if (RaceManager.Load.GameStarted && !RaceManager.Load.RaceOver)
         {
             if (Input.GetKey(KeyCode.W))
