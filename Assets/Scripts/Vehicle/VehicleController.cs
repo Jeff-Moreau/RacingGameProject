@@ -21,7 +21,7 @@ public class VehicleController : MonoBehaviour
 
     protected void Awake()
     {
-        theWaypointsContainer = LoadingManager.Load.GetCurrentTrack.GetComponent<TrackInformation>().GetWaypointsContainer;
+        theWaypointsContainer = LoadingManager.Load.GetCurrentTrack.GetComponent<TrackInformation>().GetTrackWaypointContainer;
     }
 
     protected void GetWaypoints()

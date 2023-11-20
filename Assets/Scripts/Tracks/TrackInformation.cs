@@ -2,11 +2,24 @@ using UnityEngine;
 
 public class TrackInformation : MonoBehaviour
 {
-    [SerializeField] private GameObject myWaypointsContainer;
+    [SerializeField] private TrackData myData;
     [SerializeField] private Transform[] myWaypoints;
     [SerializeField] private GameObject[] myPolePositions;
+    [SerializeField] private GameObject myWaypointsContainer;
 
-    public GameObject[] GetPolePositions => myPolePositions;
-    public GameObject GetWaypointsContainer => myWaypointsContainer;
-    public Transform[] GetMyWaypoints => myWaypoints;
+    private string myTrackName;
+    private int myTrackLaps;
+
+    public Transform[] GetTrackWaypoints => myWaypoints;
+    public GameObject[] GetTrackPolePositions => myPolePositions;
+    public GameObject GetTrackWaypointContainer => myWaypointsContainer;
+    public string GetTrackName => myTrackName;
+    public int GetTrackLaps => myTrackLaps;
+
+    private void Start()
+    {
+        myTrackName = myData.GetName;
+        myTrackLaps = myData.GetLaps;
+    }
+
 }

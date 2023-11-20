@@ -41,7 +41,7 @@ public class LoadingManager : MonoBehaviour
     private void Awake()
     {
         Singleton();
-        thePolePositions = theTrack[0].GetComponent<TrackInformation>().GetPolePositions;
+        thePolePositions = theTrack[0].GetComponent<TrackInformation>().GetTrackPolePositions;
         //theAIVehiclePool.SetTotalAIVehciles(thePolePositions.Length - thePlayerVehicles.Length);
     }
 
