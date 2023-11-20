@@ -8,15 +8,15 @@ public class PlayerController : VehicleController
     private void Start()
     {
         GetWaypoints();
-        myCurrentPosition = 0;
-        myCurrentWaypoint = 14;
-        myWaypointProximity = myData.GetWaypointProximity * myData.GetWaypointProximity;
+        myCurrentRacePosition = 0;
+        myCurrentTrackWaypoint = 14;
+        myProximityToCurrentWaypoint = myData.GetWaypointProximity * myData.GetWaypointProximity;
         myData.SetIsMoving(false);
     }
 
     private void Update()
     {
-        Debug.Log(myCurrentPosition);
+        Debug.Log(myCurrentRacePosition);
         if (RaceManager.Load.GameStarted && !RaceManager.Load.RaceOver)
         {
             if (Input.GetKey(KeyCode.W))
@@ -75,7 +75,7 @@ public class PlayerController : VehicleController
         }
         else
         {
-            var waypointPosition = myWaypoints[myCurrentWaypoint].position;
+            var waypointPosition = myTrackWaypointsToFollow[myCurrentTrackWaypoint].position;
             var relativeWaypointPos = transform.InverseTransformPoint(new Vector3(waypointPosition.x, transform.position.y, waypointPosition.z));
 
             myData.SetIsMoving(false);
@@ -84,7 +84,7 @@ public class PlayerController : VehicleController
             {
                 mySphere.AddForce(myArmor.transform.forward * (myData.GetRollSpeed / 2), ForceMode.Force);
                 mySphere.AddForce(Physics.gravity * mySphere.mass);
-                myArmor.transform.rotation = myWaypoints[myCurrentWaypoint].rotation;
+                myArmor.transform.rotation = myTrackWaypointsToFollow[myCurrentTrackWaypoint].rotation;
             }
             CheckWaypointPosition(relativeWaypointPos);
         }

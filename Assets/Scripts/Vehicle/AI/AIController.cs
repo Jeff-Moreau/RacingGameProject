@@ -8,20 +8,20 @@ public class AIController : VehicleController
     private void Start()
     {
         GetWaypoints();
-        myCurrentWaypoint = 14;
-        myWaypointProximity = myData.GetWaypointProximity * myData.GetWaypointProximity;
+        myCurrentTrackWaypoint = 14;
+        myProximityToCurrentWaypoint = myData.GetWaypointProximity * myData.GetWaypointProximity;
     }
 
     private void Update()
     {
-        var waypointPosition = myWaypoints[myCurrentWaypoint].position;
+        var waypointPosition = myTrackWaypointsToFollow[myCurrentTrackWaypoint].position;
         var relativeWaypointPos = transform.InverseTransformPoint(new Vector3(waypointPosition.x, transform.position.y, waypointPosition.z));
 
         if (RaceManager.Load.GameStarted)
         {
             mySphere.AddForce(myArmor.transform.forward * myData.GetRollSpeed, ForceMode.Force);
             mySphere.AddForce(Physics.gravity * mySphere.mass);
-            myArmor.transform.rotation = myWaypoints[myCurrentWaypoint].rotation;
+            myArmor.transform.rotation = myTrackWaypointsToFollow[myCurrentTrackWaypoint].rotation;
         }
         CheckWaypointPosition(relativeWaypointPos);
     }

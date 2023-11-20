@@ -10,52 +10,49 @@ public class VehicleController : MonoBehaviour
     [SerializeField] protected Light[] myTailLightBulbs = null;
     [SerializeField] protected Light[] myHeadLightBulbs = null;
 
-    protected GameObject theWaypointsContainer;
-    protected Transform[] myWaypoints;
-    protected int myCurrentPosition;
-    protected int myCurrentWaypoint;
-    protected float myWaypointProximity;
-
-    public int CurrentPosition => myCurrentPosition;
-    public int SetSurrentPosition(int position) => myCurrentPosition = position;
+    protected GameObject theTrackWaypointContainer;
+    protected Transform[] myTrackWaypointsToFollow;
+    protected int myCurrentRacePosition;
+    protected int myCurrentTrackWaypoint;
+    protected float myProximityToCurrentWaypoint;
 
     protected void Awake()
     {
-        theWaypointsContainer = LoadingManager.Load.GetCurrentTrack.GetComponent<TrackInformation>().GetTrackWaypointContainer;
+        theTrackWaypointContainer = LoadingManager.Load.GetCurrentTrack.GetComponent<TrackInformation>().GetWaypointContainer;
     }
 
     protected void GetWaypoints()
     {
-        var potentialWaypoints = theWaypointsContainer.GetComponentsInChildren<Transform>();
-        myWaypoints = new Transform[potentialWaypoints.Length - 1];
+        var potentialWaypoints = theTrackWaypointContainer.GetComponentsInChildren<Transform>();
+        myTrackWaypointsToFollow = new Transform[potentialWaypoints.Length - 1];
 
         for (int i = 1; i < potentialWaypoints.Length; i++)
         {
-            myWaypoints[i - 1] = potentialWaypoints[i];
+            myTrackWaypointsToFollow[i - 1] = potentialWaypoints[i];
         }
     }
 
     public Transform GetLastWaypoint()
     {
-        if (myCurrentWaypoint - 1 < 0)
+        if (myCurrentTrackWaypoint - 1 < 0)
         {
-            return myWaypoints[^ - 1];
+            return myTrackWaypointsToFollow[^ - 1];
         }
         else
         {
-            return myWaypoints[myCurrentWaypoint - 1];
+            return myTrackWaypointsToFollow[myCurrentTrackWaypoint - 1];
         }
     }
 
     protected void CheckWaypointPosition(Vector3 relativeWaypointPos)
     {
-        if (relativeWaypointPos.sqrMagnitude < myWaypointProximity)
+        if (relativeWaypointPos.sqrMagnitude < myProximityToCurrentWaypoint)
         {
-            myCurrentWaypoint += 1;
+            myCurrentTrackWaypoint += 1;
 
-            if (myCurrentWaypoint == myWaypoints.Length)
+            if (myCurrentTrackWaypoint == myTrackWaypointsToFollow.Length)
             {
-                myCurrentWaypoint = 0;
+                myCurrentTrackWaypoint = 0;
             }
         }
     }
