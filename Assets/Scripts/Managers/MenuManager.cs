@@ -26,11 +26,29 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject theRaceManager = null;
     [SerializeField] private GameObject thePlayingHUD = null;
     [SerializeField] private GameObject theCenterUpdates = null;
-
+    [SerializeField] private GameObject theIntro = null;
+    [SerializeField] private GameObject theVideo = null;
 
     private void Awake()
     {
         Singleton();
+    }
+
+    private void Start()
+    {
+        Invoke(nameof(ShowIntro), 1.7f);
+    }
+
+    public void ShowIntro()
+    {
+        theVideo.SetActive(true);
+        Invoke(nameof(GoToMainMenu), 3.6f);
+    }
+
+    public void GoToMainMenu()
+    {
+        theIntro.SetActive(false);
+        theMainMenu.SetActive(true);
     }
 
     public void NewGame()
