@@ -1306,10 +1306,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29506cae30396a941be802f7105fe93e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theTrack:
+  theTrackList:
   - {fileID: 7401349171064466089, guid: d2b31cd07e619a6408ab6ee167efa27f, type: 3}
   theAIVehiclePool: {fileID: 1770991525}
-  thePlayerVehicles:
+  thePlayerVehicleList:
   - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
 --- !u!1 &795035648
 GameObject:
@@ -3037,7 +3037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe5d769b53a4cd42a2862364aae9053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myAIVehicle: {fileID: 8030500827607855529, guid: 87657616975bb284bb01034a288ecafb, type: 3}
+  thePrefab: {fileID: 8030500827607855529, guid: 87657616975bb284bb01034a288ecafb, type: 3}
 --- !u!1 &1787686297
 GameObject:
   m_ObjectHideFlags: 0
@@ -3461,7 +3461,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 74b78c9022a9b504ebbca1e576b04f02, type: 3}
   - {fileID: 8300000, guid: 7ba88c1dd447b674491f52f216fc939d, type: 3}
   myAudioSource: {fileID: 1859775828}
-  theTracks: []
   theCountDownText: {fileID: 1635173524}
   theUpdateText: {fileID: 1963274062}
   theLapText: {fileID: 795035650}

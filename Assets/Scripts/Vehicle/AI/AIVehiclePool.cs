@@ -3,41 +3,60 @@ using UnityEngine;
 
 public class AIVehiclePool : MonoBehaviour
 {
-    [SerializeField] private GameObject myAIVehicle;
+    // INSPECTOR VARIABLES
+    [Header("Prefab to Pool")]
+    [SerializeField] private GameObject thePrefab = null;
 
-    private List<GameObject> myAIVehicleList;
-    private int myTotalAIVehiclesNeeded;
+    // LOCAL VARIABLES
+    private List<GameObject> myPrefabList;
+    private int myTotalPrefabsNeeded;
 
-    public List<GameObject> GetAIVehicleList => myAIVehicleList;
-    public int SetTotalAIVehcilesNeeded(int needed) => myTotalAIVehiclesNeeded;
+    // GETTERS
+    public List<GameObject> GetPrefabList => myPrefabList;
+
+    // SETTERS
+    public int SetTotalPrefabsNeeded(int needed) => myTotalPrefabsNeeded;
 
     private void Start()
     {
-        myTotalAIVehiclesNeeded = 0;
-        myAIVehicleList = new List<GameObject>();
+        InitializeVariables();
+        FillListWithPrefab();
+    }
 
+    private void InitializeVariables()
+    {
+        myPrefabList = new List<GameObject>();
+        myTotalPrefabsNeeded = 0;
+    }
 
-        for (int i = 0; i < myTotalAIVehiclesNeeded; i++)
+    private void FillListWithPrefab()
+    {
+        for (int i = 0; i < myTotalPrefabsNeeded; i++)
         {
-            myAIVehicleList.Add(Instantiate(myAIVehicle, transform));
-            myAIVehicleList[i].SetActive(false);
+            myPrefabList.Add(Instantiate(thePrefab, transform));
+            myPrefabList[i].SetActive(false);
         }
     }
 
-    public GameObject GetAIVehicle()
+    public GameObject GetAvailableAIVehicle()
     {
-        for (int i = 0; i < myTotalAIVehiclesNeeded; i++)
+        for (int i = 0; i < myTotalPrefabsNeeded; i++)
         {
-            if (!myAIVehicleList[i].activeInHierarchy)
+            if (!myPrefabList[i].activeInHierarchy)
             {
-                return myAIVehicleList[i];
+                return myPrefabList[i];
             }
         }
 
-        var newAIVehicle = Instantiate(myAIVehicle, transform);
-        myAIVehicle.SetActive(false);
-        myAIVehicleList.Add(newAIVehicle);
+        return IfFullAddOneMore();
+    }
 
-        return newAIVehicle;
+    private GameObject IfFullAddOneMore()
+    {
+        var extraPrefab = Instantiate(thePrefab, transform);
+        thePrefab.SetActive(false);
+        myPrefabList.Add(extraPrefab);
+
+        return extraPrefab;
     }
 }

@@ -10,7 +10,6 @@ public class VehicleData : ScriptableObject
     [SerializeField] private float theRotationSpeed = 0;
     [SerializeField] private float theWaypointProximity = 0;
 
-
     [Header("Armor Height Offset above Ball")]
     [SerializeField] private float theArmorHeight = 0;
 
@@ -18,6 +17,7 @@ public class VehicleData : ScriptableObject
     [SerializeField] private AudioClip theIdleSound = null;
     [SerializeField] private AudioClip theThrusterSound = null;
 
+    // GETTERS
     public bool GetIsMoving => isMoving;
     public float GetRollSpeed => theRollSpeed;
     public float GetMassMultiplier => theMassMultiplier;
@@ -29,5 +29,6 @@ public class VehicleData : ScriptableObject
     public AudioClip GetIdleSound => theIdleSound;
     public AudioClip GetThrusterSound => theThrusterSound;
 
+    // SETTERS
     public void SetIsMoving(bool yesno) => isMoving = yesno;
 }

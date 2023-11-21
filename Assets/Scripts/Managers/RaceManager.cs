@@ -21,27 +21,29 @@ public class RaceManager : MonoBehaviour
     public static RaceManager Load => myInstance;
     // SINGLETON ENDS
 
-    [Header("Race Data")]
+    // INSPECTOR VARIABLES
+    [Header("Audio")]
+    [NonReorderable]
     [SerializeField] private AudioClip[] myCountDownAudioClips;
     [SerializeField] private AudioSource myAudioSource;
 
     [Header("Other Data Needed")]
-    [SerializeField] private GameObject[] theTracks;
     [SerializeField] private TextMeshProUGUI theCountDownText;
     [SerializeField] private TextMeshProUGUI theUpdateText;
     [SerializeField] private TextMeshProUGUI theLapText;
     [SerializeField] private TextMeshProUGUI thePositionText;
     [SerializeField] private GameObject theFinishUI;
 
-    private List<GameObject> myRacers = null;
-    private bool myGameStart = false;
-    private bool myRaceOver = false;
-    private bool myResetText = false;
-    private float myStartRaceCountdownSeconds = 4;
-    private int myTrackLaps = 3; // to the track itself
-    private int myCurrentLap = 0;
-    private int myAudioCount = 0;
-    private int thePlayerPosition = 0;
+    // LOCAL VARIABLES
+    private List<GameObject> myRacers;
+    private bool myGameStart;
+    private bool myRaceOver;
+    private bool myResetText;
+    private float myStartRaceCountdownSeconds;
+    private int myTrackLaps; // to the track itself
+    private int myCurrentLap;
+    private int myAudioCount;
+    private int thePlayerPosition;
     private GameObject thePlayer;
 
     public bool RaceOver => myRaceOver;
@@ -62,7 +64,8 @@ public class RaceManager : MonoBehaviour
         myRaceOver = false;
         myResetText = false;
         myStartRaceCountdownSeconds = 4;
-        myTrackLaps = 3;
+        myTrackLaps = LoadingManager.Load.GetCurrentTrackLaps;
+        Debug.Log("Race " + LoadingManager.Load.GetCurrentTrackLaps);
         myCurrentLap = 0;
         myAudioCount = 0;
         myRacers = LoadingManager.Load.GetTotalVehicles;
@@ -71,8 +74,6 @@ public class RaceManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(thePlayer.tag);
-        Debug.Log("Race Manager " + thePlayerPosition);
         myStartRaceCountdownSeconds -= Time.deltaTime;
 
         if (!myGameStart && myStartRaceCountdownSeconds > 1)
@@ -121,7 +122,7 @@ public class RaceManager : MonoBehaviour
         if (myGameStart && myCurrentLap <= myTrackLaps)
         {
             theLapText.text = "Lap: " + myCurrentLap + " of " + myTrackLaps;
-            thePositionText.text = "Position: " + thePlayerPosition + " of " + (LoadingManager.Load.RaceCount);
+            thePositionText.text = "Position: " + thePlayerPosition + " of " + (LoadingManager.Load.GetTrackPolePositions);
         }
         if (myCurrentLap == myTrackLaps && !myResetText)
         {
@@ -135,7 +136,7 @@ public class RaceManager : MonoBehaviour
         }
         if (myCurrentLap > myTrackLaps)
         {
-            thePositionText.text = "Position: " + thePlayerPosition + " of " + (LoadingManager.Load.RaceCount);
+            thePositionText.text = "Position: " + thePlayerPosition + " of " + (LoadingManager.Load.GetTrackPolePositions);
             theLapText.text = "Lap: " + myTrackLaps + " of " + myTrackLaps;
             theUpdateText.text = "  YOU FINISHED  " + thePlayerPosition;
             myRaceOver = true;

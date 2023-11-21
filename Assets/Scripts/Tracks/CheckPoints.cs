@@ -6,7 +6,7 @@ public class CheckPoints : MonoBehaviour
     {
         if (!RaceManager.Load.RaceOver)
         {
-            if (RaceManager.Load.GetRacers < LoadingManager.Load.RaceCount)
+            if (RaceManager.Load.GetRacers < LoadingManager.Load.GetTrackPolePositions)
             {
                 RaceManager.Load.AddRacers(other.gameObject);
 
@@ -15,7 +15,7 @@ public class CheckPoints : MonoBehaviour
                     RaceManager.Load.SetPlayerPosition(RaceManager.Load.GetRacers);
                 }
             }
-            else if (RaceManager.Load.GetRacers >= LoadingManager.Load.RaceCount)
+            else if (RaceManager.Load.GetRacers >= LoadingManager.Load.GetTrackPolePositions)
             {
                 RaceManager.Load.ResetRacers();
                 RaceManager.Load.AddRacers(other.gameObject);

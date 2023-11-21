@@ -20,22 +20,26 @@ public class LoadingManager : MonoBehaviour
     public static LoadingManager Load => myInstance;
     // SINGLETON ENDS
 
+    // INSPECTOR VARIABLES
     [Header("Other Data Needed")]
-    [SerializeField] private GameObject[] theTrack; // fix later with list of tracks
+    [SerializeField] private GameObject[] theTrackList; // fix later with list of tracks
     [SerializeField] private AIVehiclePool theAIVehiclePool;
-    [SerializeField] private GameObject[] thePlayerVehicles;
+    [SerializeField] private GameObject[] thePlayerVehicleList;
     
+    // LOCAL VARIABLES
     private List<GameObject> theTotalVehicles;
     private int theTotalAIVehicles;
     private int theTotalPlayers;
-
-    private TrackInformation theCurrentTrack;
+    private int theCurrentTrackLaps;
+    private TrackInformation theCurrentTrackInformation;
     private GameObject[] theTrackPolePositions;
     private PolePositionMarker[] theTrackPolePositionMarkers;
 
-    public int RaceCount => theTrackPolePositions.Length;
-    public GameObject GetCurrentTrack => theTrack[0];
-    public GameObject GetPlayer => thePlayerVehicles[0];
+    // GETTERS
+    public int GetTrackPolePositions => theTrackPolePositions.Length;
+    public TrackInformation GetCurrentTrackInformation => theCurrentTrackInformation;
+    public int GetCurrentTrackLaps => theCurrentTrackLaps;
+    public GameObject GetPlayer => thePlayerVehicleList[0];
     public List<GameObject> GetTotalVehicles => theTotalVehicles;
 
     private void Awake()
@@ -45,33 +49,31 @@ public class LoadingManager : MonoBehaviour
 
     private void Start()
     {
-        Instantiate(theTrack[0]);
-        theCurrentTrack = theTrack[0].GetComponent<TrackInformation>();
-        theTrackPolePositions = theCurrentTrack.GetPolePositions;
-        theTrackPolePositionMarkers = new PolePositionMarker[theTrackPolePositions.Length];
-        theTotalVehicles = new List<GameObject>();
-        theTotalAIVehicles = 0;
-        theTotalPlayers = 0;
-        
-        for (int i = 0; i < theTrackPolePositions.Length; i++)
-        {
-            theTrackPolePositionMarkers[i] = theTrackPolePositions[i].GetComponent<PolePositionMarker>();
-        }
+        Instantiate(theTrackList[0]);
+        InitializeVariables();
 
-        theAIVehiclePool.SetTotalAIVehcilesNeeded(theTrackPolePositions.Length - thePlayerVehicles.Length);
+        theAIVehiclePool.SetTotalPrefabsNeeded(theTrackPolePositions.Length - thePlayerVehicleList.Length);
     }
 
     private void Update()
     {
-        ResetPolePositions();
         LoadPlayersInTrack();
         LoadAIVehiclesInTrack();
     }
 
-    private void ResetPolePositions()
+    private void InitializeVariables()
     {
-        for (int i = 0; i < theTrackPolePositionMarkers.Length; i++)
+        theCurrentTrackInformation = theTrackList[0].GetComponent<TrackInformation>();
+        theTrackPolePositions = theCurrentTrackInformation.GetPolePositions;
+        theCurrentTrackLaps = theCurrentTrackInformation.GetLaps;
+        theTrackPolePositionMarkers = new PolePositionMarker[theTrackPolePositions.Length];
+        theTotalVehicles = new List<GameObject>();
+        theTotalAIVehicles = 0;
+        theTotalPlayers = 0;
+
+        for (int i = 0; i < theTrackPolePositions.Length; i++)
         {
+            theTrackPolePositionMarkers[i] = theTrackPolePositions[i].GetComponent<PolePositionMarker>();
             theTrackPolePositionMarkers[i].SetSpotTaken(false);
         }
     }
@@ -80,17 +82,17 @@ public class LoadingManager : MonoBehaviour
     {
         for (int i = 0; i < theTrackPolePositions.Length; i++)
         {
-            for (int j = 0; j < thePlayerVehicles.Length; j++)
+            for (int j = 0; j < thePlayerVehicleList.Length; j++)
             {
-                var randomPolePosition = Random.Range(0, thePlayerVehicles.Length);
-                Debug.Log("random " + randomPolePosition + "Array "+ theTrackPolePositionMarkers.Length);
-                if (theTrackPolePositionMarkers[randomPolePosition].GetSpotTaken == false && theTotalPlayers < thePlayerVehicles.Length)
+                var randomPolePosition = Random.Range(0, thePlayerVehicleList.Length);
+
+                if (!theTrackPolePositionMarkers[randomPolePosition].GetSpotTaken && theTotalPlayers < thePlayerVehicleList.Length)
                 {
-                    thePlayerVehicles[j].transform.SetPositionAndRotation(theTrackPolePositions[randomPolePosition].transform.position, theTrackPolePositions[randomPolePosition].transform.rotation);
+                    thePlayerVehicleList[j].transform.SetPositionAndRotation(theTrackPolePositions[randomPolePosition].transform.position, theTrackPolePositions[randomPolePosition].transform.rotation);
                     theTrackPolePositionMarkers[randomPolePosition].SetSpotTaken(true);
-                    Instantiate(thePlayerVehicles[j]);
-                    thePlayerVehicles[j].SetActive(true);
-                    theTotalVehicles.Add(thePlayerVehicles[j]);
+                    Instantiate(thePlayerVehicleList[j]);
+                    thePlayerVehicleList[j].SetActive(true);
+                    theTotalVehicles.Add(thePlayerVehicleList[j]);
                     theTotalPlayers++;
                     theTotalAIVehicles++;
                 }
@@ -102,9 +104,9 @@ public class LoadingManager : MonoBehaviour
     {
         for (int i = 0; i < theTrackPolePositions.Length; i++)
         {
-            if (theTrackPolePositionMarkers[i].GetSpotTaken == false && theTotalAIVehicles < theTrackPolePositions.Length)
+            if (!theTrackPolePositionMarkers[i].GetSpotTaken && theTotalAIVehicles < theTrackPolePositions.Length)
             {
-                var newAIVehicle = theAIVehiclePool.GetAIVehicle();
+                var newAIVehicle = theAIVehiclePool.GetAvailableAIVehicle();
 
                 if (newAIVehicle != null)
                 {
@@ -114,7 +116,7 @@ public class LoadingManager : MonoBehaviour
                     theTotalAIVehicles++;
                 }
 
-                for (int j = 0; j < theAIVehiclePool.GetAIVehicleList.Count; j++)
+                for (int j = 0; j < theAIVehiclePool.GetPrefabList.Count; j++)
                 {
                     newAIVehicle.SetActive(true);
                 }
