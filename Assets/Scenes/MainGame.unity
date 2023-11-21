@@ -1306,12 +1306,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29506cae30396a941be802f7105fe93e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myVehicleCount: 12
+  theTrack:
+  - {fileID: 7401349171064466089, guid: d2b31cd07e619a6408ab6ee167efa27f, type: 3}
   theAIVehiclePool: {fileID: 1770991525}
   thePlayerVehicles:
   - {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
-  theTrack:
-  - {fileID: 7401349171064466089, guid: d2b31cd07e619a6408ab6ee167efa27f, type: 3}
 --- !u!1 &795035648
 GameObject:
   m_ObjectHideFlags: 0

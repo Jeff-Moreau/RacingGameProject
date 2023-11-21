@@ -45,14 +45,20 @@ public class LoadingManager : MonoBehaviour
 
     private void Start()
     {
-        theCurrentTrack = theTrack[0].GetComponent<TrackInformation>();
         Instantiate(theTrack[0]);
+        theCurrentTrack = theTrack[0].GetComponent<TrackInformation>();
         theTrackPolePositions = theCurrentTrack.GetPolePositions;
-        theTrackPolePositionMarkers = theCurrentTrack.GetPolePositionMarkers;
-        theAIVehiclePool.SetTotalAIVehcilesNeeded(theTrackPolePositions.Length - thePlayerVehicles.Length);
+        theTrackPolePositionMarkers = new PolePositionMarker[theTrackPolePositions.Length];
         theTotalVehicles = new List<GameObject>();
         theTotalAIVehicles = 0;
         theTotalPlayers = 0;
+        
+        for (int i = 0; i < theTrackPolePositions.Length; i++)
+        {
+            theTrackPolePositionMarkers[i] = theTrackPolePositions[i].GetComponent<PolePositionMarker>();
+        }
+
+        theAIVehiclePool.SetTotalAIVehcilesNeeded(theTrackPolePositions.Length - thePlayerVehicles.Length);
     }
 
     private void Update()
