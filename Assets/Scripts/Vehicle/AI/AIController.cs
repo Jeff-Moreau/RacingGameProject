@@ -4,7 +4,7 @@ public class AIController : VehicleController
 {
     // INSPECTOR VARIABLES
     [Header("Scriptable Object Data")]
-    [SerializeField] protected VehicleData myData;
+    [SerializeField] protected VehicleData myData = null;
 
     private void Start()
     {
@@ -33,7 +33,7 @@ public class AIController : VehicleController
         var waypointPosition = theTrackWaypointsToFollow[myCurrentTrackWaypoint].position;
         var relativeWaypointPos = transform.InverseTransformPoint(new Vector3(waypointPosition.x, transform.position.y, waypointPosition.z));
 
-        if (RaceManager.Load.GameStarted)
+        if (RaceManager.Load.GetGameStarted)
         {
             for (int i = 0; i < myThrusterParticles.Length; i++)
             {

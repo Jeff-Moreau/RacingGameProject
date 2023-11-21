@@ -2,16 +2,18 @@ using UnityEngine;
 
 public class TrackInformation : MonoBehaviour
 {
-    [SerializeField] private TrackData myData;
+    // INSPECTOR VARIABLES
+    [Header("Scriptable Object Data")]
+    [SerializeField] private TrackData myData = null;
 
+    [Header("Track Information")]
+    [SerializeField] private GameObject myWaypointsContainer = null;
     [NonReorderable]
-    [SerializeField] private Transform[] myWaypoints;
-
+    [SerializeField] private Transform[] myWaypoints = null;
     [NonReorderable]
-    [SerializeField] private GameObject[] myPolePositions;
+    [SerializeField] private GameObject[] myPolePositions = null;
 
-    [SerializeField] private GameObject myWaypointsContainer;
-
+    // GETTERS
     public Transform[] GetWaypoints => myWaypoints;
     public GameObject[] GetPolePositions => myPolePositions;
     public GameObject GetWaypointContainer => myWaypointsContainer;

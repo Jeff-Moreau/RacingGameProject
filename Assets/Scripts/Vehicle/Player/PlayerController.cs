@@ -4,7 +4,7 @@ public class PlayerController : VehicleController
 {
     // INSPECTOR VARIABLES
     [Header("Scriptable Object Data")]
-    [SerializeField] protected VehicleData myData;
+    [SerializeField] protected VehicleData myData = null;
 
     private void Start()
     {
@@ -14,7 +14,7 @@ public class PlayerController : VehicleController
 
     private void Update()
     {
-        if (RaceManager.Load.GameStarted && !RaceManager.Load.RaceOver)
+        if (RaceManager.Load.GetGameStarted && !RaceManager.Load.GetRaceOver)
         {
             PressMoveForwardKey();
             ReleaseMoveForwardKey();
@@ -114,16 +114,16 @@ public class PlayerController : VehicleController
 
         myData.SetIsMoving(false);
 
-        if (RaceManager.Load.GameStarted)
+        if (RaceManager.Load.GetGameStarted)
         {
             for (int i = 0; i < myThrusterParticles.Length; i++)
             {
-                myThrusterParticles[i].gameObject.SetActive(true);
+                myThrusterParticles[i].gameObject.SetActive(false);
             }
 
             for (int i = 0; i < myExhaustParticles.Length; i++)
             {
-                myExhaustParticles[i].gameObject.SetActive(false);
+                myExhaustParticles[i].gameObject.SetActive(true);
             }
 
             mySphere.AddForce(myArmor.transform.forward * (myData.GetRollSpeed / 2), ForceMode.Force);

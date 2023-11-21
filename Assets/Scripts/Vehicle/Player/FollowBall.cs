@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class FollowBall : MonoBehaviour
 {
-    [SerializeField] private Transform Ball;
-    [SerializeField] private VehicleData ArmorOffset;
+    [Header("Objects Needed")]
+    [SerializeField] private Transform Ball = null;
+    [SerializeField] private VehicleData ArmorOffset = null;
 
     private void Update()
     {

@@ -4,8 +4,8 @@ using UnityEngine;
 public class TrackData : ScriptableObject
 {
     [Header("Track Information")]
-    [SerializeField] private string myName;
-    [SerializeField] private int myLaps;
+    [SerializeField] private string myName = "";
+    [SerializeField] private int myLaps = 0;
 
     public string GetName => myName;
     public int GetLaps => myLaps;

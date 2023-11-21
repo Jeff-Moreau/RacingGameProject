@@ -22,9 +22,9 @@ public class LoadingManager : MonoBehaviour
 
     // INSPECTOR VARIABLES
     [Header("Other Data Needed")]
-    [SerializeField] private GameObject[] theTrackList; // fix later with list of tracks
-    [SerializeField] private AIVehiclePool theAIVehiclePool;
-    [SerializeField] private GameObject[] thePlayerVehicleList;
+    [SerializeField] private GameObject[] theTrackList = null;
+    [SerializeField] private AIVehiclePool theAIVehiclePool = null;
+    [SerializeField] private GameObject[] thePlayerVehicleList = null;
     
     // LOCAL VARIABLES
     private List<GameObject> theTotalVehicles;
