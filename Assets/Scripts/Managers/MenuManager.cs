@@ -28,6 +28,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject theCenterUpdates = null;
     [SerializeField] private GameObject theIntro = null;
     [SerializeField] private GameObject theVideo = null;
+    [SerializeField] private GameObject theNewGameMenu = null;
 
     private void Awake()
     {
@@ -54,11 +55,7 @@ public class MenuManager : MonoBehaviour
     public void NewGame()
     {
         theMainMenu.SetActive(false);
-        theGameManager.SetActive(true);
-        theLoadingManager.SetActive(true);
-        theRaceManager.SetActive(true);
-        thePlayingHUD.SetActive(true);
-        theCenterUpdates.SetActive(true);
+        theNewGameMenu.SetActive(true);
     }
 
     public void ExitGame()
