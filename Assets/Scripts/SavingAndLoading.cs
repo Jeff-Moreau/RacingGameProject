@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -21,17 +22,27 @@ public class SavingAndLoading : MonoBehaviour
 
     public void SaveGame()
     {
-        myPlayer.SetName("Jeff");
+        myPlayer.SetName("Brain");
         myPlayer.SetBallMaterial(theEditor.GetMaterial);
         myPlayer.SetMaterialRed(theEditor.GetMaterialRed);
         myPlayer.SetMaterialGreen(theEditor.GetMaterialGreen);
         myPlayer.SetMaterialBlue(theEditor.GetMaterialBlue);
         myPlayer.SetMaterialAlpha(theEditor.GetMaterialAlpha);
         mySaveFilePath = Application.persistentDataPath + "/VehicleData-" + myPlayer.GetName + ".json";
-        var savePlayerData = JsonUtility.ToJson(myPlayer);
-        File.WriteAllText(mySaveFilePath, savePlayerData);
 
-        Debug.Log("Saved Vehicle at : " + mySaveFilePath);
+
+        if (File.Exists(mySaveFilePath))
+        {
+            var savePlayerData = JsonUtility.ToJson(myPlayer);
+            File.WriteAllText(mySaveFilePath, savePlayerData);
+            Debug.Log("Change Vehicle Config for : " + myPlayer.GetName);
+        }
+        else if (!File.Exists(mySaveFilePath))
+        {
+            var savePlayerData = JsonUtility.ToJson(myPlayer);
+            File.WriteAllText(mySaveFilePath, savePlayerData);
+            Debug.Log("New Vehicle Config for : " + myPlayer.GetName);
+        }
     }
 
     public void LoadGame()

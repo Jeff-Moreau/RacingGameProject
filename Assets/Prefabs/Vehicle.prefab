@@ -16671,7 +16671,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3.15
+      scalar: -0.21
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -16725,7 +16725,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0, g: 0.98021173, b: 1, a: 0.3764706}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.039215688}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -17253,7 +17253,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 1.84
       mode: 0
       spread: 0
       speed:
@@ -17372,7 +17372,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 230.35
+      scalar: 1000
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -17802,7 +17802,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 1
+    enabled: 0
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -20436,13 +20436,13 @@ ParticleSystem:
         m_RotationOrder: 4
     maxLights: 20
   TrailModule:
-    enabled: 1
+    enabled: 0
     mode: 1
     ratio: 1
     lifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -20493,14 +20493,14 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     minVertexDistance: 0.2
-    textureMode: 0
+    textureMode: 4
     textureScale: {x: 1, y: 1}
-    ribbonCount: 1
+    ribbonCount: 67
     shadowBias: 0.5
     worldSpace: 0
     dieWithParticles: 1
     sizeAffectsWidth: 1
-    sizeAffectsLifetime: 0
+    sizeAffectsLifetime: 1
     inheritParticleColor: 1
     generateLightingData: 0
     splitSubEmitterRibbons: 0
@@ -21280,7 +21280,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -37227,7 +37226,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9660042f787edab4b96f690045ec8379, type: 2}
+  - {fileID: 2100000, guid: 2b0ba5c845a8ea8418e26de344997de4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -37309,8 +37308,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608fd93c6ad138b4ba7b839f1104dda3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myVehicleName: 
-  myMaterialRed: 0
+  myVehicleName: Brain
+  myMaterialRed: 0.1284262
+  myMaterialGreen: 0
+  myMaterialBlue: 0
+  myMaterialAlpha: 0
+  myBallMaterial: {fileID: 2100000, guid: 2b0ba5c845a8ea8418e26de344997de4, type: 2}
   mySphere: {fileID: 5410282482315495453}
   myRenderer: {fileID: 6323648850615545603}
   myArmor:
