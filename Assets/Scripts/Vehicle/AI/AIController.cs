@@ -45,9 +45,9 @@ public class AIController : VehicleController
                 myExhaustParticles[i].gameObject.SetActive(false);
             }
 
-            mySphere.AddForce(myArmor.transform.forward * myData.GetRollSpeed, ForceMode.Force);
+            //mySphere.AddForce(myArmor.transform.forward * myData.GetRollSpeed, ForceMode.Force);
             mySphere.AddForce(Physics.gravity * mySphere.mass);
-            myArmor.transform.rotation = theTrackWaypointsToFollow[myCurrentTrackWaypoint].rotation;
+            //myArmor.transform.rotation = theTrackWaypointsToFollow[myCurrentTrackWaypoint].rotation;
         }
         CheckWaypointPosition(relativeWaypointPos);
     }

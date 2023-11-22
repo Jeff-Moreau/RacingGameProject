@@ -1,11 +1,21 @@
+using Palmmedia.ReportGenerator.Core;
 using UnityEngine;
 
 public class VehicleController : MonoBehaviour
 {
     // INSPECTOR VARIABLES
+    [Header("For Saving and Loading")]
+    [SerializeField] protected string myVehicleName = null;
+    [SerializeField] protected float myMaterialRed = 0;
+    [SerializeField] protected float myMaterialGreen = 0;
+    [SerializeField] protected float myMaterialBlue = 0;
+    [SerializeField] protected float myMaterialAlpha = 1;
+    [SerializeField] protected Material myBallMaterial = null;
+
     [Header("Vehicle Pieces")]
     [SerializeField] protected Rigidbody mySphere = null;
-    [SerializeField] protected GameObject myArmor = null;
+    [SerializeField] protected Renderer myRenderer = null;
+    [SerializeField] protected GameObject[] myArmor = null;
     [SerializeField] protected ParticleSystem[] myExhaustParticles = null;
     [SerializeField] protected ParticleSystem[] myThrusterParticles = null;
     [SerializeField] protected Light[] myTailLightBulbs = null;
@@ -18,6 +28,14 @@ public class VehicleController : MonoBehaviour
     protected int myCurrentTrackWaypoint;
     protected float myProximityToCurrentWaypoint;
 
+    public string SetName(string vehicle) => myVehicleName = vehicle;
+    public float SetMaterialRed(float num) => myMaterialRed = num;
+    public float SetMaterialGreen(float num) => myMaterialGreen = num;
+    public float SetMaterialBlue(float num) => myMaterialBlue = num;
+    public float SetMaterialAlpha(float num) => myMaterialAlpha = num;
+    public Material SetBallMaterial(Material mat) => myBallMaterial = mat;
+
+    public string GetName => myVehicleName;
     protected void Awake()
     {
         theTrackWaypointContainer = LoadingManager.Load.GetCurrentTrackInformation.GetWaypointContainer;

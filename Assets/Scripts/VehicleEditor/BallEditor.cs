@@ -4,6 +4,16 @@ using UnityEngine.UI;
 
 public class BallEditor : MonoBehaviour
 {
+    private enum MaterialType
+    {
+        DragonScale,
+        Fire,
+        Lightning,
+        Lava,
+        Chrome,
+        Water
+    }
+
     // INSPECTOR VARIABLES
     [SerializeField] private Renderer myRenderer = null;
     [SerializeField] private Slider myRedSlider = null;
@@ -13,14 +23,30 @@ public class BallEditor : MonoBehaviour
     [SerializeField] private TMP_Dropdown myDropdown = null;
     [SerializeField] private Material[] myBallMaterials = null;
 
-    // PRIVATE VARIABLES
+    // LOCAL VARIABLES
+    private string myVehicleName;
     private float myRendererRed;
     private float myRendererGreen;
     private float myRendererBlue;
     private float myRendererAlpha;
+    private Material myRendererMaterial;
+
+    public float GetMaterialRed => myRendererRed;
+    public float GetMaterialGreen => myRendererGreen;
+    public float GetMaterialBlue => myRendererBlue;
+    public float GetMaterialAlpha => myRendererAlpha;
+    public Material GetMaterial => myRendererMaterial;
 
     private void Start()
     {
+        InitializeVariables();
+    }
+
+    private void InitializeVariables()
+    {
+        myVehicleName = "";
+        myRendererMaterial = myRenderer.material;
+
         myRendererRed = myRenderer.material.GetColor("_Color").r;
         myRendererGreen = myRenderer.material.GetColor("_Color").g;
         myRendererBlue = myRenderer.material.GetColor("_Color").b;
@@ -34,13 +60,24 @@ public class BallEditor : MonoBehaviour
 
     public void ChangeColor()
     {
+        myRendererRed = myRedSlider.value;
+        myRendererGreen = myGreenSlider.value;
+        myRendererBlue = myBlueSlider.value;
+        myRendererAlpha = myAlphaSlider.value;
+
         myRenderer.material.SetColor("_Color", new Color(myRedSlider.value, myGreenSlider.value, myBlueSlider.value, myAlphaSlider.value));
     }
 
     public void RandomColor()
     {
+        myRendererRed = myRedSlider.value;
+        myRendererGreen = myGreenSlider.value;
+        myRendererBlue = myBlueSlider.value;
+        myRendererAlpha = myAlphaSlider.value;
+
         var randomMaterial = Random.Range(0, myBallMaterials.Length);
 
+        myRendererMaterial = myBallMaterials[randomMaterial];
         myRenderer.material = myBallMaterials[randomMaterial];
         myDropdown.value = randomMaterial;
 
@@ -59,29 +96,32 @@ public class BallEditor : MonoBehaviour
 
     public void ChangeBallMaterial()
     {
-        if (myDropdown.value == 0)
+        switch (myDropdown.value)
         {
-            myRenderer.material = myBallMaterials[0];
-        }
-        else if (myDropdown.value == 1)
-        {
-            myRenderer.material = myBallMaterials[1];
-        }
-        else if (myDropdown.value == 2)
-        {
-            myRenderer.material = myBallMaterials[2];
-        }
-        else if (myDropdown.value == 3)
-        {
-            myRenderer.material = myBallMaterials[3];
-        }
-        else if (myDropdown.value == 4)
-        {
-            myRenderer.material = myBallMaterials[4];
-        }
-        else if (myDropdown.value == 5)
-        {
-            myRenderer.material = myBallMaterials[5];
+            case (int)MaterialType.DragonScale:
+                myRendererMaterial = myBallMaterials[(int)MaterialType.DragonScale];
+                myRenderer.material = myBallMaterials[(int)MaterialType.DragonScale];
+                break;
+            case (int)MaterialType.Fire:
+                myRendererMaterial = myBallMaterials[(int)MaterialType.Fire];
+                myRenderer.material = myBallMaterials[(int)MaterialType.Fire];
+                break;
+            case (int)MaterialType.Lightning:
+                myRendererMaterial = myBallMaterials[(int)MaterialType.Lightning];
+                myRenderer.material = myBallMaterials[(int)MaterialType.Lightning];
+                break;
+            case (int)MaterialType.Lava:
+                myRendererMaterial = myBallMaterials[(int)MaterialType.Lava];
+                myRenderer.material = myBallMaterials[(int)MaterialType.Lava];
+                break;
+            case (int)MaterialType.Chrome:
+                myRendererMaterial = myBallMaterials[(int)MaterialType.Chrome];
+                myRenderer.material = myBallMaterials[(int)MaterialType.Chrome];
+                break;
+            case (int)MaterialType.Water:
+                myRendererMaterial = myBallMaterials[(int)MaterialType.Water];
+                myRenderer.material = myBallMaterials[(int)MaterialType.Water];
+                break;
         }
     }
 }

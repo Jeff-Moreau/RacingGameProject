@@ -29,6 +29,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject theIntro = null;
     [SerializeField] private GameObject theVideo = null;
     [SerializeField] private GameObject theNewGameMenu = null;
+    [SerializeField] private Camera theMainCamera = null;
 
     private void Awake()
     {
@@ -84,6 +85,12 @@ public class MenuManager : MonoBehaviour
 
     public void NextRace()
     {
-
+        theNewGameMenu.SetActive(false);
+        theGameManager.SetActive(true);
+        theLoadingManager.SetActive(true);
+        theRaceManager.SetActive(true);
+        theMainCamera.gameObject.SetActive(false);
+        thePlayingHUD.SetActive(true);
+        theCenterUpdates.SetActive(true);
     }
 }

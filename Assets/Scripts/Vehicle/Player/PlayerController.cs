@@ -29,11 +29,12 @@ public class PlayerController : VehicleController
 
     private void InitializeVariables()
     {
+        myRenderer.material = myBallMaterial;
+        myRenderer.material.SetColor("_Color", new Color(myMaterialRed, myMaterialGreen, myMaterialBlue, myMaterialAlpha));
         myCurrentRacePosition = 0;
         myCurrentTrackWaypoint = 14;
         myProximityToCurrentWaypoint = myData.GetWaypointProximity * myData.GetWaypointProximity;
         myData.SetIsMoving(false);
-
         for (int i = 0; i < myThrusterParticles.Length; i++)
         {
             myThrusterParticles[i].gameObject.SetActive(false);
@@ -44,7 +45,7 @@ public class PlayerController : VehicleController
     {
         if (Input.GetKey(KeyCode.A))
         {
-            myArmor.transform.Rotate(new Vector3(0, -myData.GetRotationSpeed, 0) * Time.deltaTime);
+            //myArmor.transform.Rotate(new Vector3(0, -myData.GetRotationSpeed, 0) * Time.deltaTime);
         }
     }
 
@@ -52,7 +53,7 @@ public class PlayerController : VehicleController
     {
         if (Input.GetKey(KeyCode.D))
         {
-            myArmor.transform.Rotate(new Vector3(0, myData.GetRotationSpeed, 0) * Time.deltaTime);
+            //myArmor.transform.Rotate(new Vector3(0, myData.GetRotationSpeed, 0) * Time.deltaTime);
         }
     }
 
@@ -102,7 +103,7 @@ public class PlayerController : VehicleController
                 myTailLightBulbs[i].gameObject.SetActive(false);
             }
 
-            mySphere.AddForce(myArmor.transform.forward * myData.GetRollSpeed, ForceMode.Force);
+            //mySphere.AddForce(myArmor.transform.forward * myData.GetRollSpeed, ForceMode.Force);
             mySphere.AddForce(Physics.gravity * mySphere.mass);
         }
     }
@@ -126,9 +127,9 @@ public class PlayerController : VehicleController
                 myExhaustParticles[i].gameObject.SetActive(true);
             }
 
-            mySphere.AddForce(myArmor.transform.forward * (myData.GetRollSpeed / 2), ForceMode.Force);
+            //mySphere.AddForce(myArmor.transform.forward * (myData.GetRollSpeed / 2), ForceMode.Force);
             mySphere.AddForce(Physics.gravity * mySphere.mass);
-            myArmor.transform.rotation = theTrackWaypointsToFollow[myCurrentTrackWaypoint].rotation;
+            //myArmor.transform.rotation = theTrackWaypointsToFollow[myCurrentTrackWaypoint].rotation;
         }
         CheckWaypointPosition(relativeWaypointPos);
     }

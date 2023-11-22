@@ -9,4 +9,9 @@ public class TrackData : ScriptableObject
 
     public string GetName => myName;
     public int GetLaps => myLaps;
+
+    public void Start()
+    {
+        myName = "Johnny";
+    }
 }
