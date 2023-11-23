@@ -6,6 +6,9 @@ public class AIController : VehicleController
     [Header("Scriptable Object Data")]
     [SerializeField] protected VehicleData myData = null;
 
+    // LOCAL VARIABLE
+    private float theVehicleSpeed;
+
     private void Start()
     {
         InitializeVariables();
@@ -22,6 +25,8 @@ public class AIController : VehicleController
         SetExhaustParticles();
         SetArmorType();
 
+
+        theVehicleSpeed = myData.GetRollSpeed;
         myCurrentTrackWaypoint = 0;
         myProximityToCurrentWaypoint = myData.GetWaypointProximity * myData.GetWaypointProximity;
     }
@@ -77,6 +82,19 @@ public class AIController : VehicleController
     {
         var waypointPosition = theTrackWaypointsToFollow[myCurrentTrackWaypoint].position;
         var relativeWaypointPos = transform.InverseTransformPoint(new Vector3(waypointPosition.x, transform.position.y, waypointPosition.z));
+        
+        if (RaceManager.Load.GetPlayerPosition <= 20 && RaceManager.Load.GetPlayerPosition >= 4)
+        {
+            theVehicleSpeed = Random.Range(myData.GetRollSpeed * 0.5f, myData.GetRollSpeed);
+        }
+        else if (RaceManager.Load.GetPlayerPosition == 1)
+        {
+            theVehicleSpeed = myData.GetRollSpeed * 1.3f;
+        }
+        else
+        {
+            theVehicleSpeed = Random.Range(myData.GetRollSpeed, myData.GetRollSpeed * 1.3f);
+        }
 
         if (RaceManager.Load.GetGameStarted)
         {
@@ -98,10 +116,27 @@ public class AIController : VehicleController
                 myThrusterParticles[3].gameObject.SetActive(true);
             }
 
-            mySphere.AddForce(myArmor[myArmorType].transform.forward * myData.GetRollSpeed, ForceMode.Force);
+            mySphere.AddForce(myArmor[myArmorType].transform.forward * theVehicleSpeed, ForceMode.Force);
             mySphere.AddForce(Physics.gravity * mySphere.mass);
-            myArmor[myArmorType].transform.rotation = theTrackWaypointsToFollow[myCurrentTrackWaypoint].rotation;
+            myArmor[myArmorType].transform.LookAt(theTrackWaypointsToFollow[myCurrentTrackWaypoint]);
+            //myArmor[myArmorType].transform.rotation = theTrackWaypointsToFollow[myCurrentTrackWaypoint].rotation;
         }
         CheckWaypointPosition(relativeWaypointPos);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "FinishLine" && !RaceManager.Load.GetRaceOver)
+        {
+            if (RaceManager.Load.GetRacers < LoadingManager.Load.GetTrackPolePositions)
+            {
+                RaceManager.Load.AddRacers(gameObject);
+            }
+            else if (RaceManager.Load.GetRacers >= LoadingManager.Load.GetTrackPolePositions)
+            {
+                RaceManager.Load.ResetRacers();
+                RaceManager.Load.AddRacers(gameObject);
+            }
+        }
     }
 }

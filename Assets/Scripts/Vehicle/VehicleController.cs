@@ -30,6 +30,8 @@ public class VehicleController : MonoBehaviour
 
     // GETTERS
     public string GetName => myVehicleName;
+    public int GetArmorType => myArmorType;
+
 
     // SETTERS
     public int SetArmorType(int num) => myArmorType = num;

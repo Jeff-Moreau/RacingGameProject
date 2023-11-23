@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -55,7 +54,9 @@ public class SavingAndLoading : MonoBehaviour
             var loadVehicleData = File.ReadAllText(mySaveFilePath);
             JsonUtility.FromJsonOverwrite(loadVehicleData, myPlayer);
 
-            Debug.Log("Loaded Vehicle!");
+            theEditor.SetArmorNumber(myPlayer.GetArmorType);
+
+            Debug.Log("Loaded Vehicle : "+ theEditor.GetName);
         }
         else
         {

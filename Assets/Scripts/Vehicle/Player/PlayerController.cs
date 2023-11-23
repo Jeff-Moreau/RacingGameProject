@@ -101,7 +101,7 @@ public class PlayerController : VehicleController
             if (myArmor[0].activeInHierarchy)
             {
                 myExhaustParticles[0].gameObject.SetActive(true);
-                myThrusterParticles[0].gameObject.SetActive(false); 
+                myThrusterParticles[0].gameObject.SetActive(false);
             }
             else if (myArmor[1].activeInHierarchy)
             {
@@ -178,8 +178,27 @@ public class PlayerController : VehicleController
 
             mySphere.AddForce(myArmor[myArmorType].transform.forward * (myData.GetRollSpeed / 2), ForceMode.Force);
             mySphere.AddForce(Physics.gravity * mySphere.mass);
-            myArmor[myArmorType].transform.rotation = theTrackWaypointsToFollow[myCurrentTrackWaypoint].rotation;
+            myArmor[myArmorType].transform.LookAt(theTrackWaypointsToFollow[myCurrentTrackWaypoint]);
+            //myArmor[myArmorType].transform.rotation = theTrackWaypointsToFollow[myCurrentTrackWaypoint].rotation;
         }
         CheckWaypointPosition(relativeWaypointPos);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "FinishLine" && !RaceManager.Load.GetRaceOver)
+        {
+            if (RaceManager.Load.GetRacers < LoadingManager.Load.GetTrackPolePositions)
+            {
+                RaceManager.Load.AddRacers(gameObject);
+            }
+            else if (RaceManager.Load.GetRacers >= LoadingManager.Load.GetTrackPolePositions)
+            {
+                RaceManager.Load.ResetRacers();
+                RaceManager.Load.AddRacers(gameObject);
+            }
+            RaceManager.Load.SetPlayerPosition(RaceManager.Load.GetRacers);
+            RaceManager.Load.SetCurrentLap(RaceManager.Load.GetCurrentLap + 1);
+        }
     }
 }

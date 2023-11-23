@@ -51,6 +51,7 @@ public class RaceManager : MonoBehaviour
     public bool GetGameStarted => myGameStart;
     public int GetRacers => myRacers.Count;
     public int GetCurrentLap => myCurrentLap;
+    public int GetPlayerPosition => thePlayerPosition;
 
     // SETTERS
     public void AddRacers(GameObject me) => myRacers.Add(me);

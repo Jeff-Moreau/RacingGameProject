@@ -49,10 +49,16 @@ public class BallEditor : MonoBehaviour
     public float GetMaterialBlue => myRendererBlue;
     public float GetMaterialAlpha => myRendererAlpha;
     public Material GetMaterial => myRendererMaterial;
+    public int SetArmorNumber(int armor) =>  myArmorNumber = armor;
 
     private void Start()
     {
         InitializeVariables();
+    }
+
+    private void Update()
+    {
+        myArmorDropDown.value = myArmorNumber;
     }
 
     private void InitializeVariables()
@@ -60,6 +66,7 @@ public class BallEditor : MonoBehaviour
         myVehicleName = "";
 
         myArmorNumber = 0;
+        myArmorDropDown.value = myArmorNumber;
 
         myRendererRed = myOnScreenBall.material.GetColor("_Color").r;
         myRendererGreen = myOnScreenBall.material.GetColor("_Color").g;
@@ -87,6 +94,7 @@ public class BallEditor : MonoBehaviour
 
         myRendererMaterial = myBallMaterials[randomMaterial];
         myOnScreenBall.material = myBallMaterials[randomMaterial];
+        myArmorDropDown.value = Random.Range(0, myArmorTypes.Length);
         myDropdown.value = randomMaterial;
 
         var randomRedColor = Random.Range(0f, 1f);

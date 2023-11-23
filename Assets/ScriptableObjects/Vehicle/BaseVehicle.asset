@@ -16,7 +16,8 @@ MonoBehaviour:
   theRollSpeed: 50
   theMassMultiplier: 15
   theRotationSpeed: 150
-  theWaypointProximity: 8
+  theWaypointProximity: 10
   theArmorHeight: 7.7
   theIdleSound: {fileID: 8300000, guid: 1ca6a3d1d522dfe43b044954d63f8040, type: 3}
   theThrusterSound: {fileID: 8300000, guid: 8c0b2ad2efb831c458025c1ab7951902, type: 3}
+  theBallMaterials: []
