@@ -19,8 +19,27 @@ public class AIController : VehicleController
 
     private void InitializeVariables()
     {
-        myArmorType = 0;
-        myArmor[myArmorType].SetActive(true);
+        myArmorType = Random.Range(0, 3);
+
+        if (myArmorType == 0)
+        {
+            myArmor[0].SetActive(true);
+            myArmor[1].SetActive(false);
+            myArmor[2].SetActive(false);
+        }
+        else if (myArmorType == 1)
+        {
+            myArmor[0].SetActive(false);
+            myArmor[1].SetActive(true);
+            myArmor[2].SetActive(false);
+        }
+        else if (myArmorType == 2)
+        {
+            myArmor[0].SetActive(false);
+            myArmor[1].SetActive(false);
+            myArmor[2].SetActive(true);
+        }
+
         myCurrentTrackWaypoint = 14;
         myProximityToCurrentWaypoint = myData.GetWaypointProximity * myData.GetWaypointProximity;
 

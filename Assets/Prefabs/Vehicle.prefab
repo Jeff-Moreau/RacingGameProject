@@ -10167,13 +10167,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1174248049123087107}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: -0.5, z: -1.75}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.0000043869018, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8470111364112228388}
-  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!20 &670003295146060563
 Camera:
   m_ObjectHideFlags: 0
@@ -10292,8 +10292,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393589456472944314}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: -0.5, z: -1.75}
+  m_LocalRotation: {x: 0.70710677, y: 0.000000029802315, z: -0.000000029802315, w: 0.70710677}
+  m_LocalPosition: {x: 0, y: 2.0000005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26823,13 +26823,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6338946892732874564}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 0, y: -0.5, z: -1.75}
+  m_LocalRotation: {x: 0.53729963, y: 0, z: 0, w: 0.8433915}
+  m_LocalPosition: {x: 0, y: 15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2652929348883954178}
-  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 65, y: 0, z: 0}
 --- !u!20 &2225155817704348010
 Camera:
   m_ObjectHideFlags: 0
@@ -37314,6 +37314,7 @@ MonoBehaviour:
   myMaterialBlue: 0.4078167
   myMaterialAlpha: 0.8107469
   myBallMaterial: {fileID: 2100000, guid: e40cfde024b8ea44f9142f0597aa8655, type: 2}
+  myArmorType: 0
   mySphere: {fileID: 5410282482315495453}
   myRenderer: {fileID: 6323648850615545603}
   myArmor:
