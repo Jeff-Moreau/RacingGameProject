@@ -22,14 +22,15 @@ public class SavingAndLoading : MonoBehaviour
 
     public void SaveGame()
     {
-        myPlayer.SetName("Brain");
+        myPlayer.SetName(theEditor.GetName);
         myPlayer.SetBallMaterial(theEditor.GetMaterial);
         myPlayer.SetMaterialRed(theEditor.GetMaterialRed);
         myPlayer.SetMaterialGreen(theEditor.GetMaterialGreen);
         myPlayer.SetMaterialBlue(theEditor.GetMaterialBlue);
         myPlayer.SetMaterialAlpha(theEditor.GetMaterialAlpha);
-        mySaveFilePath = Application.persistentDataPath + "/VehicleData-" + myPlayer.GetName + ".json";
+        myPlayer.SetArmorType(theEditor.GetArmorNumber);
 
+        mySaveFilePath = Application.persistentDataPath + "/VehicleData-" + myPlayer.GetName + ".json";
 
         if (File.Exists(mySaveFilePath))
         {
@@ -47,7 +48,7 @@ public class SavingAndLoading : MonoBehaviour
 
     public void LoadGame()
     {
-        mySaveFilePath = Application.persistentDataPath + "/VehicleData-Default.json";
+        mySaveFilePath = Application.persistentDataPath + "/VehicleData-" + theEditor.GetName + ".json";
 
         if (File.Exists(mySaveFilePath))
         {

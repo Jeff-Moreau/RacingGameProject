@@ -10858,8 +10858,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f265b241bd6564d9f722034e1174da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myVehicleName: 
+  myMaterialRed: 0
+  myMaterialGreen: 0
+  myMaterialBlue: 0
+  myMaterialAlpha: 1
+  myBallMaterial: {fileID: 0}
+  myArmorType: 0
   mySphere: {fileID: 5410282482315495453}
-  myArmor: {fileID: 7925766267834119143}
+  myRenderer: {fileID: 6323648850615545603}
+  myArmor:
+  - {fileID: 7925766267834119143}
   myExhaustParticles:
   - {fileID: 1682183365871664060}
   myThrusterParticles:

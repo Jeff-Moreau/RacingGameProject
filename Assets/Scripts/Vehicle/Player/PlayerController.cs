@@ -29,6 +29,25 @@ public class PlayerController : VehicleController
 
     private void InitializeVariables()
     {
+        if (myArmorType == 0)
+        {
+            myArmor[0].SetActive(true);
+            myArmor[1].SetActive(false);
+            myArmor[2].SetActive(false);
+        }
+        else if (myArmorType == 1)
+        {
+            myArmor[0].SetActive(false);
+            myArmor[1].SetActive(true);
+            myArmor[2].SetActive(false);
+        }
+        else if (myArmorType == 2)
+        {
+            myArmor[0].SetActive(false);
+            myArmor[1].SetActive(false);
+            myArmor[2].SetActive(true);
+        }
+
         myRenderer.material = myBallMaterial;
         myRenderer.material.SetColor("_Color", new Color(myMaterialRed, myMaterialGreen, myMaterialBlue, myMaterialAlpha));
         myCurrentRacePosition = 0;
@@ -45,7 +64,7 @@ public class PlayerController : VehicleController
     {
         if (Input.GetKey(KeyCode.A))
         {
-            //myArmor.transform.Rotate(new Vector3(0, -myData.GetRotationSpeed, 0) * Time.deltaTime);
+            myArmor[myArmorType].transform.Rotate(new Vector3(0, -myData.GetRotationSpeed, 0) * Time.deltaTime);
         }
     }
 
@@ -53,7 +72,7 @@ public class PlayerController : VehicleController
     {
         if (Input.GetKey(KeyCode.D))
         {
-            //myArmor.transform.Rotate(new Vector3(0, myData.GetRotationSpeed, 0) * Time.deltaTime);
+            myArmor[myArmorType].transform.Rotate(new Vector3(0, myData.GetRotationSpeed, 0) * Time.deltaTime);
         }
     }
 
@@ -103,7 +122,7 @@ public class PlayerController : VehicleController
                 myTailLightBulbs[i].gameObject.SetActive(false);
             }
 
-            //mySphere.AddForce(myArmor.transform.forward * myData.GetRollSpeed, ForceMode.Force);
+            mySphere.AddForce(myArmor[myArmorType].transform.forward * myData.GetRollSpeed, ForceMode.Force);
             mySphere.AddForce(Physics.gravity * mySphere.mass);
         }
     }
@@ -127,9 +146,9 @@ public class PlayerController : VehicleController
                 myExhaustParticles[i].gameObject.SetActive(true);
             }
 
-            //mySphere.AddForce(myArmor.transform.forward * (myData.GetRollSpeed / 2), ForceMode.Force);
+            mySphere.AddForce(myArmor[myArmorType].transform.forward * (myData.GetRollSpeed / 2), ForceMode.Force);
             mySphere.AddForce(Physics.gravity * mySphere.mass);
-            //myArmor.transform.rotation = theTrackWaypointsToFollow[myCurrentTrackWaypoint].rotation;
+            myArmor[myArmorType].transform.rotation = theTrackWaypointsToFollow[myCurrentTrackWaypoint].rotation;
         }
         CheckWaypointPosition(relativeWaypointPos);
     }

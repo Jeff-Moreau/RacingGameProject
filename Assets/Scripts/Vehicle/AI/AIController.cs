@@ -19,6 +19,8 @@ public class AIController : VehicleController
 
     private void InitializeVariables()
     {
+        myArmorType = 0;
+        myArmor[myArmorType].SetActive(true);
         myCurrentTrackWaypoint = 14;
         myProximityToCurrentWaypoint = myData.GetWaypointProximity * myData.GetWaypointProximity;
 
@@ -45,9 +47,9 @@ public class AIController : VehicleController
                 myExhaustParticles[i].gameObject.SetActive(false);
             }
 
-            //mySphere.AddForce(myArmor.transform.forward * myData.GetRollSpeed, ForceMode.Force);
+            mySphere.AddForce(myArmor[myArmorType].transform.forward * myData.GetRollSpeed, ForceMode.Force);
             mySphere.AddForce(Physics.gravity * mySphere.mass);
-            //myArmor.transform.rotation = theTrackWaypointsToFollow[myCurrentTrackWaypoint].rotation;
+            myArmor[myArmorType].transform.rotation = theTrackWaypointsToFollow[myCurrentTrackWaypoint].rotation;
         }
         CheckWaypointPosition(relativeWaypointPos);
     }

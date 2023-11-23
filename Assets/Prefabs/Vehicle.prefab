@@ -37226,7 +37226,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2b0ba5c845a8ea8418e26de344997de4, type: 2}
+  - {fileID: 2100000, guid: e830797b5e22ea74ab6753fc8217bbfc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -37308,12 +37308,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608fd93c6ad138b4ba7b839f1104dda3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myVehicleName: Brain
-  myMaterialRed: 0.1284262
-  myMaterialGreen: 0
-  myMaterialBlue: 0
-  myMaterialAlpha: 0
-  myBallMaterial: {fileID: 2100000, guid: 2b0ba5c845a8ea8418e26de344997de4, type: 2}
+  myVehicleName: testing
+  myMaterialRed: 0.81755865
+  myMaterialGreen: 0.9489479
+  myMaterialBlue: 0.4078167
+  myMaterialAlpha: 0.8107469
+  myBallMaterial: {fileID: 2100000, guid: e40cfde024b8ea44f9142f0597aa8655, type: 2}
   mySphere: {fileID: 5410282482315495453}
   myRenderer: {fileID: 6323648850615545603}
   myArmor:

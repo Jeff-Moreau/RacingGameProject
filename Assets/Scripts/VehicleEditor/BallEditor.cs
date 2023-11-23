@@ -14,8 +14,14 @@ public class BallEditor : MonoBehaviour
         Water
     }
 
+    private enum ArmorType
+    {
+        Default,
+        MoHawk,
+        BigBooty
+    }
+
     // INSPECTOR VARIABLES
-    [SerializeField] private GameObject myPlayerBall = null;
     [SerializeField] private Renderer myOnScreenBall = null;
     [SerializeField] private Slider myRedSlider = null;
     [SerializeField] private Slider myGreenSlider = null;
@@ -23,9 +29,11 @@ public class BallEditor : MonoBehaviour
     [SerializeField] private Slider myAlphaSlider = null;
     [SerializeField] private TMP_Dropdown myDropdown = null;
     [SerializeField] private Material[] myBallMaterials = null;
+    [SerializeField] private GameObject[] myArmorTypes = null;
+    [SerializeField] private TMP_Dropdown myArmorDropDown = null;
 
     // LOCAL VARIABLES
-    private Renderer myRenderer;
+    private int myArmorNumber;
     private string myVehicleName;
     private float myRendererRed;
     private float myRendererGreen;
@@ -33,6 +41,9 @@ public class BallEditor : MonoBehaviour
     private float myRendererAlpha;
     private Material myRendererMaterial;
 
+    // GETTERS
+    public int GetArmorNumber => myArmorNumber;
+    public string GetName => myVehicleName;
     public float GetMaterialRed => myRendererRed;
     public float GetMaterialGreen => myRendererGreen;
     public float GetMaterialBlue => myRendererBlue;
@@ -46,19 +57,14 @@ public class BallEditor : MonoBehaviour
 
     private void InitializeVariables()
     {
-        myRenderer = myPlayerBall.GetComponentInChildren<Renderer>();
         myVehicleName = "";
-        myRendererMaterial = myRenderer.sharedMaterial;
+
+        myArmorNumber = 0;
 
         myRendererRed = myOnScreenBall.material.GetColor("_Color").r;
         myRendererGreen = myOnScreenBall.material.GetColor("_Color").g;
         myRendererBlue = myOnScreenBall.material.GetColor("_Color").b;
         myRendererAlpha = myOnScreenBall.material.GetColor("_Color").a;
-
-        myRendererRed = myRenderer.sharedMaterial.GetColor("_Color").r;
-        myRendererGreen = myRenderer.sharedMaterial.GetColor("_Color").g;
-        myRendererBlue = myRenderer.sharedMaterial.GetColor("_Color").b;
-        myRendererAlpha = myRenderer.sharedMaterial.GetColor("_Color").a;
 
         myRedSlider.value = myRendererRed;
         myGreenSlider.value = myRendererGreen;
@@ -68,26 +74,18 @@ public class BallEditor : MonoBehaviour
 
     public void ChangeColor()
     {
-        myRendererRed = myRedSlider.value;
-        myRendererGreen = myGreenSlider.value;
-        myRendererBlue = myBlueSlider.value;
-        myRendererAlpha = myAlphaSlider.value;
+        SliderAdjust();
 
-        myRenderer.sharedMaterial.SetColor("_Color", new Color(myRedSlider.value, myGreenSlider.value, myBlueSlider.value, myAlphaSlider.value));
         myOnScreenBall.material.SetColor("_Color", new Color(myRedSlider.value, myGreenSlider.value, myBlueSlider.value, myAlphaSlider.value));
     }
 
     public void RandomColor()
     {
-        myRendererRed = myRedSlider.value;
-        myRendererGreen = myGreenSlider.value;
-        myRendererBlue = myBlueSlider.value;
-        myRendererAlpha = myAlphaSlider.value;
+        SliderAdjust();
 
         var randomMaterial = Random.Range(0, myBallMaterials.Length);
 
         myRendererMaterial = myBallMaterials[randomMaterial];
-        myRenderer.sharedMaterial = myBallMaterials[randomMaterial];
         myOnScreenBall.material = myBallMaterials[randomMaterial];
         myDropdown.value = randomMaterial;
 
@@ -101,8 +99,15 @@ public class BallEditor : MonoBehaviour
         myBlueSlider.value = randomBlueColor;
         myAlphaSlider.value = randomAlphaColor;
 
-        myRenderer.sharedMaterial.SetColor("_Color", new Color(randomRedColor, randomGreenColor, randomBlueColor, randomAlphaColor));
         myOnScreenBall.material.SetColor("_Color", new Color(randomRedColor, randomGreenColor, randomBlueColor, randomAlphaColor));
+    }
+
+    private void SliderAdjust()
+    {
+        myRendererRed = myRedSlider.value;
+        myRendererGreen = myGreenSlider.value;
+        myRendererBlue = myBlueSlider.value;
+        myRendererAlpha = myAlphaSlider.value;
     }
 
     public void ChangeBallMaterial()
@@ -111,33 +116,58 @@ public class BallEditor : MonoBehaviour
         {
             case (int)MaterialType.DragonScale:
                 myRendererMaterial = myBallMaterials[(int)MaterialType.DragonScale];
-                myRenderer.sharedMaterial = myBallMaterials[(int)MaterialType.DragonScale];
                 myOnScreenBall.material = myBallMaterials[(int)MaterialType.DragonScale];
+                myVehicleName = "DragonScale";
                 break;
             case (int)MaterialType.Fire:
                 myRendererMaterial = myBallMaterials[(int)MaterialType.Fire];
-                myRenderer.sharedMaterial = myBallMaterials[(int)MaterialType.Fire];
                 myOnScreenBall.material = myBallMaterials[(int)MaterialType.Fire];
+                myVehicleName = "FireBall";
                 break;
             case (int)MaterialType.Lightning:
                 myRendererMaterial = myBallMaterials[(int)MaterialType.Lightning];
-                myRenderer.sharedMaterial = myBallMaterials[(int)MaterialType.Lightning];
                 myOnScreenBall.material = myBallMaterials[(int)MaterialType.Lightning];
+                myVehicleName = "LightningRod";
                 break;
             case (int)MaterialType.Lava:
                 myRendererMaterial = myBallMaterials[(int)MaterialType.Lava];
-                myRenderer.sharedMaterial = myBallMaterials[(int)MaterialType.Lava];
                 myOnScreenBall.material = myBallMaterials[(int)MaterialType.Lava];
+                myVehicleName = "LavaPool";
                 break;
             case (int)MaterialType.Chrome:
                 myRendererMaterial = myBallMaterials[(int)MaterialType.Chrome];
-                myRenderer.sharedMaterial = myBallMaterials[(int)MaterialType.Chrome];
                 myOnScreenBall.material = myBallMaterials[(int)MaterialType.Chrome];
+                myVehicleName = "ChromeReflection";
                 break;
             case (int)MaterialType.Water:
                 myRendererMaterial = myBallMaterials[(int)MaterialType.Water];
-                myRenderer.sharedMaterial = myBallMaterials[(int)MaterialType.Water];
                 myOnScreenBall.material = myBallMaterials[(int)MaterialType.Water];
+                myVehicleName = "WaterHole";
+                break;
+        }
+    }
+
+    public void ChangeArmorType()
+    {
+        switch (myArmorDropDown.value)
+        {
+            case (int)ArmorType.Default:
+                myArmorTypes[(int)ArmorType.Default].SetActive(true);
+                myArmorTypes[(int)ArmorType.BigBooty].SetActive(false);
+                myArmorTypes[(int)ArmorType.MoHawk].SetActive(false);
+                myArmorNumber = (int)ArmorType.Default;
+                break;
+            case (int)ArmorType.MoHawk:
+                myArmorTypes[(int)ArmorType.Default].SetActive(false);
+                myArmorTypes[(int)ArmorType.BigBooty].SetActive(false);
+                myArmorTypes[(int)ArmorType.MoHawk].SetActive(true);
+                myArmorNumber = (int)ArmorType.MoHawk;
+                break;
+            case (int)ArmorType.BigBooty:
+                myArmorTypes[(int)ArmorType.Default].SetActive(false);
+                myArmorTypes[(int)ArmorType.BigBooty].SetActive(true);
+                myArmorTypes[(int)ArmorType.MoHawk].SetActive(false);
+                myArmorNumber = (int)ArmorType.BigBooty;
                 break;
         }
     }

@@ -19991,7 +19991,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6b05c937daf4014bb28d66f0c1239a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myPlayerBall: {fileID: 8030500827607855529, guid: 3f9b9f46fde091b4ca2705c5b49ea125, type: 3}
   myOnScreenBall: {fileID: 6323648850390696985}
   myRedSlider: {fileID: 1933821458}
   myGreenSlider: {fileID: 1552915811}
@@ -21896,7 +21895,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 571b6bf425ccc8c45b6a4769ca410c5a, type: 2}
+  - {fileID: 2100000, guid: 79253fd1a1b7deb4aa0a6bdc9e0ce8b6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

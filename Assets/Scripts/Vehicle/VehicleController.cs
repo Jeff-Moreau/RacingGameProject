@@ -11,6 +11,7 @@ public class VehicleController : MonoBehaviour
     [SerializeField] protected float myMaterialBlue = 0;
     [SerializeField] protected float myMaterialAlpha = 1;
     [SerializeField] protected Material myBallMaterial = null;
+    [SerializeField] protected int myArmorType = 0;
 
     [Header("Vehicle Pieces")]
     [SerializeField] protected Rigidbody mySphere = null;
@@ -28,6 +29,11 @@ public class VehicleController : MonoBehaviour
     protected int myCurrentTrackWaypoint;
     protected float myProximityToCurrentWaypoint;
 
+    // GETTERS
+    public string GetName => myVehicleName;
+
+    // SETTERS
+    public int SetArmorType(int num) => myArmorType = num;
     public string SetName(string vehicle) => myVehicleName = vehicle;
     public float SetMaterialRed(float num) => myMaterialRed = num;
     public float SetMaterialGreen(float num) => myMaterialGreen = num;
@@ -35,7 +41,6 @@ public class VehicleController : MonoBehaviour
     public float SetMaterialAlpha(float num) => myMaterialAlpha = num;
     public Material SetBallMaterial(Material mat) => myBallMaterial = mat;
 
-    public string GetName => myVehicleName;
     protected void Awake()
     {
         theTrackWaypointContainer = LoadingManager.Load.GetCurrentTrackInformation.GetWaypointContainer;
