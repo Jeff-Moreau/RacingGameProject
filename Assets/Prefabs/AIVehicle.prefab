@@ -6348,7 +6348,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.40830955, b: 0, a: 1}
+      maxColor: {r: 1, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -11685,7 +11685,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.40830955, b: 0, a: 1}
+      maxColor: {r: 1, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -27180,7 +27180,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.40830955, b: 0, a: 1}
+      maxColor: {r: 1, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -32040,8 +32040,14 @@ MonoBehaviour:
   - {fileID: 1919355076111354689}
   myExhaustParticles:
   - {fileID: 1682183365871664060}
+  - {fileID: 1748631528164188936}
+  - {fileID: 8079112845952983529}
+  - {fileID: 7397915611814278350}
   myThrusterParticles:
   - {fileID: 2471891424572293884}
+  - {fileID: 8320228246913421546}
+  - {fileID: 4591619897046439765}
+  - {fileID: 7374257205014110743}
   myTailLightBulbs:
   - {fileID: 3107903475711936130}
   - {fileID: 5014522531667267744}
@@ -32786,7 +32792,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.40830955, b: 0, a: 1}
+      maxColor: {r: 1, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -37491,7 +37497,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8470111364112228388
 Transform:
   m_ObjectHideFlags: 0

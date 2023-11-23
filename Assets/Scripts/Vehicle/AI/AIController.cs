@@ -19,6 +19,28 @@ public class AIController : VehicleController
 
     private void InitializeVariables()
     {
+        SetExhaustParticles();
+        SetArmorType();
+
+        myCurrentTrackWaypoint = 0;
+        myProximityToCurrentWaypoint = myData.GetWaypointProximity * myData.GetWaypointProximity;
+    }
+
+    private void SetExhaustParticles()
+    {
+        for (int i = 0; i < myThrusterParticles.Length; i++)
+        {
+            myThrusterParticles[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < myExhaustParticles.Length; i++)
+        {
+            myExhaustParticles[i].gameObject.SetActive(false);
+        }
+    }
+
+    private void SetArmorType()
+    {
         myArmorType = Random.Range(0, 3);
 
         if (myArmorType == 0)
@@ -26,26 +48,28 @@ public class AIController : VehicleController
             myArmor[0].SetActive(true);
             myArmor[1].SetActive(false);
             myArmor[2].SetActive(false);
+            myRenderer.material = myData.GetBallMaterials[Random.Range(0, myData.GetBallMaterials.Length)];
+            myRenderer.material.SetColor("_Color", Color.red);
+            myExhaustParticles[0].gameObject.SetActive(true);
         }
         else if (myArmorType == 1)
         {
             myArmor[0].SetActive(false);
             myArmor[1].SetActive(true);
             myArmor[2].SetActive(false);
+            myRenderer.material = myData.GetBallMaterials[Random.Range(0, myData.GetBallMaterials.Length)];
+            myRenderer.material.SetColor("_Color", Color.red);
+            myExhaustParticles[1].gameObject.SetActive(true);
+            myExhaustParticles[2].gameObject.SetActive(true);
         }
         else if (myArmorType == 2)
         {
             myArmor[0].SetActive(false);
             myArmor[1].SetActive(false);
             myArmor[2].SetActive(true);
-        }
-
-        myCurrentTrackWaypoint = 14;
-        myProximityToCurrentWaypoint = myData.GetWaypointProximity * myData.GetWaypointProximity;
-
-        for (int i = 0; i < myThrusterParticles.Length; i++)
-        {
-            myThrusterParticles[i].gameObject.SetActive(false);
+            myRenderer.material = myData.GetBallMaterials[Random.Range(0, myData.GetBallMaterials.Length)];
+            myRenderer.material.SetColor("_Color", Color.red);
+            myExhaustParticles[3].gameObject.SetActive(true);
         }
     }
 
@@ -56,14 +80,22 @@ public class AIController : VehicleController
 
         if (RaceManager.Load.GetGameStarted)
         {
-            for (int i = 0; i < myThrusterParticles.Length; i++)
+            if (myArmor[0].activeInHierarchy)
             {
-                myThrusterParticles[i].gameObject.SetActive(true);
+                myExhaustParticles[0].gameObject.SetActive(false);
+                myThrusterParticles[0].gameObject.SetActive(true);
             }
-
-            for (int i = 0; i < myExhaustParticles.Length; i++)
+            else if (myArmor[1].activeInHierarchy)
             {
-                myExhaustParticles[i].gameObject.SetActive(false);
+                myExhaustParticles[1].gameObject.SetActive(false);
+                myExhaustParticles[2].gameObject.SetActive(false);
+                myThrusterParticles[1].gameObject.SetActive(true);
+                myThrusterParticles[2].gameObject.SetActive(true);
+            }
+            else if (myArmor[2].activeInHierarchy)
+            {
+                myExhaustParticles[3].gameObject.SetActive(false);
+                myThrusterParticles[3].gameObject.SetActive(true);
             }
 
             mySphere.AddForce(myArmor[myArmorType].transform.forward * myData.GetRollSpeed, ForceMode.Force);

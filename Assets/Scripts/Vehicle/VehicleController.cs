@@ -1,4 +1,3 @@
-using Palmmedia.ReportGenerator.Core;
 using UnityEngine;
 
 public class VehicleController : MonoBehaviour
@@ -23,7 +22,7 @@ public class VehicleController : MonoBehaviour
     [SerializeField] protected Light[] myHeadLightBulbs = null;
 
     // LOCAL VARIABLES
-    protected GameObject theTrackWaypointContainer;
+    protected GameObject[] theTrackWaypointContainer;
     protected Transform[] theTrackWaypointsToFollow;
     protected int myCurrentRacePosition;
     protected int myCurrentTrackWaypoint;
@@ -48,7 +47,8 @@ public class VehicleController : MonoBehaviour
 
     protected void GetWaypoints()
     {
-        var potentialWaypoints = theTrackWaypointContainer.GetComponentsInChildren<Transform>();
+        var randomWaypoints = Random.Range(0, theTrackWaypointContainer.Length);
+        var potentialWaypoints = theTrackWaypointContainer[randomWaypoints].GetComponentsInChildren<Transform>();
         theTrackWaypointsToFollow = new Transform[potentialWaypoints.Length - 1];
 
         for (int i = 1; i < potentialWaypoints.Length; i++)
