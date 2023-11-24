@@ -8,8 +8,10 @@ public class AIVehiclePool : MonoBehaviour
     [SerializeField] private GameObject thePrefab = null;
 
     // LOCAL VARIABLES
-    private List<GameObject> myPrefabList;
     private int myTotalPrefabsNeeded;
+
+    // LOCAL CONTAINERS
+    private List<GameObject> myPrefabList;
 
     // GETTERS
     public List<GameObject> GetPrefabList => myPrefabList;
@@ -25,8 +27,8 @@ public class AIVehiclePool : MonoBehaviour
 
     private void InitializeVariables()
     {
-        myPrefabList = new List<GameObject>();
         myTotalPrefabsNeeded = 0;
+        myPrefabList = new List<GameObject>();
     }
 
     private void FillListWithPrefab()
@@ -54,8 +56,8 @@ public class AIVehiclePool : MonoBehaviour
     private GameObject IfFullAddOneMore()
     {
         var extraPrefab = Instantiate(thePrefab, transform);
-        thePrefab.SetActive(false);
         myPrefabList.Add(extraPrefab);
+        thePrefab.SetActive(false);
 
         return extraPrefab;
     }

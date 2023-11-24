@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "VehicleData", menuName = "ScriptableObject/VehicleData")]
 public class VehicleData : ScriptableObject
 {
+    // INSPECTOR VARIABLES
     [Header("Movement")]
     [SerializeField] private bool isMoving = false;
     [SerializeField] private float theRollSpeed = 0;
@@ -17,17 +18,20 @@ public class VehicleData : ScriptableObject
     [SerializeField] private AudioClip theIdleSound = null;
     [SerializeField] private AudioClip theThrusterSound = null;
 
+    [Header("Ball Materials")]
+    [NonReorderable]
+    [SerializeField] private Material[] theBallMaterials = null;
+
     // GETTERS
     public bool GetIsMoving => isMoving;
     public float GetRollSpeed => theRollSpeed;
-    public float GetMassMultiplier => theMassMultiplier;
-    public float GetRotationSpeed => theRotationSpeed;
-    public float GetWaypointProximity => theWaypointProximity;
-
     public float GetArmorHeight => theArmorHeight;
-
+    public float GetRotationSpeed => theRotationSpeed;
+    public float GetMassMultiplier => theMassMultiplier;
+    public float GetWaypointProximity => theWaypointProximity;
     public AudioClip GetIdleSound => theIdleSound;
     public AudioClip GetThrusterSound => theThrusterSound;
+    public Material[] GetBallMaterials => theBallMaterials;
 
     // SETTERS
     public void SetIsMoving(bool yesno) => isMoving = yesno;

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class FollowBall : MonoBehaviour
 {
+    // INSPECTOR VARIABLES
     [Header("Objects Needed")]
     [SerializeField] private Transform Ball = null;
     [SerializeField] private VehicleData ArmorOffset = null;

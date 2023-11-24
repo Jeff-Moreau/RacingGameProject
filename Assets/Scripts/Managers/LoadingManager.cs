@@ -17,21 +17,25 @@ public class LoadingManager : MonoBehaviour
             myInstance = this;
         }
     }
+
     public static LoadingManager Load => myInstance;
     // SINGLETON ENDS
 
     // INSPECTOR VARIABLES
     [Header("Other Data Needed")]
-    [SerializeField] private GameObject[] theTrackList = null;
     [SerializeField] private AIVehiclePool theAIVehiclePool = null;
+    [NonReorderable]
+    [SerializeField] private GameObject[] theTrackList = null;
     [SerializeField] private GameObject[] thePlayerVehicleList = null;
     
     // LOCAL VARIABLES
-    private List<GameObject> theTotalVehicles;
     private int theTotalAIVehicles;
     private int theTotalPlayers;
     private int theCurrentTrackLaps;
     private TrackInformation theCurrentTrackInformation;
+
+    // LOCAL CONTAINERS
+    private List<GameObject> theTotalVehicles;
     private GameObject[] theTrackPolePositions;
     private PolePositionMarker[] theTrackPolePositionMarkers;
 

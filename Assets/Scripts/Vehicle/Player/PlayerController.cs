@@ -29,14 +29,55 @@ public class PlayerController : VehicleController
 
     private void InitializeVariables()
     {
-        myCurrentRacePosition = 0;
-        myCurrentTrackWaypoint = 14;
-        myProximityToCurrentWaypoint = myData.GetWaypointProximity * myData.GetWaypointProximity;
-        myData.SetIsMoving(false);
+        SetupParticles();
+        SetArmorType();
 
+        myData.SetIsMoving(false);
+        myCurrentRacePosition = 0;
+        myCurrentTrackWaypoint = 0;
+        myRenderer.material = myBallMaterial;
+        myProximityToCurrentWaypoint = myData.GetWaypointProximity * myData.GetWaypointProximity;
+        myRenderer.material.SetColor("_Color", new Color(myMaterialRed, myMaterialGreen, myMaterialBlue, myMaterialAlpha));
+    }
+
+    private void SetupParticles()
+    {
         for (int i = 0; i < myThrusterParticles.Length; i++)
         {
             myThrusterParticles[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < myExhaustParticles.Length; i++)
+        {
+            myExhaustParticles[i].gameObject.SetActive(false);
+        }
+    }
+
+    private void SetArmorType()
+    {
+        switch (myArmorType)
+        {
+            case 0:
+                myArmor[0].SetActive(true);
+                myArmor[1].SetActive(false);
+                myArmor[2].SetActive(false);
+                myExhaustParticles[0].gameObject.SetActive(true);
+                break;
+
+            case 1:
+                myArmor[0].SetActive(false);
+                myArmor[1].SetActive(true);
+                myArmor[2].SetActive(false);
+                myExhaustParticles[1].gameObject.SetActive(true);
+                myExhaustParticles[2].gameObject.SetActive(true);
+                break;
+
+            case 2:
+                myArmor[0].SetActive(false);
+                myArmor[1].SetActive(false);
+                myArmor[2].SetActive(true);
+                myExhaustParticles[3].gameObject.SetActive(true);
+                break;
         }
     }
 
@@ -44,7 +85,7 @@ public class PlayerController : VehicleController
     {
         if (Input.GetKey(KeyCode.A))
         {
-            myArmor.transform.Rotate(new Vector3(0, -myData.GetRotationSpeed, 0) * Time.deltaTime);
+            myArmor[myArmorType].transform.Rotate(new Vector3(0, -myData.GetRotationSpeed, 0) * Time.deltaTime);
         }
     }
 
@@ -52,7 +93,7 @@ public class PlayerController : VehicleController
     {
         if (Input.GetKey(KeyCode.D))
         {
-            myArmor.transform.Rotate(new Vector3(0, myData.GetRotationSpeed, 0) * Time.deltaTime);
+            myArmor[myArmorType].transform.Rotate(new Vector3(0, myData.GetRotationSpeed, 0) * Time.deltaTime);
         }
     }
 
@@ -62,19 +103,24 @@ public class PlayerController : VehicleController
         {
             myData.SetIsMoving(false);
 
-            for (int i = 0; i < myExhaustParticles.Length; i++)
+            switch (myArmorType)
             {
-                myExhaustParticles[i].gameObject.SetActive(true);
-            }
+                case 0:
+                    myExhaustParticles[0].gameObject.SetActive(true);
+                    myThrusterParticles[0].gameObject.SetActive(false);
+                    break;
 
-            for (int i = 0; i < myThrusterParticles.Length; i++)
-            {
-                myThrusterParticles[i].gameObject.SetActive(false);
-            }
+                case 1:
+                    myExhaustParticles[1].gameObject.SetActive(true);
+                    myExhaustParticles[2].gameObject.SetActive(true);
+                    myThrusterParticles[1].gameObject.SetActive(false);
+                    myThrusterParticles[2].gameObject.SetActive(false);
+                    break;
 
-            for (int i = 0; i < myTailLightBulbs.Length; i++)
-            {
-                myTailLightBulbs[i].gameObject.SetActive(true);
+                case 2:
+                    myExhaustParticles[3].gameObject.SetActive(true);
+                    myThrusterParticles[3].gameObject.SetActive(false);
+                    break;
             }
 
             mySphere.AddForce(Physics.gravity * (mySphere.mass * myData.GetMassMultiplier));
@@ -87,22 +133,27 @@ public class PlayerController : VehicleController
         {
             myData.SetIsMoving(true);
 
-            for (int i = 0; i < myExhaustParticles.Length; i++)
+            switch (myArmorType)
             {
-                myExhaustParticles[i].gameObject.SetActive(false);
+                case 0:
+                    myExhaustParticles[0].gameObject.SetActive(false);
+                    myThrusterParticles[0].gameObject.SetActive(true);
+                    break;
+
+                case 1:
+                    myExhaustParticles[1].gameObject.SetActive(false);
+                    myExhaustParticles[2].gameObject.SetActive(false);
+                    myThrusterParticles[1].gameObject.SetActive(true);
+                    myThrusterParticles[2].gameObject.SetActive(true);
+                    break;
+
+                case 2:
+                    myExhaustParticles[3].gameObject.SetActive(false);
+                    myThrusterParticles[3].gameObject.SetActive(true);
+                    break;
             }
 
-            for (int i = 0; i < myThrusterParticles.Length; i++)
-            {
-                myThrusterParticles[i].gameObject.SetActive(true);
-            }
-
-            for (int i = 0; i < myTailLightBulbs.Length; i++)
-            {
-                myTailLightBulbs[i].gameObject.SetActive(false);
-            }
-
-            mySphere.AddForce(myArmor.transform.forward * myData.GetRollSpeed, ForceMode.Force);
+            mySphere.AddForce(myArmor[myArmorType].transform.forward * myData.GetRollSpeed, ForceMode.Force);
             mySphere.AddForce(Physics.gravity * mySphere.mass);
         }
     }
@@ -116,20 +167,48 @@ public class PlayerController : VehicleController
 
         if (RaceManager.Load.GetGameStarted)
         {
-            for (int i = 0; i < myThrusterParticles.Length; i++)
+            switch (myArmorType)
             {
-                myThrusterParticles[i].gameObject.SetActive(false);
+                case 0:
+                    myExhaustParticles[0].gameObject.SetActive(true);
+                    myThrusterParticles[0].gameObject.SetActive(false);
+                    break;
+
+                case 1:
+                    myExhaustParticles[1].gameObject.SetActive(true);
+                    myExhaustParticles[2].gameObject.SetActive(true);
+                    myThrusterParticles[1].gameObject.SetActive(false);
+                    myThrusterParticles[2].gameObject.SetActive(false);
+                    break;
+
+                case 2:
+                    myExhaustParticles[3].gameObject.SetActive(true);
+                    myThrusterParticles[3].gameObject.SetActive(false);
+                    break;
             }
 
-            for (int i = 0; i < myExhaustParticles.Length; i++)
-            {
-                myExhaustParticles[i].gameObject.SetActive(true);
-            }
-
-            mySphere.AddForce(myArmor.transform.forward * (myData.GetRollSpeed / 2), ForceMode.Force);
+            mySphere.AddForce(myArmor[myArmorType].transform.forward * (myData.GetRollSpeed / 2), ForceMode.Force);
             mySphere.AddForce(Physics.gravity * mySphere.mass);
-            myArmor.transform.rotation = theTrackWaypointsToFollow[myCurrentTrackWaypoint].rotation;
+            myArmor[myArmorType].transform.LookAt(theTrackWaypointsToFollow[myCurrentTrackWaypoint]);
         }
         CheckWaypointPosition(relativeWaypointPos);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "FinishLine" && !RaceManager.Load.GetRaceOver)
+        {
+            if (RaceManager.Load.GetRacers < LoadingManager.Load.GetTrackPolePositions)
+            {
+                RaceManager.Load.AddRacers(gameObject);
+            }
+            else if (RaceManager.Load.GetRacers >= LoadingManager.Load.GetTrackPolePositions)
+            {
+                RaceManager.Load.ResetRacers();
+                RaceManager.Load.AddRacers(gameObject);
+            }
+            RaceManager.Load.SetPlayerPosition(RaceManager.Load.GetRacers);
+            RaceManager.Load.SetCurrentLap(RaceManager.Load.GetCurrentLap + 1);
+        }
     }
 }

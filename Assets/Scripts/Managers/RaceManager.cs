@@ -24,8 +24,11 @@ public class RaceManager : MonoBehaviour
     // INSPECTOR VARIABLES
     [Header("Audio")]
     [NonReorderable]
-    [SerializeField] private AudioClip[] myCountDownAudioClips = null;
     [SerializeField] private AudioSource myAudioSource = null;
+    [NonReorderable]
+    [SerializeField] private AudioClip[] myCountDownAudioClips = null;
+    [NonReorderable]
+    [SerializeField] private AudioClip[] myCheerClips = null;
 
     [Header("Other Data Needed")]
     [SerializeField] private TextMeshProUGUI theCountDownText = null;
@@ -35,22 +38,25 @@ public class RaceManager : MonoBehaviour
     [SerializeField] private GameObject theFinishUI = null;
 
     // LOCAL VARIABLES
-    private List<GameObject> myRacers;
-    private bool myGameStart;
-    private bool myRaceOver;
-    private bool myResetText;
-    private float myStartRaceCountdownSeconds;
     private int myTrackLaps;
     private int myCurrentLap;
     private int myAudioCount;
     private int thePlayerPosition;
+    private bool myGameStart;
+    private bool myRaceOver;
+    private bool myResetText;
+    private float myStartRaceCountdownSeconds;
     private GameObject thePlayer;
+
+    // LOCAL CONTAINERS
+    private List<GameObject> myRacers;
 
     // GETTERS
     public bool GetRaceOver => myRaceOver;
     public bool GetGameStarted => myGameStart;
     public int GetRacers => myRacers.Count;
     public int GetCurrentLap => myCurrentLap;
+    public int GetPlayerPosition => thePlayerPosition;
 
     // SETTERS
     public void AddRacers(GameObject me) => myRacers.Add(me);
@@ -79,15 +85,15 @@ public class RaceManager : MonoBehaviour
 
     private void InitializeVariables()
     {
-        myGameStart = false;
         myRaceOver = false;
+        myGameStart = false;
         myResetText = false;
-        myStartRaceCountdownSeconds = 4;
         myCurrentLap = 0;
         myAudioCount = 0;
-        myTrackLaps = LoadingManager.Load.GetCurrentTrackLaps;
-        myRacers = LoadingManager.Load.GetTotalVehicles;
+        myStartRaceCountdownSeconds = 4;
         thePlayer = LoadingManager.Load.GetPlayer;
+        myRacers = LoadingManager.Load.GetTotalVehicles;
+        myTrackLaps = LoadingManager.Load.GetCurrentTrackLaps;
     }
 
     private void RaceOver()
@@ -97,6 +103,18 @@ public class RaceManager : MonoBehaviour
             thePositionText.text = "Position: " + thePlayerPosition + " of " + (LoadingManager.Load.GetTrackPolePositions);
             theLapText.text = "Lap: " + myTrackLaps + " of " + myTrackLaps;
             theUpdateText.text = "  YOU FINISHED  " + thePlayerPosition;
+
+            if (!myAudioSource.isPlaying)
+            {
+                if (thePlayerPosition == 1)
+                {
+                    myAudioSource.PlayOneShot(myCheerClips[0]);
+                }
+                else
+                {
+                    myAudioSource.PlayOneShot(myCheerClips[1]);
+                }
+            }
             myRaceOver = true;
             theFinishUI.SetActive(true);
         }
@@ -111,6 +129,7 @@ public class RaceManager : MonoBehaviour
                 myAudioSource.PlayOneShot(myCountDownAudioClips[4]);
                 myAudioCount++;
             }
+
             theUpdateText.text = "LAST LAP!";
             Invoke(nameof(ResetLapText), 2);
         }
