@@ -56,19 +56,24 @@ public class SavingAndLoading : MonoBehaviour
             var loadVehicleData = File.ReadAllText(mySaveFilePath);
             JsonUtility.FromJsonOverwrite(loadVehicleData, myPlayer);
 
-            theEditor.SetMaterial(myPlayer.GetMaterial);
-            theEditor.SetMaterialRed(myPlayer.GetMaterialRed);
-            theEditor.SetMaterialGreen(myPlayer.GetMaterialGreen);
-            theEditor.SetMaterialBlue(myPlayer.GetMaterialBlue);
-            theEditor.SetMaterialAlpha(myPlayer.GetMaterialAlpha);
-            theEditor.SetArmorNumber(myPlayer.GetArmorType);
-
             Debug.Log("Loaded Vehicle : "+ theEditor.GetName);
+
+            UpdateModel();
         }
         else
         {
             Debug.Log("No Vehicle Found!");
         }
+    }
+
+    public void UpdateModel()
+    {
+        theEditor.SetMaterial(myPlayer.GetMaterial);
+        theEditor.SetMaterialRed(myPlayer.GetMaterialRed);
+        theEditor.SetMaterialGreen(myPlayer.GetMaterialGreen);
+        theEditor.SetMaterialBlue(myPlayer.GetMaterialBlue);
+        theEditor.SetMaterialAlpha(myPlayer.GetMaterialAlpha);
+        theEditor.SetArmorNumber(myPlayer.GetArmorType);
     }
 
     public void DeleteVehicle()

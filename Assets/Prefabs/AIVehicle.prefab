@@ -17068,7 +17068,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5022361064774142161
 Transform:
   m_ObjectHideFlags: 0
@@ -32026,18 +32026,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myVehicleName: 
+  myArmorType: 0
   myMaterialRed: 0
   myMaterialGreen: 0
   myMaterialBlue: 0
   myMaterialAlpha: 1
   myBallMaterial: {fileID: 0}
-  myArmorType: 0
   mySphere: {fileID: 5410282482315495453}
   myRenderer: {fileID: 6323648850615545603}
   myArmor:
   - {fileID: 7925766267834119143}
   - {fileID: 4883399211330687393}
   - {fileID: 1919355076111354689}
+  myTailLightBulbs:
+  - {fileID: 3107903475711936130}
+  - {fileID: 5014522531667267744}
+  myHeadLightBulbs:
+  - {fileID: 3938720496734198529}
+  - {fileID: 7239500624726001572}
   myExhaustParticles:
   - {fileID: 1682183365871664060}
   - {fileID: 1748631528164188936}
@@ -32048,12 +32054,6 @@ MonoBehaviour:
   - {fileID: 8320228246913421546}
   - {fileID: 4591619897046439765}
   - {fileID: 7374257205014110743}
-  myTailLightBulbs:
-  - {fileID: 3107903475711936130}
-  - {fileID: 5014522531667267744}
-  myHeadLightBulbs:
-  - {fileID: 3938720496734198529}
-  - {fileID: 7239500624726001572}
   myData: {fileID: 11400000, guid: 154c61855ff75f347ac481eb7f214bac, type: 2}
 --- !u!1 &7210709188219219941
 GameObject:
@@ -37782,7 +37782,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8150369305171185649
 Transform:
   m_ObjectHideFlags: 0
@@ -43115,7 +43115,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8243522056463428020
 Transform:
   m_ObjectHideFlags: 0

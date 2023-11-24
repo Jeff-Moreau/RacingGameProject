@@ -25,11 +25,13 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject theVideo = null;
     [SerializeField] private GameObject theMainMenu = null;
     [SerializeField] private GameObject thePlayingHUD = null;
+    [SerializeField] private GameObject theFinalWindow = null;
     [SerializeField] private GameObject theGameManager = null;
     [SerializeField] private GameObject theRaceManager = null;
     [SerializeField] private GameObject theNewGameMenu = null;
     [SerializeField] private GameObject theCenterUpdates = null;
     [SerializeField] private GameObject theLoadingManager = null;
+    [SerializeField] private GameObject theMultiplayerMenu = null;
 
     private void Awake()
     {
@@ -81,6 +83,8 @@ public class MenuManager : MonoBehaviour
     public void BackToMain()
     {
         theMainMenu.SetActive(true);
+        theMultiplayerMenu.SetActive(false);
+        theNewGameMenu.SetActive(false);
     }
 
     public void NextRace()
@@ -92,5 +96,21 @@ public class MenuManager : MonoBehaviour
         theMainCamera.gameObject.SetActive(false);
         thePlayingHUD.SetActive(true);
         theCenterUpdates.SetActive(true);
+    }
+
+    public void MultiplayerMenu()
+    {
+        theMainMenu.SetActive(false);
+        theMultiplayerMenu.SetActive(true);
+    }
+
+    public void MainFromRace()
+    {
+        theGameManager.SetActive(false);
+        theLoadingManager.SetActive(false);
+        theRaceManager.SetActive(false);
+        theFinalWindow.SetActive(false);
+        theMainCamera.gameObject.SetActive(true);
+        theMainMenu.SetActive(true);
     }
 }
