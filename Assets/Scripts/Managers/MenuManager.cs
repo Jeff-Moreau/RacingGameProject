@@ -20,16 +20,16 @@ public class MenuManager : MonoBehaviour
     // SINGLETON ENDS
 
     // INSPECTOR VARIABLES
-    [SerializeField] private GameObject theMainMenu = null;
-    [SerializeField] private GameObject theGameManager = null;
-    [SerializeField] private GameObject theLoadingManager = null;
-    [SerializeField] private GameObject theRaceManager = null;
-    [SerializeField] private GameObject thePlayingHUD = null;
-    [SerializeField] private GameObject theCenterUpdates = null;
+    [SerializeField] private Camera theMainCamera = null;
     [SerializeField] private GameObject theIntro = null;
     [SerializeField] private GameObject theVideo = null;
+    [SerializeField] private GameObject theMainMenu = null;
+    [SerializeField] private GameObject thePlayingHUD = null;
+    [SerializeField] private GameObject theGameManager = null;
+    [SerializeField] private GameObject theRaceManager = null;
     [SerializeField] private GameObject theNewGameMenu = null;
-    [SerializeField] private Camera theMainCamera = null;
+    [SerializeField] private GameObject theCenterUpdates = null;
+    [SerializeField] private GameObject theLoadingManager = null;
 
     private void Awake()
     {

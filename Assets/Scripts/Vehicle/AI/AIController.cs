@@ -25,7 +25,6 @@ public class AIController : VehicleController
         SetExhaustParticles();
         SetArmorType();
 
-
         theVehicleSpeed = myData.GetRollSpeed;
         myCurrentTrackWaypoint = 0;
         myProximityToCurrentWaypoint = myData.GetWaypointProximity * myData.GetWaypointProximity;
@@ -48,33 +47,35 @@ public class AIController : VehicleController
     {
         myArmorType = Random.Range(0, 3);
 
-        if (myArmorType == 0)
+        switch (myArmorType)
         {
-            myArmor[0].SetActive(true);
-            myArmor[1].SetActive(false);
-            myArmor[2].SetActive(false);
-            myRenderer.material = myData.GetBallMaterials[Random.Range(0, myData.GetBallMaterials.Length)];
-            myRenderer.material.SetColor("_Color", Color.red);
-            myExhaustParticles[0].gameObject.SetActive(true);
-        }
-        else if (myArmorType == 1)
-        {
-            myArmor[0].SetActive(false);
-            myArmor[1].SetActive(true);
-            myArmor[2].SetActive(false);
-            myRenderer.material = myData.GetBallMaterials[Random.Range(0, myData.GetBallMaterials.Length)];
-            myRenderer.material.SetColor("_Color", Color.red);
-            myExhaustParticles[1].gameObject.SetActive(true);
-            myExhaustParticles[2].gameObject.SetActive(true);
-        }
-        else if (myArmorType == 2)
-        {
-            myArmor[0].SetActive(false);
-            myArmor[1].SetActive(false);
-            myArmor[2].SetActive(true);
-            myRenderer.material = myData.GetBallMaterials[Random.Range(0, myData.GetBallMaterials.Length)];
-            myRenderer.material.SetColor("_Color", Color.red);
-            myExhaustParticles[3].gameObject.SetActive(true);
+            case 0:
+                myArmor[0].SetActive(true);
+                myArmor[1].SetActive(false);
+                myArmor[2].SetActive(false);
+                myRenderer.material = myData.GetBallMaterials[Random.Range(0, myData.GetBallMaterials.Length)];
+                myRenderer.material.SetColor("_Color", Color.red);
+                myExhaustParticles[0].gameObject.SetActive(true);
+                break;
+
+            case 1:
+                myArmor[0].SetActive(false);
+                myArmor[1].SetActive(true);
+                myArmor[2].SetActive(false);
+                myRenderer.material = myData.GetBallMaterials[Random.Range(0, myData.GetBallMaterials.Length)];
+                myRenderer.material.SetColor("_Color", Color.red);
+                myExhaustParticles[1].gameObject.SetActive(true);
+                myExhaustParticles[2].gameObject.SetActive(true);
+                break;
+
+            case 2:
+                myArmor[0].SetActive(false);
+                myArmor[1].SetActive(false);
+                myArmor[2].SetActive(true);
+                myRenderer.material = myData.GetBallMaterials[Random.Range(0, myData.GetBallMaterials.Length)];
+                myRenderer.material.SetColor("_Color", Color.red);
+                myExhaustParticles[3].gameObject.SetActive(true);
+                break;
         }
     }
 
@@ -82,46 +83,52 @@ public class AIController : VehicleController
     {
         var waypointPosition = theTrackWaypointsToFollow[myCurrentTrackWaypoint].position;
         var relativeWaypointPos = transform.InverseTransformPoint(new Vector3(waypointPosition.x, transform.position.y, waypointPosition.z));
-        
-        if (RaceManager.Load.GetPlayerPosition <= 20 && RaceManager.Load.GetPlayerPosition >= 4)
-        {
-            theVehicleSpeed = Random.Range(myData.GetRollSpeed * 0.5f, myData.GetRollSpeed);
-        }
-        else if (RaceManager.Load.GetPlayerPosition == 1)
-        {
-            theVehicleSpeed = myData.GetRollSpeed * 1.3f;
-        }
-        else
-        {
-            theVehicleSpeed = Random.Range(myData.GetRollSpeed, myData.GetRollSpeed * 1.3f);
-        }
+
+        SpeedAdjust();
 
         if (RaceManager.Load.GetGameStarted)
         {
-            if (myArmor[0].activeInHierarchy)
+            switch (myArmorType)
             {
-                myExhaustParticles[0].gameObject.SetActive(false);
-                myThrusterParticles[0].gameObject.SetActive(true);
-            }
-            else if (myArmor[1].activeInHierarchy)
-            {
-                myExhaustParticles[1].gameObject.SetActive(false);
-                myExhaustParticles[2].gameObject.SetActive(false);
-                myThrusterParticles[1].gameObject.SetActive(true);
-                myThrusterParticles[2].gameObject.SetActive(true);
-            }
-            else if (myArmor[2].activeInHierarchy)
-            {
-                myExhaustParticles[3].gameObject.SetActive(false);
-                myThrusterParticles[3].gameObject.SetActive(true);
+                case 0:
+                    myExhaustParticles[0].gameObject.SetActive(false);
+                    myThrusterParticles[0].gameObject.SetActive(true);
+                    break;
+
+                case 1:
+                    myExhaustParticles[1].gameObject.SetActive(false);
+                    myExhaustParticles[2].gameObject.SetActive(false);
+                    myThrusterParticles[1].gameObject.SetActive(true);
+                    myThrusterParticles[2].gameObject.SetActive(true);
+                    break;
+
+                case 2:
+                    myExhaustParticles[3].gameObject.SetActive(false);
+                    myThrusterParticles[3].gameObject.SetActive(true);
+                    break;
             }
 
             mySphere.AddForce(myArmor[myArmorType].transform.forward * theVehicleSpeed, ForceMode.Force);
             mySphere.AddForce(Physics.gravity * mySphere.mass);
             myArmor[myArmorType].transform.LookAt(theTrackWaypointsToFollow[myCurrentTrackWaypoint]);
-            //myArmor[myArmorType].transform.rotation = theTrackWaypointsToFollow[myCurrentTrackWaypoint].rotation;
         }
         CheckWaypointPosition(relativeWaypointPos);
+    }
+
+    private void SpeedAdjust()
+    {
+        if (RaceManager.Load.GetPlayerPosition <= 20 && RaceManager.Load.GetPlayerPosition >= 4)
+        {
+            theVehicleSpeed = Random.Range(myData.GetRollSpeed * 0.9f, myData.GetRollSpeed);
+        }
+        else if (RaceManager.Load.GetPlayerPosition == 1)
+        {
+            theVehicleSpeed = myData.GetRollSpeed * 1.05f;
+        }
+        else
+        {
+            theVehicleSpeed = Random.Range(myData.GetRollSpeed, myData.GetRollSpeed * 1);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

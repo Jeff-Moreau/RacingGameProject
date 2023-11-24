@@ -28,28 +28,35 @@ public class BallEditor : MonoBehaviour
     [SerializeField] private Slider myBlueSlider = null;
     [SerializeField] private Slider myAlphaSlider = null;
     [SerializeField] private TMP_Dropdown myDropdown = null;
+    [SerializeField] private TMP_Dropdown myArmorDropDown = null;
     [SerializeField] private Material[] myBallMaterials = null;
     [SerializeField] private GameObject[] myArmorTypes = null;
-    [SerializeField] private TMP_Dropdown myArmorDropDown = null;
 
     // LOCAL VARIABLES
     private int myArmorNumber;
-    private string myVehicleName;
     private float myRendererRed;
     private float myRendererGreen;
     private float myRendererBlue;
     private float myRendererAlpha;
+    private string myVehicleName;
     private Material myRendererMaterial;
 
     // GETTERS
-    public int GetArmorNumber => myArmorNumber;
     public string GetName => myVehicleName;
+    public int GetArmorNumber => myArmorNumber;
     public float GetMaterialRed => myRendererRed;
-    public float GetMaterialGreen => myRendererGreen;
     public float GetMaterialBlue => myRendererBlue;
+    public float GetMaterialGreen => myRendererGreen;
     public float GetMaterialAlpha => myRendererAlpha;
     public Material GetMaterial => myRendererMaterial;
+
+    // SETTERS
     public int SetArmorNumber(int armor) =>  myArmorNumber = armor;
+    public float SetMaterialRed(float amount) => myRendererRed = amount;
+    public Material SetMaterial(Material mat) => myRendererMaterial = mat;
+    public float SetMaterialBlue(float amount) => myRendererBlue = amount;
+    public float SetMaterialGreen(float amount) => myRendererGreen = amount;
+    public float SetMaterialAlpha(float amount) => myRendererAlpha = amount;
 
     private void Start()
     {
@@ -59,13 +66,17 @@ public class BallEditor : MonoBehaviour
     private void Update()
     {
         myArmorDropDown.value = myArmorNumber;
+        myRedSlider.value = myRendererRed;
+        myGreenSlider.value = myRendererGreen;
+        myBlueSlider.value = myRendererBlue;
+        myAlphaSlider.value = myRendererAlpha;
     }
 
     private void InitializeVariables()
     {
-        myVehicleName = "";
-
         myArmorNumber = 0;
+        myVehicleName = "DragonScale";
+
         myArmorDropDown.value = myArmorNumber;
 
         myRendererRed = myOnScreenBall.material.GetColor("_Color").r;
@@ -127,26 +138,31 @@ public class BallEditor : MonoBehaviour
                 myOnScreenBall.material = myBallMaterials[(int)MaterialType.DragonScale];
                 myVehicleName = "DragonScale";
                 break;
+
             case (int)MaterialType.Fire:
                 myRendererMaterial = myBallMaterials[(int)MaterialType.Fire];
                 myOnScreenBall.material = myBallMaterials[(int)MaterialType.Fire];
                 myVehicleName = "FireBall";
                 break;
+
             case (int)MaterialType.Lightning:
                 myRendererMaterial = myBallMaterials[(int)MaterialType.Lightning];
                 myOnScreenBall.material = myBallMaterials[(int)MaterialType.Lightning];
                 myVehicleName = "LightningRod";
                 break;
+
             case (int)MaterialType.Lava:
                 myRendererMaterial = myBallMaterials[(int)MaterialType.Lava];
                 myOnScreenBall.material = myBallMaterials[(int)MaterialType.Lava];
                 myVehicleName = "LavaPool";
                 break;
+
             case (int)MaterialType.Chrome:
                 myRendererMaterial = myBallMaterials[(int)MaterialType.Chrome];
                 myOnScreenBall.material = myBallMaterials[(int)MaterialType.Chrome];
                 myVehicleName = "ChromeReflection";
                 break;
+
             case (int)MaterialType.Water:
                 myRendererMaterial = myBallMaterials[(int)MaterialType.Water];
                 myOnScreenBall.material = myBallMaterials[(int)MaterialType.Water];
@@ -165,12 +181,14 @@ public class BallEditor : MonoBehaviour
                 myArmorTypes[(int)ArmorType.MoHawk].SetActive(false);
                 myArmorNumber = (int)ArmorType.Default;
                 break;
+
             case (int)ArmorType.MoHawk:
                 myArmorTypes[(int)ArmorType.Default].SetActive(false);
                 myArmorTypes[(int)ArmorType.BigBooty].SetActive(false);
                 myArmorTypes[(int)ArmorType.MoHawk].SetActive(true);
                 myArmorNumber = (int)ArmorType.MoHawk;
                 break;
+
             case (int)ArmorType.BigBooty:
                 myArmorTypes[(int)ArmorType.Default].SetActive(false);
                 myArmorTypes[(int)ArmorType.BigBooty].SetActive(true);

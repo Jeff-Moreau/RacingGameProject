@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class SavingAndLoading : MonoBehaviour
 {
+    // INSPECTOR VARIABLES
     [SerializeField] private GameObject thePlayer;
     [SerializeField] private BallEditor theEditor;
 
-    private VehicleController myPlayer;
+    // LOCAL VARIABLES
     private string mySaveFilePath;
+    private VehicleController myPlayer;
 
     void Start()
     {
@@ -54,6 +56,11 @@ public class SavingAndLoading : MonoBehaviour
             var loadVehicleData = File.ReadAllText(mySaveFilePath);
             JsonUtility.FromJsonOverwrite(loadVehicleData, myPlayer);
 
+            theEditor.SetMaterial(myPlayer.GetMaterial);
+            theEditor.SetMaterialRed(myPlayer.GetMaterialRed);
+            theEditor.SetMaterialGreen(myPlayer.GetMaterialGreen);
+            theEditor.SetMaterialBlue(myPlayer.GetMaterialBlue);
+            theEditor.SetMaterialAlpha(myPlayer.GetMaterialAlpha);
             theEditor.SetArmorNumber(myPlayer.GetArmorType);
 
             Debug.Log("Loaded Vehicle : "+ theEditor.GetName);

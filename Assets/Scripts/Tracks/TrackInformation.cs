@@ -7,13 +7,14 @@ public class TrackInformation : MonoBehaviour
     [SerializeField] private TrackData myData = null;
 
     [Header("Track Information")]
+    [NonReorderable]
     [SerializeField] private GameObject[] myWaypointsContainer = null;
     [NonReorderable]
     [SerializeField] private GameObject[] myPolePositions = null;
 
     // GETTERS
+    public int GetLaps => myData.GetLaps;
+    public string GetName => myData.GetName;
     public GameObject[] GetPolePositions => myPolePositions;
     public GameObject[] GetWaypointContainer => myWaypointsContainer;
-    public string GetName => myData.GetName;
-    public int GetLaps => myData.GetLaps;
 }

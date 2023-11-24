@@ -10167,13 +10167,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1174248049123087107}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.29237175, y: -0.000000029802319, z: 0.000000029802319, w: 0.9563048}
-  m_LocalPosition: {x: 0, y: 15, z: -13}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: -5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 27956016822722741}
-  m_LocalEulerAnglesHint: {x: 34, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &670003295146060563
 Camera:
   m_ObjectHideFlags: 0
@@ -10184,7 +10184,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.40205592, g: 0.48417044, b: 0.6132076, a: 0.87058824}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -10206,7 +10206,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 1500
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -10719,8 +10719,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2416455231217781526}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.29237175, y: -0.000000029802319, z: 0.00000004470348, w: 0.9563048}
-  m_LocalPosition: {x: 0, y: 15, z: -13}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0000064849855, y: 0.49999988, z: -5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10758,7 +10758,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 1500
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -37217,18 +37217,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myVehicleName: WaterHole
-  myMaterialRed: 0.9516847
-  myMaterialGreen: 0.79541636
-  myMaterialBlue: 0.6339606
-  myMaterialAlpha: 0.9723973
+  myArmorType: 2
+  myMaterialRed: 0.01723826
+  myMaterialGreen: 0.20415556
+  myMaterialBlue: 0.757349
+  myMaterialAlpha: 0.9721886
   myBallMaterial: {fileID: 2100000, guid: e830797b5e22ea74ab6753fc8217bbfc, type: 2}
-  myArmorType: 1
   mySphere: {fileID: 5410282482315495453}
   myRenderer: {fileID: 6323648850615545603}
   myArmor:
   - {fileID: 7925766267834119143}
   - {fileID: 1124586604050009986}
   - {fileID: 3186888404765457649}
+  myTailLightBulbs:
+  - {fileID: 3107903475711936130}
+  - {fileID: 5014522531667267744}
+  myHeadLightBulbs:
+  - {fileID: 3938720496734198529}
+  - {fileID: 7239500624726001572}
   myExhaustParticles:
   - {fileID: 1682183365871664060}
   - {fileID: 6064577936909389939}
@@ -37239,12 +37245,6 @@ MonoBehaviour:
   - {fileID: 3105276731704407206}
   - {fileID: 6245689003180616339}
   - {fileID: 7182106244982676218}
-  myTailLightBulbs:
-  - {fileID: 3107903475711936130}
-  - {fileID: 5014522531667267744}
-  myHeadLightBulbs:
-  - {fileID: 3938720496734198529}
-  - {fileID: 7239500624726001572}
   myData: {fileID: 11400000, guid: 6d61787211c2fa747ab58dde8b3fba67, type: 2}
 --- !u!1 &6951955405990440623
 GameObject:
@@ -42355,8 +42355,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7902403093591122025}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.29237175, y: -0.000000029802319, z: 0.00000004470348, w: 0.9563048}
-  m_LocalPosition: {x: 0, y: 15, z: -13}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0000064849855, y: 0.49999988, z: -5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42394,7 +42394,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 1500
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -42537,8 +42537,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8030500827607855529}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.5395058, z: -0, w: 0.84198195}
-  m_LocalPosition: {x: 633.04, y: 25.449997, z: 797.99}
+  m_LocalRotation: {x: -0, y: 0.63221204, z: -0, w: 0.7747955}
+  m_LocalPosition: {x: 746.10004, y: 9.564377, z: 831.9641}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
